@@ -1,0 +1,80 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyMenu"
+    tools:ignore="MergeRootFrame" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="298dp"
+        android:layout_gravity="center|bottom"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:text="CALENDARIO"
+            android:id="@+id/calendario"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity"
+            android:onClick="lanzarCalendario" />
+
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:text="HORARIO"
+            android:id="@+id/horario"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity" />
+
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:text="CURSOS"
+            android:id="@+id/cursos"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity" />
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:text="UBICACIONES"
+            android:id="@+id/ubicaciones"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity" />
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:text="FECHAS IMPORTANTES"
+            android:id="@+id/fechas_importantes"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity" />
+</LinearLayout>
+</FrameLayout>

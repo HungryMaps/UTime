@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">UTime</string>
+    <string name="calendario">Calendario</string>
+    <string name="horario">Horario</string>
+    <string name="cursos">Cursos</string>
+    <string name="ubicaciones">Ubicaciones</string>
+    <string name="fechas_importantes">Fechas Importantes</string>
+
+
+
+    <string name="action_settings">Settings</string>
+
+</resources>
