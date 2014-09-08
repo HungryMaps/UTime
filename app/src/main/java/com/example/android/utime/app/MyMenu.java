@@ -1,18 +1,15 @@
 package com.example.android.utime.app;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.os.Build;
-
+import android.widget.Button;
 
 
 public class MyMenu extends ActionBarActivity {
@@ -21,6 +18,19 @@ public class MyMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_menu);
+
+        Button botonCursos = (Button)findViewById(R.id.cursos);
+
+        botonCursos.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent in = new Intent(MyMenu.this, Cursos.class); //aquí le decimos de donde vamos y hacia adonde
+                startActivity(in);                                 //lanza la siguiente ventana
+
+            }
+        });
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -64,9 +74,10 @@ public class MyMenu extends ActionBarActivity {
         }
     }
 
-    //METODO CAMBIAR A CALENDARIO
+    /*//METODO CAMBIAR A CALENDARIO
     public void  lanzarCalendario(View vista){
-        Intent i = new Intent(this, Calendario.class);
-        startActivity(i);
+        //Intent i = new Intent(this, Calendario.class);
+        //startActivity(i);
     }
+    */
 }//FIN CLASE
