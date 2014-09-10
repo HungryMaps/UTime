@@ -1,3 +1,9 @@
+/*
+ * Autor: Jennifer Ledezma
+ * Clase Cursos: Muestra los cursos guardados en la app por el usuario, y opción de interactuar
+ *               de distintas formas con estos (crear un nuevo curso, editar, eliminar)
+ */
+
 package com.example.android.utime.app;
 
 import android.support.v7.app.ActionBarActivity;
@@ -13,7 +19,6 @@ public class Cursos extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
