@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">UTime</string>
-    <string name="calendario">Calendario</string>
     <string name="horario">Horario</string>
     <string name="cursos">Cursos</string>
     <string name="ubicaciones">Ubicaciones</string>

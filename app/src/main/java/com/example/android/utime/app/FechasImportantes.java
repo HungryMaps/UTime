@@ -43,16 +43,16 @@ public class FechasImportantes extends ActionBarActivity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * A FechasImportantesFragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class FechasImportantesFragment extends Fragment {
 
-        public PlaceholderFragment() {
+        public FechasImportantesFragment() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fechas_importantes, container, false);
             return rootView;
         }

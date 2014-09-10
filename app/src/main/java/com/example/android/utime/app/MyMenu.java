@@ -56,10 +56,9 @@ public class MyMenu extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-
-        ////
-
+/**
+ *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
+ */
         botonFechImp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -73,11 +72,6 @@ public class MyMenu extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-
-        /////
-
-
     }
 
     @Override
