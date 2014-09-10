@@ -1,3 +1,9 @@
+/*
+ * Autor: Ana Laura Berdasco
+ * Clase Fechas Importantes: Muestra las fechas mas relevantes de la universidad de Costa Rica,
+ * fechas de matricula, pagos y ayudas socioeconomicas entre otras
+ */
+
 package com.example.android.utime.app;
 
 import android.support.v7.app.ActionBarActivity;
