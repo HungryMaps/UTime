@@ -1,19 +1,26 @@
+/*
+ * Proyecto de Ingeniría del Software II: UTime
+ * Autores: Ana Laura Berdasco
+ *          Jennifer Ledezma
+ *          Paula López
+ *          Joan Marchena
+ *          David Ramírez
+ * Clase que maneja el control de las funcionalidades e interacciones del Inicio
+ * II Ciclo, 2014
+ */
+
 package com.example.android.utime.app;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.os.Build;
-
-
+import android.widget.Button;
 
 public class MyMenu extends ActionBarActivity {
 
@@ -21,13 +28,34 @@ public class MyMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_menu);
+
+        Button botonCursos = (Button)findViewById(R.id.cursos);
+
+        /**
+         *Método que captura el boton al que se le ha dado click
+         */
+        botonCursos.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             * REQ: que se haya capturado bien el botón al que se le hizo click
+             * @param view
+             * EFE: Carga en tiempo de ejecuión una nueva vista o actividad segun corresponda
+             */
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(MyMenu.this, Cursos.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,10 +91,4 @@ public class MyMenu extends ActionBarActivity {
             return rootView;
         }
     }
-
-    //METODO CAMBIAR A CALENDARIO
-    public void  lanzarCalendario(View vista){
-        Intent i = new Intent(this, Calendario.class);
-        startActivity(i);
-    }
-}//FIN CLASE
+}
