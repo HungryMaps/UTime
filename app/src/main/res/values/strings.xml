@@ -10,5 +10,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_cursos">Ver Cursos</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_fechas_importantes">FechasImportantes</string>
 
 </resources>

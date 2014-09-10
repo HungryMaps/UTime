@@ -30,6 +30,7 @@ public class MyMenu extends ActionBarActivity {
         setContentView(R.layout.activity_my_menu);
 
         Button botonCursos = (Button)findViewById(R.id.cursos);
+        Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
 
         /**
          *Método que captura el boton al que se le ha dado click
@@ -55,6 +56,28 @@ public class MyMenu extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+
+        ////
+
+        botonFechImp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent in = new Intent(MyMenu.this, FechasImportantes.class);
+                startActivity(in);
+            }
+        });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }
+
+
+        /////
+
+
     }
 
     @Override

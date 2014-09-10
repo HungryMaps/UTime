@@ -20,6 +20,10 @@
             android:name=".Cursos"
             android:label="@string/title_activity_cursos" >
         </activity>
+        <activity
+            android:name=".FechasImportantes"
+            android:label="@string/title_activity_fechas_importantes" >
+        </activity>
     </application>
 
 </manifest>
