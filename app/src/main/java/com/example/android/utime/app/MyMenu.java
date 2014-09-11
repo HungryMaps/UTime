@@ -31,6 +31,8 @@ public class MyMenu extends ActionBarActivity {
 
         Button botonCursos = (Button)findViewById(R.id.cursos);
         Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
+        Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);
+        Button botonHorario = (Button)findViewById(R.id.horario);
 
         /**
          *Método que captura el boton al que se le ha dado click
@@ -40,7 +42,7 @@ public class MyMenu extends ActionBarActivity {
             /**
              * REQ: que se haya capturado bien el botón al que se le hizo click
              * @param view
-             * EFE: Carga en tiempo de ejecuión una nueva vista o actividad segun corresponda
+             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
              */
             @Override
             public void onClick(View view){
@@ -56,9 +58,10 @@ public class MyMenu extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-/**
- *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
- */
+
+        /**
+         *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
+         */
         botonFechImp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -66,6 +69,45 @@ public class MyMenu extends ActionBarActivity {
                 startActivity(in);
             }
         });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }
+
+        /**
+         *Método que captura el boton al que se le ha dado click en este caso Ubicaciones
+         */
+        botonUbicacion.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(MyMenu.this, Ubicaciones.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }
+
+        /**
+         *Método que captura el boton al que se le ha dado click en este caso Horario
+         */
+        botonHorario.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(MyMenu.this, Horario.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
