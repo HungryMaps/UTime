@@ -25,7 +25,6 @@
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity" />
-
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"

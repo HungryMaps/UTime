@@ -53,12 +53,6 @@ public class MyMenu extends ActionBarActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
-
         /**
          *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
          */
@@ -69,12 +63,6 @@ public class MyMenu extends ActionBarActivity {
                 startActivity(in);
             }
         });
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
 
         /**
          *Método que captura el boton al que se le ha dado click en este caso Ubicaciones
@@ -89,12 +77,6 @@ public class MyMenu extends ActionBarActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
-
         /**
          *Método que captura el boton al que se le ha dado click en este caso Horario
          */
@@ -107,7 +89,6 @@ public class MyMenu extends ActionBarActivity {
                 startActivity(in);
             }
         });
-
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
