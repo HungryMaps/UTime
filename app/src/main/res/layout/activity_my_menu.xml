@@ -1,10 +1,15 @@
+<!-- Se utiliza el color gris como fondo de la aplicación y los colores
+truquesa, y sus variantes, como colores que se van a utilizar en toda la
+aplicación para mantener la coherencia a traves de toda ella-->
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyMenu"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame"
+    android:background="@color/gris">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,7 +29,9 @@
             android:enabled="true"
             android:focusable="false"
             android:longClickable="false"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:background="#ff006d6d"
+            android:textColor="#ffffffff" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -36,7 +43,9 @@
             android:enabled="true"
             android:focusable="false"
             android:longClickable="false"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:background="#ff006d5b"
+            android:textColor="#ffffffff" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -48,7 +57,9 @@
             android:enabled="true"
             android:focusable="false"
             android:longClickable="false"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:background="#ff006d41"
+            android:textColor="#ffffffff" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -60,6 +71,8 @@
             android:enabled="true"
             android:focusable="false"
             android:longClickable="false"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:background="#ff006d20"
+            android:textColor="#ffffffff" />
 </LinearLayout>
 </FrameLayout>
