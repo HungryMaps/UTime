@@ -21,6 +21,21 @@ aplicación para mantener la coherencia a traves de toda ella-->
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
+            android:text="CALENDARIO"
+            android:id="@+id/caledario"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textAlignment="gravity"
+            android:background="#ff00556d"
+            android:textColor="#ffffffff" />
+
+        <Button
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
             android:text="HORARIO"
             android:id="@+id/horario"
             android:layout_gravity="center_horizontal"

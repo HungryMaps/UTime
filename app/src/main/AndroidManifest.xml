@@ -32,6 +32,14 @@
             android:name=".Horario"
             android:label="@string/title_activity_horario" >
         </activity>
+        <activity
+            android:name=".calendario"
+            android:label="@string/title_activity_calendario" >
+        </activity>
+        <activity
+            android:name=".Calendario"
+            android:label="@string/title_activity_calendario" >
+        </activity>
     </application>
 
 </manifest>
