@@ -12,5 +12,6 @@
     <string name="title_activity_fechas_importantes">FechasImportantes</string>
     <string name="title_activity_ubicaciones">Ubicaciones</string>
     <string name="title_activity_horario">Horario</string>
+    <color name="gris">#4a4644</color>
 
 </resources>
