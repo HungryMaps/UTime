@@ -1,3 +1,7 @@
+<!-- Se utiliza el color gris como fondo de la aplicación y los colores
+truquesa, y sus variantes, como colores que se van a utilizar en toda la
+aplicación para mantener la coherencia a traves de toda ella-->
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
