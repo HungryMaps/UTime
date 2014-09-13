@@ -33,6 +33,7 @@ public class MyMenu extends ActionBarActivity {
         Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
         Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);
         Button botonHorario = (Button)findViewById(R.id.horario);
+        Button botonCalendario = (Button)findViewById(R.id.caledario);
 
         /**
          *Método que captura el boton al que se le ha dado click
@@ -85,6 +86,25 @@ public class MyMenu extends ActionBarActivity {
             public void onClick(View view){
                 //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
                 Intent in = new Intent(MyMenu.this, Horario.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
+
+        /**
+         *Método que captura el boton al que se le ha dado click
+         */
+        botonCalendario.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             * REQ: que se haya capturado bien el botón al que se le hizo click
+             * @param view
+             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
+             */
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(MyMenu.this, Calendario.class);
                 //lanza la siguiente ventana
                 startActivity(in);
             }
