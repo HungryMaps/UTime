@@ -1,3 +1,10 @@
+/*
+ * Autor: Paula López
+ * Clase Calendario: Muestra el calendario de la aplicación, además de un espacio para notas generales
+ *                  que se quieran hacer.
+ */
+
+
 package com.example.android.utime.app;
 
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +15,9 @@ import android.view.MenuItem;
 
 public class Calendario extends ActionBarActivity {
 
+    /*
+    *  Método para crear el activity cuando lo llama menú.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
