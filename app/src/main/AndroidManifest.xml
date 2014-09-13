@@ -24,6 +24,14 @@
             android:name=".FechasImportantes"
             android:label="@string/title_activity_fechas_importantes" >
         </activity>
+        <activity
+            android:name=".Ubicaciones"
+            android:label="@string/title_activity_ubicaciones" >
+        </activity>
+        <activity
+            android:name=".Horario"
+            android:label="@string/title_activity_horario" >
+        </activity>
     </application>
 
 </manifest>
