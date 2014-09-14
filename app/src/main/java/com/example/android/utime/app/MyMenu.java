@@ -29,31 +29,14 @@ public class MyMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_menu);
 
-        Button botonCursos = (Button)findViewById(R.id.cursos);
+        Cursos cursos = new Cursos(this);
+        cursos.insertar("Ingenieria de Software", "Lunes", "Jueves", "Carlos Castro", "Informatica", "303");
+
+        //Button botonCursos = (Button)findViewById(R.id.cursos);
         Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
         Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);
         Button botonHorario = (Button)findViewById(R.id.horario);
         Button botonCalendario = (Button)findViewById(R.id.caledario);
-
-        /**
-         *Método que captura el boton al que se le ha dado click
-         */
-        botonCursos.setOnClickListener(new View.OnClickListener(){
-
-            /**
-             * REQ: que se haya capturado bien el botón al que se le hizo click
-             * @param view
-             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
-             */
-            @Override
-            public void onClick(View view){
-                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-                Intent in = new Intent(MyMenu.this, Cursos.class);
-                //lanza la siguiente ventana
-                startActivity(in);
-            }
-        });
-
         /**
          *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
          */
@@ -135,6 +118,7 @@ public class MyMenu extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      * A placeholder fragment containing a simple view.
