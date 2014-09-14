@@ -14,9 +14,21 @@ aplicación para mantener la coherencia a traves de toda ella-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="298dp"
+        android:layout_height="520dp"
         android:layout_gravity="center|bottom"
         android:weightSum="1">
+
+        <!--
+        *View de la imagen en el menú inical
+        *Centrada
+        *Ajuste al contenido
+        -->
+        <ImageView
+            android:layout_width="216dp"
+            android:layout_height="216dp"
+            android:src="@drawable/logofin"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top" />
 
         <Button
             android:layout_width="287dp"
@@ -90,4 +102,5 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:background="#ff006d20"
             android:textColor="#ffffffff" />
 </LinearLayout>
+
 </FrameLayout>
