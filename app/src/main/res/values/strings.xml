@@ -13,7 +13,18 @@
     <string name="title_activity_ubicaciones">Ubicaciones</string>
     <string name="title_activity_horario">Horario</string>
 
-    <color name="gris">#4a4644</color>
+    <!--
+    Constantes de los colores principales de la aplicación, para poder utilizar
+    por toda la aplicación y no usar el código, para hacerlo más fácil
+    Están acomodados a como aparecen en el menú de inicio.
+    -->
+
+    <color name="fondo">#fcf1d1</color>
+    <color name="amarillo">#ffffcc33</color>
+    <color name="verde1">#ffa3c586</color>
+    <color name="verde2">#ff5b7444</color>
+    <color name="azul1">#ff688b9a</color>
+    <color name="azul2">#ff47697e</color>
 
     <string name="title_activity_calendario">calendario</string>
 
