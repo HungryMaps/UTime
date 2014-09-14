@@ -1,5 +1,5 @@
 <!-- Se utiliza el color gris como fondo de la aplicación y los colores
-truquesa, y sus variantes, como colores que se van a utilizar en toda la
+amarillo, verde y azul (con sus variantes), como colores que se van a utilizar en toda la
 aplicación para mantener la coherencia a traves de toda ella-->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,7 +9,7 @@ aplicación para mantener la coherencia a traves de toda ella-->
     android:layout_height="match_parent"
     tools:context=".MyMenu"
     tools:ignore="MergeRootFrame"
-    android:background="@color/gris">
+    android:background="@color/fondo">
 
     <LinearLayout
         android:orientation="vertical"
@@ -42,8 +42,9 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="#ff00556d"
-            android:textColor="#ffffffff" />
+            android:background="@color/amarillo"
+            android:textColor="#000000"
+            />
 
         <Button
             android:layout_width="287dp"
@@ -57,8 +58,8 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="#ff006d6d"
-            android:textColor="#ffffffff" />
+            android:background="@color/verde1"
+            android:textColor="#000000" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -71,8 +72,8 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="#ff006d5b"
-            android:textColor="#ffffffff" />
+            android:background="@color/verde2"
+            android:textColor="#000000" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -85,8 +86,8 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="#ff006d41"
-            android:textColor="#ffffffff" />
+            android:background="@color/azul1"
+            android:textColor="#000000" />
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
@@ -99,8 +100,8 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="#ff006d20"
-            android:textColor="#ffffffff" />
+            android:background="@color/azul2"
+            android:textColor="#000000" />
 </LinearLayout>
 
 </FrameLayout>
