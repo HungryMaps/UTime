@@ -90,4 +90,11 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:background="#ff006d20"
             android:textColor="#ffffffff" />
 </LinearLayout>
+
+    <ImageView
+        android:layout_width="216dp"
+        android:layout_height="216dp"
+        android:src="@drawable/logofin"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top" />
 </FrameLayout>
