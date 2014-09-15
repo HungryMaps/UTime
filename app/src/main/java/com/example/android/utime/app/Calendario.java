@@ -12,9 +12,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
+
 
 
 public class Calendario extends ActionBarActivity {
@@ -27,7 +28,9 @@ public class Calendario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
-
+         /*
+        *  Lister que presenta la fecha al presionar el DatePicker
+        */
         final DatePicker calendario = (DatePicker) findViewById(R.id.calendario);
 
         calendario.setOnClickListener(new OnClickListener() {
