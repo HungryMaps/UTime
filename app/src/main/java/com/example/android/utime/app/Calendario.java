@@ -11,11 +11,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 
@@ -31,7 +28,8 @@ public class Calendario extends ActionBarActivity {
         setContentView(R.layout.activity_calendario);
 
          /*
-        *  Lister que presenta la fecha al presionar el DatePicker
+        *  Listener que obtiene la fecha al presionar un día en específico en el calendario
+        *  Su uso por ahora es temporal, se planea usar para presentar notas relevantes a ese día en particular
         */
         final CalendarView calendario = (CalendarView) findViewById(R.id.calendario);
 
