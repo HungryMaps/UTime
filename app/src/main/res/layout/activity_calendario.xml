@@ -6,15 +6,15 @@
 
 
     <DatePicker
-        android:id="@+id/dp"
+        android:id="@+id/calendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
 
-    <Button
+    <!-- <Button
         android:id="@+id/set"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set"/>
+        android:text="Set"/> -->
 
 </LinearLayout>
