@@ -10,6 +10,13 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        testApplicationId = "com.example.android.utime.app.tests"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    testOptions{
+        reportDir = "$project.buildDir/results/report"
+        resultsDir = "$project.buildDir/results"
     }
     buildTypes {
         release {

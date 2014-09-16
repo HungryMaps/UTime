@@ -40,6 +40,10 @@
             android:name=".Calendario"
             android:label="@string/title_activity_calendario" >
         </activity>
+        <activity
+            android:name=".AgregarCurso"
+            android:label="@string/title_activity_agregar_curso" >
+        </activity>
     </application>
 
 </manifest>

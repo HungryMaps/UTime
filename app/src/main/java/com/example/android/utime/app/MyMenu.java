@@ -28,10 +28,6 @@ public class MyMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_menu);
-
-        CrearCurso cursos = new CrearCurso(this);
-        cursos.insertar("Ingenieria de Software", "Lunes", "Jueves", "Carlos Castro", "Informatica", "303");
-
         Button botonCursos = (Button)findViewById(R.id.cursos);
         Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
         Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);

@@ -1,4 +1,4 @@
-package com.example.android.utime.app;
+package com.example.android.utime.app.tests;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
@@ -9,5 +9,9 @@ import android.test.ApplicationTestCase;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
+    }
+
+    public void test_esto_siempre_pasa(){
+        assertTrue(5>1);
     }
 }
