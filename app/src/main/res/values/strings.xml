@@ -27,5 +27,6 @@
     <color name="azul2">#ff47697e</color>
 
     <string name="title_activity_calendario">calendario</string>
+    <string name="title_activity_agregar_curso">AgregarCurso</string>
 
 </resources>

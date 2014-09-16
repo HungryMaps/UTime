@@ -27,7 +27,7 @@ public class Calendario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
-         /*
+       /**
         *  Listener que obtiene la fecha al presionar un día en específico en el calendario
         *  Su uso por ahora es temporal, se planea usar para presentar notas relevantes a ese día en particular
         */
