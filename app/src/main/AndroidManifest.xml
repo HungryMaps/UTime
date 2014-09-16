@@ -44,6 +44,10 @@
             android:name=".AgregarCurso"
             android:label="@string/title_activity_agregar_curso" >
         </activity>
+        <activity
+            android:name=".ModificarCurso"
+            android:label="@string/title_activity_modificar_curso" >
+        </activity>
     </application>
 
 </manifest>

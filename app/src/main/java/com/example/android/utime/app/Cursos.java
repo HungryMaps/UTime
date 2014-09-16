@@ -79,6 +79,12 @@ public class Cursos extends ActionBarActivity {
 
                 String aux_cursoId = textView_cursoID.getText().toString();
                 String aux_cursoNombre = textView_cursoNombre.getText().toString();
+
+                Intent modify_intent = new Intent(getApplicationContext(), ModificarCurso.class);
+                modify_intent.putExtra("cursoId", aux_cursoId);
+                modify_intent.putExtra("cursoNombre", aux_cursoNombre);
+                startActivity(modify_intent);
+
             }
         });
     }  //termina el onCreate

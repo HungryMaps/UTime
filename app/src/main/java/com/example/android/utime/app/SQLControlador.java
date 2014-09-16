@@ -51,4 +51,17 @@ public class SQLControlador {
         }
         return cursor;
     }
+
+    public int actualizarDatos(long memberID, String cursoName) {
+        ContentValues cvActualizar = new ContentValues();
+        cvActualizar.put(DBhelper.CURSO_NOMBRE, cursoName);
+        int i = database.update(DBhelper.TABLE_CURSOS, cvActualizar,
+                DBhelper.CURSO_ID + " = " + memberID, null);
+        return i;
+    }
+
+    public void deleteData(long memberID) {
+        database.delete(DBhelper.TABLE_CURSOS, DBhelper.CURSO_ID + "="
+                + memberID, null);
+    }
 }

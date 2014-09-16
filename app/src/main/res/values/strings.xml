@@ -28,5 +28,6 @@
 
     <string name="title_activity_calendario">calendario</string>
     <string name="title_activity_agregar_curso">AgregarCurso</string>
+    <string name="title_activity_modificar_curso">ModificarCurso</string>
 
 </resources>
