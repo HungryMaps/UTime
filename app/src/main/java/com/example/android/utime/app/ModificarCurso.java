@@ -1,5 +1,9 @@
-package com.example.android.utime.app;
+/*
+ * Autor: Ana Laura Berdasco
+ * Clase ModificarCursos: Modifica el nombre del curso exietente
+ */
 
+package com.example.android.utime.app;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,11 +15,9 @@ import android.widget.EditText;
 
 public class ModificarCurso extends Activity implements OnClickListener {
 
-    EditText et;
-    Button btnActualizar, btnEliminar;
-
-    long member_id;
-
+    EditText editartexto;
+    Button btnActualizar, btnEliminar; //botones para actualizar y eliminar
+    long curso_member_id;
     SQLControlador dbcon;
 
     @Override
@@ -27,35 +29,37 @@ public class ModificarCurso extends Activity implements OnClickListener {
         dbcon = new SQLControlador(this);
         dbcon.abrirBaseDeDatos();
 
-        et = (EditText) findViewById(R.id.et_curso_id);
+        editartexto = (EditText) findViewById(R.id.et_curso_id);
         btnActualizar = (Button) findViewById(R.id.btnActualizar);
         btnEliminar = (Button) findViewById(R.id.btnEliminar);
 
-        Intent i = getIntent();
-        String memberID = i.getStringExtra("cursoId");
-        String memberName = i.getStringExtra("cursoNombre");
+        Intent intent = getIntent();
+        String memberID = intent.getStringExtra("cursoId");
+        String memberName = intent.getStringExtra("cursoNombre");
 
-        member_id = Long.parseLong(memberID);
-
-        et.setText(memberName);
+        curso_member_id = Long.parseLong(memberID);
+        editartexto.setText(memberName);
 
         btnActualizar.setOnClickListener(this);
         btnEliminar.setOnClickListener(this);
-
     }
 
+    /**
+     * Despliega las opciones de actualizar o eliminar el curso
+     * @param vista
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View vista) {
         // TODO Auto-generated method stub
-        switch (v.getId()) {
+        switch (vista.getId()) {
             case R.id.btnActualizar:
-                String cursoName_upd = et.getText().toString();
-                dbcon.actualizarDatos(member_id, cursoName_upd);
+                String cursoName_upd = editartexto.getText().toString();
+                dbcon.actualizarDatos(curso_member_id, cursoName_upd);
                 this.returnHome();
                 break;
 
             case R.id.btnEliminar:
-                dbcon.deleteData(member_id);
+                dbcon.deleteData(curso_member_id);
                 this.returnHome();
                 break;
         }

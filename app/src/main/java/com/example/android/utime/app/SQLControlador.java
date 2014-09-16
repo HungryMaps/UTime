@@ -52,16 +52,26 @@ public class SQLControlador {
         return cursor;
     }
 
+    /**
+     * Actualiza los datos en la base de datos
+     * @param memberID
+     * @param cursoName
+     * @return actualizado
+     */
     public int actualizarDatos(long memberID, String cursoName) {
         ContentValues cvActualizar = new ContentValues();
         cvActualizar.put(DBhelper.CURSO_NOMBRE, cursoName);
-        int i = database.update(DBhelper.TABLE_CURSOS, cvActualizar,
+        int actualizado = database.update(DBhelper.TABLE_CURSOS, cvActualizar,
                 DBhelper.CURSO_ID + " = " + memberID, null);
-        return i;
+        return actualizado;
     }
 
-    public void deleteData(long memberID) {
+    /**
+     * Elimina los datos de la base de datos
+     * @param cursoID
+     */
+    public void deleteData(long cursoID) {
         database.delete(DBhelper.TABLE_CURSOS, DBhelper.CURSO_ID + "="
-                + memberID, null);
+                + cursoID, null);
     }
 }
