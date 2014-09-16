@@ -1,8 +1,11 @@
+/**
+ * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco on 15/09/2014.
+ * Clase SQLControlador: Se encarga de todas las operacioned de la BD (Insertar, Consultar, Actualizar,
+ *                       Eliminar)
+ */
 package com.example.android.utime.app;
 
-/**
- * Created by JENNIFER on 15/09/2014.
- */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

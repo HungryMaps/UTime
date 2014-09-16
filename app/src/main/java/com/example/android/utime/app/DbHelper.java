@@ -1,22 +1,23 @@
-package com.example.android.utime.app;
-/**
+/*
  * Created by JENNIFER on 14/09/2014.
+ * Clase DbHelper: Se encarga de crear las tabla Cursos para la Base de Datos
  */
+
+package com.example.android.utime.app;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
-
-
+    //Información de la Tabla Cursos
     public static final String TABLE_CURSO = "cursos";
     public static final String CURSO_ID = "_id";
     public static final String CURSO_NOMBRE = "nombreCurso";
-
+    //Información de la BD
     static final String DB_NAME = "DBCURSO";
     static final int DB_VERSION = 1;
-
-
+    //Información de la BD
     private static final String CREATE_TABLE_CURSO = "create table "
             + TABLE_CURSO + "(" + CURSO_ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT, "

@@ -1,5 +1,6 @@
 /*
- * Autor: Jennifer Ledezma
+ * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco
  * Clase Cursos: Muestra los cursos guardados en la app por el usuario, y opción de interactuar
  *               de distintas formas con estos (crear un nuevo curso, editar, eliminar)
  */
@@ -38,7 +39,9 @@ public class Cursos extends ActionBarActivity {
         btnAgregarCurso = (Button) findViewById(R.id.btnAgregarCurso);
         lista = (ListView) findViewById(R.id.listViewCursos);
 
-        //acción del boton agregar miembro
+        /**
+         * Acción del boton agregar curso
+         */
         btnAgregarCurso.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +49,7 @@ public class Cursos extends ActionBarActivity {
                 startActivity(intentAgregar);
             }
         });
-
+        /*Tomar los datos para poner en el cursor y después en el adapter*/
         Cursor cursor = dbconeccion.leerDatos();
 
         String[] from = new String[] {
@@ -64,7 +67,6 @@ public class Cursos extends ActionBarActivity {
         adapter.notifyDataSetChanged();
         lista.setAdapter(adapter);
 
-        // acción cuando hacemos click en item para poder modificarlo o eliminarlo
         lista.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -77,7 +79,7 @@ public class Cursos extends ActionBarActivity {
             }
         });
     }
-    //codigo viejo
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
