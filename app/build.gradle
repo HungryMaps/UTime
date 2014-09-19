@@ -18,6 +18,10 @@ testOptions{
     reportDir = "$project.buildDir/results/report"
     resultsDir = "$project.buildDir/results"
 }
+    /**
+     * Estos cambios lo que permiten es la creacion de un reporte donde se observe el resultado de las pruebas
+     * y cuales de estas fueron exitosas y cuales fallaron
+     */
 
     buildTypes {
         release {
