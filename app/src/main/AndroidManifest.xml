@@ -48,6 +48,18 @@
             android:name=".ModificarCurso"
             android:label="@string/title_activity_modificar_curso" >
         </activity>
+        <activity
+            android:name=".AgregarNota"
+            android:label="@string/title_activity_agregar_nota" >
+        </activity>
+        <activity
+            android:name=".ModificarNota"
+            android:label="@string/title_activity_modificar_nota" >
+        </activity>
+        <activity
+            android:name=".formato_nota"
+            android:label="@string/title_activity_formato_nota" >
+        </activity>
     </application>
 
 </manifest>

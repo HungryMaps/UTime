@@ -29,5 +29,8 @@
     <string name="title_activity_calendario">calendario</string>
     <string name="title_activity_agregar_curso">AgregarCurso</string>
     <string name="title_activity_modificar_curso">ModificarCurso</string>
+    <string name="title_activity_agregar_nota">AgregarNota</string>
+    <string name="title_activity_modificar_nota">ModificarNota</string>
+    <string name="title_activity_formato_nota">formato_nota</string>
 
 </resources>

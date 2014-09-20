@@ -6,19 +6,69 @@
 
 package com.example.android.utime.app;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 
 public class Horario extends ActionBarActivity {
+
+    Button btnAgregarNota;
+    ListView lista;
+    SQLControlador dbconeccion;
+    TextView textView_notaID, textView_notaTexto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
-    }
+
+        dbconeccion = new SQLControlador(this);
+        dbconeccion.abrirBaseDeDatos();
+        btnAgregarNota = (Button) findViewById(R.id.btnAgregarNota);
+        lista = (ListView) findViewById(R.id.listViewNotas);
+
+        /**
+         * Acción del botón agregar nota.
+         */
+        btnAgregarNota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAgregar = new Intent(Horario.this, AgregarNota.class);
+                startActivity(intentAgregar);
+            }
+        });
+
+        // Traer los datos de la base, se ponen en el cursor para después ponerlos en el adapter.
+        Cursor cursor = dbconeccion.leerDatosNotas();
+
+        String[] from = new String[] {
+                DBhelper.NOTA_ID,
+                DBhelper.NOTA_TEXTO
+        };
+
+        int[] to = new int[] {
+                R.id.nota_id,
+                R.id.nota_texto
+        };
+
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                Horario.this, R.layout.formato_nota, cursor, from, to);
+
+        adapter.notifyDataSetChanged();
+        lista.setAdapter(adapter);
+
+    } //onCreate
 
 
     @Override

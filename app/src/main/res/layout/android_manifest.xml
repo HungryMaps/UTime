@@ -16,8 +16,20 @@ android:layout_width="match_parent" android:layout_height="match_parent">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+
+    <activity
+        android:name=".HORARIO"
+        android:label="@string/app_name" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
     <activity android:name=".AgregarCurso"></activity>
     <activity android:name=".ModificarCurso"></activity>
+    <activity android:name=".AgregarNota"></activity>
 </application>
 
 </manifest>
