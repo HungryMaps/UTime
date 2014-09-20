@@ -14,10 +14,10 @@ android {
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 
-testOptions{
-    reportDir = "$project.buildDir/results/report"
-    resultsDir = "$project.buildDir/results"
-}
+    testOptions {
+        reportDir = "$project.buildDir/results/report"
+        resultsDir = "$project.buildDir/results"
+    }
     /**
      * Estos cambios lo que permiten es la creacion de un reporte donde se observe el resultado de las pruebas
      * y cuales de estas fueron exitosas y cuales fallaron
@@ -30,12 +30,15 @@ testOptions{
         }
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
 }
 
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.roomorama:caldroid:1.1.1'
 }

@@ -48,6 +48,10 @@
             android:name=".ModificarCurso"
             android:label="@string/title_activity_modificar_curso" >
         </activity>
+        <activity
+            android:name=".prueba"
+            android:label="@string/title_activity_prueba" >
+        </activity>
     </application>
 
 </manifest>
