@@ -28,6 +28,10 @@ public class Horario extends ActionBarActivity {
     TextView textView_notaID, textView_notaTexto;
 
 
+    /*
+    * Se le agrega más funcionalidad al método onCreate para que aparesca la tabla de notas generales
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

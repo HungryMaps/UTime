@@ -18,6 +18,9 @@ public class AgregarNota extends Activity implements OnClickListener {
     Button btnAgregarId, read_bt;
     SQLControlador dbconeccion;
 
+    /*
+    * Método que crea lo que se necesita para poder agregar una nota
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,9 @@ public class AgregarNota extends Activity implements OnClickListener {
 
     }//onCreate
 
+    /*
+    * Método que se acciona cuando se le da click al botón, esto para agregar una nota a la base
+     */
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
