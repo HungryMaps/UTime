@@ -39,12 +39,31 @@ public class SQLControlador {
         database.insert(DBhelper.TABLE_CURSOS, null, cv);
     }
 
+    public void insertarDatosNotas(String name) {
+        ContentValues cv = new ContentValues();
+        cv.put(DBhelper.NOTA_TEXTO, name);
+        database.insert(DBhelper.TABLE_NOTAS, null, cv);
+    }
+
     public Cursor leerDatos() {
         String[] todasLasColumnas = new String[] {
                 DBhelper.CURSO_ID,
                 DBhelper.CURSO_NOMBRE
         };
         Cursor cursor = database.query(DBhelper.TABLE_CURSOS, todasLasColumnas, null,
+                null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    public Cursor leerDatosNotas() {
+        String[] todasLasColumnas = new String[] {
+                DBhelper.NOTA_ID,
+                DBhelper.NOTA_TEXTO
+        };
+        Cursor cursor = database.query(DBhelper.TABLE_NOTAS, todasLasColumnas, null,
                 null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
