@@ -7,14 +7,20 @@
 
 package com.example.android.utime.app;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.Toast;
 
+import com.roomorama.caldroid.CaldroidFragment;
+
+import java.util.Calendar;
 
 
 public class Calendario extends ActionBarActivity {
@@ -27,18 +33,22 @@ public class Calendario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
-       /**
-        *  Listener que obtiene la fecha al presionar un día en específico en el calendario
-        *  Su uso por ahora es temporal, se planea usar para presentar notas relevantes a ese día en particular
-        */
-        final CalendarView calendario = (CalendarView) findViewById(R.id.calendario);
+        /*
+        *Se instancia un Calendario de la libreria Caldroid.
+        * Se pasan los argumentos de día, mes y año correspondientes.
+         */
 
-        calendario.setOnDateChangeListener(new OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(Calendario.this, dayOfMonth + " / " + (month+1) + " / " + year, Toast.LENGTH_SHORT).show();
-            }
-        });
+        CaldroidFragment caldroidFragment = new CaldroidFragment();
+        Bundle args = new Bundle();
+        Calendar calendar = Calendar.getInstance();
+        args.putInt(CaldroidFragment.MONTH, calendar.get(Calendar.MONTH) + 1);
+        args.putInt(CaldroidFragment.YEAR, calendar.get(Calendar.YEAR));
+        caldroidFragment.setArguments(args);
+
+        android.support.v4.app.FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.calendar1, caldroidFragment);
+        t.commit();
+
     }
 
 
@@ -60,4 +70,6 @@ public class Calendario extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
