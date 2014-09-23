@@ -7,12 +7,17 @@ import android.util.Log;
 
 /**
  * Created by JENNIFER on 23/09/2014.
+ * Clase que se encarga de hacerle pruebas unitarias a la BD en la tabla de Curso
  */
 
 public class DbTest extends AndroidTestCase {
 
     public static final String LOG_TAG = DbTest.class.getSimpleName();
 
+    /**
+     * Limpia la base de datos y prueba si la está creando y si la puede abrir
+     * @throws Throwable
+     */
     public void testPrueba()throws Throwable{
         mContext.deleteDatabase(DBhelper.DB_NAME);
         SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
@@ -20,14 +25,15 @@ public class DbTest extends AndroidTestCase {
         db.close();
     }
 
+    /**
+     * Prueba Unitaria para hacer el Insertar en la DB
+     * @throws Throwable
+     */
     public void testInsert()throws Throwable{
-        String name = "Inge";
+        String name = "Ingeniería del Software";
         mContext.deleteDatabase(DBhelper.DB_NAME);
         SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
 
-        //ContentValues cv = new ContentValues();
-        //cv.put(DBhelper.CURSO_NOMBRE, name);
-        //db.insert(DBhelper.TABLE_CURSOS, null, cv);
         SQLControlador ctrl = new SQLControlador(mContext);
         ctrl.abrirBaseDeDatos();
         ctrl.insertarDatos(name);
@@ -41,10 +47,8 @@ public class DbTest extends AndroidTestCase {
         String nombre = cursor.getString(nombreC);
         Log.d(LOG_TAG, "PRUEBA "+nombre);
 
-        assertEquals("pase yay", nombre, name);
-        //assertFalse(nombre, 1<0);
+        assertEquals("Prueba acertada", nombre, name);
         db.close();
-
     }
 }
 
