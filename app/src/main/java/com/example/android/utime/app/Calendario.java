@@ -33,19 +33,10 @@ public class Calendario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
-       /**
-        *  Listener que obtiene la fecha al presionar un día en específico en el calendario
-        *  Su uso por ahora es temporal, se planea usar para presentar notas relevantes a ese día en particular
-        */
         /*
-        final CalendarView calendario = (CalendarView) findViewById(R.id.calendario);
-
-        calendario.setOnDateChangeListener(new OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(Calendario.this, dayOfMonth + " / " + (month+1) + " / " + year, Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        *Se instancia un Calendario de la libreria Caldroid.
+        * Se pasan los argumentos de día, mes y año correspondientes.
+         */
 
         CaldroidFragment caldroidFragment = new CaldroidFragment();
         Bundle args = new Bundle();
