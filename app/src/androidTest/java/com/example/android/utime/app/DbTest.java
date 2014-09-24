@@ -76,6 +76,69 @@ public class DbTest extends AndroidTestCase {
         db.close();
     }
 
+    public void testDeleteNota()throws Throwable{
+        String name = "Ensamblador";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador ctrl = new SQLControlador(mContext);
+        ctrl.abrirBaseDeDatos();
+        ctrl.insertarDatosNotas(name);
+        Cursor cursor = ctrl.leerDatosNotas();
+
+        int idnota = cursor.getColumnIndex(DBhelper.NOTA_ID); //para tomar el id
+        int nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
+        String nombre = cursor.getString(nombreC);
+        String id = cursor.getString(idnota);
+        long idnum = Integer.parseInt(id);
+
+        //String cambioCurso = "Sistemas Operativos";
+
+        ctrl.deleteData(idnum);
+        //ctrl.leerDatosNotas();
+        Cursor  cursor2 = ctrl.leerDatosNotas();
+        nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
+        nombre = cursor.getString(nombreC);
+       assertNotSame("Prueba delete",cursor,cursor2);
+      //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
+
+
+        db.close();
+    }
+
+    public void testDeleteCurso()throws Throwable{
+        String name = "Ensamblador";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador ctrl = new SQLControlador(mContext);
+        ctrl.abrirBaseDeDatos();
+        ctrl.insertarDatos(name);
+        Cursor cursor = ctrl.leerDatos();
+
+        int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
+        int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
+        String nombre = cursor.getString(nombreC);
+        String id = cursor.getString(idcurso);
+        long idnum = Integer.parseInt(id);
+
+        //String cambioCurso = "Sistemas Operativos";
+
+        ctrl.deleteData(idnum);
+        ctrl.leerDatos();
+        Cursor  cursor2 = ctrl.leerDatos();
+        nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
+        nombre = cursor.getString(nombreC);
+        assertNotSame("Prueba delete",cursor,cursor2);
+        //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
+
+
+        db.close();
+    }
+
+
+
+
 }
 
 
