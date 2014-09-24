@@ -93,4 +93,24 @@ public class SQLControlador {
         database.delete(DBhelper.TABLE_CURSOS, DBhelper.CURSO_ID + "="
                 + cursoID, null);
     }
+
+    public int actualizarDatosnotas(long memberID, String cursoName) {
+        ContentValues cvActualizar = new ContentValues();
+        cvActualizar.put(DBhelper.NOTA_TEXTO, cursoName);
+        int actualizado = database.update(DBhelper.TABLE_NOTAS, cvActualizar,
+                DBhelper.NOTA_ID + " = " + memberID, null);
+        return actualizado;
+    }
+
+    public void deleteDataNotas(long notaID) {
+        database.delete(DBhelper.TABLE_NOTAS, DBhelper.NOTA_ID + "="
+                + notaID, null);
+    }
+
+
+
+
+
+    
+
 }
