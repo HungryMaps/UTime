@@ -75,7 +75,11 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba correcta", texto, nota);
         db.close();
     }
-
+    
+    /**
+     * Elimina una nota de la base de datos
+     * @throws Throwable
+     */
     public void testDeleteNota()throws Throwable{
         String name = "Ensamblador";
         mContext.deleteDatabase(DBhelper.DB_NAME);
@@ -91,21 +95,18 @@ public class DbTest extends AndroidTestCase {
         String nombre = cursor.getString(nombreC);
         String id = cursor.getString(idnota);
         long idnum = Integer.parseInt(id);
-
-        //String cambioCurso = "Sistemas Operativos";
-
-        ctrl.deleteData(idnum);
-        //ctrl.leerDatosNotas();
+        ctrl.deleteData(idnum); //elimina la nota
         Cursor  cursor2 = ctrl.leerDatosNotas();
         nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
-        nombre = cursor.getString(nombreC);
        assertNotSame("Prueba delete",cursor,cursor2);
       //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
-
-
         db.close();
     }
 
+    /**
+     * Elimina un curso de la base de datos
+     * @throws Throwable
+     */
     public void testDeleteCurso()throws Throwable{
         String name = "Ensamblador";
         mContext.deleteDatabase(DBhelper.DB_NAME);
@@ -121,23 +122,14 @@ public class DbTest extends AndroidTestCase {
         String nombre = cursor.getString(nombreC);
         String id = cursor.getString(idcurso);
         long idnum = Integer.parseInt(id);
-
-        //String cambioCurso = "Sistemas Operativos";
-
-        ctrl.deleteData(idnum);
+        ctrl.deleteData(idnum);// elimina el curso de la base
         ctrl.leerDatos();
         Cursor  cursor2 = ctrl.leerDatos();
         nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
-        nombre = cursor.getString(nombreC);
         assertNotSame("Prueba delete",cursor,cursor2);
         //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
-
-
         db.close();
     }
-
-
-
 
 }
 
