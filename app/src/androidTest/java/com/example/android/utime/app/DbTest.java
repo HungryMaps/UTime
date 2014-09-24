@@ -50,6 +50,25 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba acertada", nombre, name);
         db.close();
     }
+
+    public void testInsertarNota()throws Throwable{
+        String nota = "Ana 88888888";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador controlador = new SQLControlador(mContext);
+        controlador.abrirBaseDeDatos();
+        controlador.insertarDatosNotas(nota);
+        Cursor cursor = controlador.leerDatosNotas();
+
+        int textoNota = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
+        String texto = cursor.getString(textoNota);
+        Log.d(LOG_TAG, "PRUEBA "+texto);
+
+        assertEquals("Prueba correcta", texto, nota);
+        db.close();
+    }
+
 }
 
 
