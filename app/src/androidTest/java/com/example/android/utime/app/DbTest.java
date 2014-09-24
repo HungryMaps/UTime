@@ -50,6 +50,32 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba acertada", nombre, name);
         db.close();
     }
+
+    /**
+     * Prueba que verifica si se agrega bien una nota a la tabla de notas
+     */
+    public void testInsertarNota()throws Throwable{
+        //La nota contiene "Ana 88888888" como si fuera un número de teléfono
+        String nota = "Ana 88888888";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador controlador = new SQLControlador(mContext);
+        controlador.abrirBaseDeDatos();
+        //Se inserta en la base
+        controlador.insertarDatosNotas(nota);
+
+        //Aquí vamos a revisar si se insertó bien esa nota
+        Cursor cursor = controlador.leerDatosNotas();
+
+        int textoNota = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
+        String texto = cursor.getString(textoNota);
+        Log.d(LOG_TAG, "PRUEBA "+texto);
+
+        assertEquals("Prueba correcta", texto, nota);
+        db.close();
+    }
+
 }
 
 
