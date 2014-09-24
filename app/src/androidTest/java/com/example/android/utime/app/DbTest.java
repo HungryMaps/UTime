@@ -95,7 +95,7 @@ public class DbTest extends AndroidTestCase {
         String nombre = cursor.getString(nombreC);
         String id = cursor.getString(idnota);
         long idnum = Integer.parseInt(id);
-        ctrl.deleteData(idnum); //elimina la nota
+        ctrl.deleteDataNotas(idnum); //elimina la nota
         Cursor  cursor2 = ctrl.leerDatosNotas();
         nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
        assertNotSame("Prueba delete",cursor,cursor2);
@@ -142,7 +142,6 @@ public class DbTest extends AndroidTestCase {
         ctrl.abrirBaseDeDatos();
         ctrl.insertarDatos(name);
         Cursor cursor = ctrl.leerDatos();
-
         int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
         String id = cursor.getString(idcurso);
         long idnum = Integer.parseInt(id);
@@ -157,6 +156,33 @@ public class DbTest extends AndroidTestCase {
         db.close();
     }
 
+    /**
+     * Prueba para actualizar una nota
+     * @throws Throwable
+     */
+    public void testModificarNota()throws Throwable{
+        String name = "Hola,hello,";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador ctrl = new SQLControlador(mContext);
+        ctrl.abrirBaseDeDatos();
+        ctrl.insertarDatosNotas(name);
+        Cursor cursor = ctrl.leerDatosNotas();
+
+        int idcurso = cursor.getColumnIndex(DBhelper.NOTA_ID); //para tomar el id
+
+        String id = cursor.getString(idcurso);
+        long idnum = Integer.parseInt(id);
+        String nuevoNombre = "adios,good bye";
+
+        ctrl.actualizarDatosNotas(idnum,nuevoNombre);
+        cursor = ctrl.leerDatosNotas();
+        int nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
+        String nombre = cursor.getString(nombreC);
+
+        assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
+
+        db.close();
+    }
 }
-
-
