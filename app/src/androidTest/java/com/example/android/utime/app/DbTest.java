@@ -129,6 +129,10 @@ public class DbTest extends AndroidTestCase {
         db.close();
     }
 
+    /**
+     * Prueba que verifica que se actualizo el nombre del curso
+     * @throws Throwable
+     */
     public void testModificarCurso()throws Throwable{
         String name = "Ensamblador";
         mContext.deleteDatabase(DBhelper.DB_NAME);
@@ -140,7 +144,6 @@ public class DbTest extends AndroidTestCase {
         Cursor cursor = ctrl.leerDatos();
 
         int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
-
         String id = cursor.getString(idcurso);
         long idnum = Integer.parseInt(id);
         String nuevoNombre = "Estructuras Discretas";
@@ -149,14 +152,10 @@ public class DbTest extends AndroidTestCase {
         cursor = ctrl.leerDatos();
         int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
         String nombre = cursor.getString(nombreC);
-
         assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
-
 
         db.close();
     }
-
-
 
 }
 
