@@ -142,7 +142,6 @@ public class DbTest extends AndroidTestCase {
         ctrl.abrirBaseDeDatos();
         ctrl.insertarDatos(name);
         Cursor cursor = ctrl.leerDatos();
-
         int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
         String id = cursor.getString(idcurso);
         long idnum = Integer.parseInt(id);
@@ -157,7 +156,10 @@ public class DbTest extends AndroidTestCase {
         db.close();
     }
 
-
+    /**
+     * Prueba para actualizar una nota
+     * @throws Throwable
+     */
     public void testModificarNota()throws Throwable{
         String name = "Hola,hello,";
         mContext.deleteDatabase(DBhelper.DB_NAME);
@@ -174,17 +176,13 @@ public class DbTest extends AndroidTestCase {
         long idnum = Integer.parseInt(id);
         String nuevoNombre = "adios,good bye";
 
-        ctrl.actualizarDatosnotas(idnum,nuevoNombre);
+        ctrl.actualizarDatosNotas(idnum,nuevoNombre);
         cursor = ctrl.leerDatosNotas();
         int nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
         String nombre = cursor.getString(nombreC);
 
         assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
 
-
         db.close();
     }
-
 }
-
-

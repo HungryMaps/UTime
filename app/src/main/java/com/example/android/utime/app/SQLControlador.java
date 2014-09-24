@@ -94,7 +94,13 @@ public class SQLControlador {
                 + cursoID, null);
     }
 
-    public int actualizarDatosnotas(long memberID, String cursoName) {
+    /**
+     * Actualiza los datos  de la tabla nota
+     * @param memberID
+     * @param cursoName
+     * @return
+     */
+    public int actualizarDatosNotas(long memberID, String cursoName) {
         ContentValues cvActualizar = new ContentValues();
         cvActualizar.put(DBhelper.NOTA_TEXTO, cursoName);
         int actualizado = database.update(DBhelper.TABLE_NOTAS, cvActualizar,
@@ -102,15 +108,12 @@ public class SQLControlador {
         return actualizado;
     }
 
+    /**
+     * Elimina los datos de la tabla Nota
+     * @param notaID
+     */
     public void deleteDataNotas(long notaID) {
         database.delete(DBhelper.TABLE_NOTAS, DBhelper.NOTA_ID + "="
                 + notaID, null);
     }
-
-
-
-
-
-    
-
 }
