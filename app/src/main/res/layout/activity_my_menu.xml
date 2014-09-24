@@ -46,11 +46,12 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:textColor="#000000"
             />
 
+
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:text="HORARIO"
-            android:id="@+id/horario"
+            android:text="CURSOS"
+            android:id="@+id/cursos"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:clickable="true"
@@ -63,8 +64,8 @@ aplicación para mantener la coherencia a traves de toda ella-->
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:text="CURSOS"
-            android:id="@+id/cursos"
+            android:text="HORARIO"
+            android:id="@+id/fechas_importantes"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:clickable="true"
@@ -86,13 +87,14 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="@color/azul1"
+            android:background="@color/azul2"
             android:textColor="#000000" />
+
         <Button
             android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:text="FECHAS IMPORTANTES"
-            android:id="@+id/fechas_importantes"
+            android:text="NOTAS GENERALES"
+            android:id="@+id/horario"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:clickable="true"
@@ -100,7 +102,7 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:focusable="false"
             android:longClickable="false"
             android:textAlignment="gravity"
-            android:background="@color/azul2"
+            android:background="@color/azul1"
             android:textColor="#000000" />
 </LinearLayout>
 
