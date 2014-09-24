@@ -123,13 +123,40 @@ public class DbTest extends AndroidTestCase {
         String id = cursor.getString(idcurso);
         long idnum = Integer.parseInt(id);
         ctrl.deleteData(idnum);// elimina el curso de la base
-        ctrl.leerDatos();
         Cursor  cursor2 = ctrl.leerDatos();
-        nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
         assertNotSame("Prueba delete",cursor,cursor2);
-        //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
+
         db.close();
     }
+
+    public void testModificarCurso()throws Throwable{
+        String name = "Ensamblador";
+        mContext.deleteDatabase(DBhelper.DB_NAME);
+        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+
+        SQLControlador ctrl = new SQLControlador(mContext);
+        ctrl.abrirBaseDeDatos();
+        ctrl.insertarDatos(name);
+        Cursor cursor = ctrl.leerDatos();
+
+        int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
+
+        String id = cursor.getString(idcurso);
+        long idnum = Integer.parseInt(id);
+        String nuevoNombre = "Estructuras Discretas";
+
+        ctrl.actualizarDatos(idnum,nuevoNombre);
+        cursor = ctrl.leerDatos();
+        int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
+        String nombre = cursor.getString(nombreC);
+
+        assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
+
+
+        db.close();
+    }
+
+
 
 }
 
