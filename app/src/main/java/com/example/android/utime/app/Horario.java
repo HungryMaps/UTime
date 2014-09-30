@@ -27,7 +27,6 @@ public class Horario extends ActionBarActivity {
     SQLControlador dbconeccion;
     TextView textView_notaID, textView_notaTexto;
 
-
     /*
     * Se le agrega más funcionalidad al método onCreate para que aparesca la tabla de notas generales
      */
@@ -72,8 +71,24 @@ public class Horario extends ActionBarActivity {
         adapter.notifyDataSetChanged();
         lista.setAdapter(adapter);
 
-    } //onCreate
+        // Para cuando se le da click para verlo y poder modificar o eliminar la nota
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
+                textView_notaID = (TextView) view.findViewById(R.id.nota_id);
+                textView_notaTexto = (TextView) view.findViewById(R.id.nota_texto);
+
+                String notaId = textView_notaID.getText().toString();
+                String notaTexto = textView_notaTexto.getText().toString();
+
+                Intent modify_intent = new Intent(getApplicationContext(), ModificarNota.class);
+                modify_intent.putExtra("notaId", notaId);
+                modify_intent.putExtra("notaTexto", notaTexto);
+                startActivity(modify_intent);
+            }
+        });
+    } //onCreate
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

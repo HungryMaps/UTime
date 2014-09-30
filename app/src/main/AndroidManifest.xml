@@ -33,10 +33,6 @@
             android:label="@string/title_activity_horario" >
         </activity>
         <activity
-            android:name=".calendario"
-            android:label="@string/title_activity_calendario" >
-        </activity>
-        <activity
             android:name=".Calendario"
             android:label="@string/title_activity_calendario" >
         </activity>
@@ -56,16 +52,9 @@
             android:name=".ModificarNota"
             android:label="@string/title_activity_modificar_nota" >
         </activity>
-        <activity
-            android:name=".formato_nota"
-            android:label="@string/title_activity_formato_nota" >
-        </activity>
     </application>
-    <uses-permission
-        android:name="android.permission.READ_CALENDAR">
+    <uses-permission android:name="android.permission.READ_CALENDAR" >
     </uses-permission>
-    <uses-permission
-        android:name="android.permission.WRITE_CALENDAR">
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" >
     </uses-permission>
-
 </manifest>
