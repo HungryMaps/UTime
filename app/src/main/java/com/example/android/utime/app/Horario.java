@@ -27,7 +27,6 @@ public class Horario extends ActionBarActivity {
     SQLControlador dbconeccion;
     TextView textView_notaID, textView_notaTexto;
 
-
     /*
     * Se le agrega más funcionalidad al método onCreate para que aparesca la tabla de notas generales
      */
@@ -87,12 +86,9 @@ public class Horario extends ActionBarActivity {
                 modify_intent.putExtra("notaId", notaId);
                 modify_intent.putExtra("notaTexto", notaTexto);
                 startActivity(modify_intent);
-
             }
         });
-
     } //onCreate
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
