@@ -112,8 +112,9 @@ public class SQLControlador {
      * Elimina los datos de la tabla Nota
      * @param notaID
      */
-    public void deleteDataNotas(long notaID) {
+    public void eliminarDataNotas(long notaID) {
         database.delete(DBhelper.TABLE_NOTAS, DBhelper.NOTA_ID + "="
                 + notaID, null);
     }
+
 }
