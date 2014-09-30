@@ -7,20 +7,21 @@
 
 package com.example.android.utime.app;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
+import android.annotation.TargetApi;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import android.widget.CalendarView;
-import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.Toast;
-
-import com.roomorama.caldroid.CaldroidFragment;
-
-import java.util.Calendar;
+import android.text.format.Time;
+import android.view.View;
+import java.util.GregorianCalendar;
 
 
 public class Calendario extends ActionBarActivity {
@@ -32,44 +33,49 @@ public class Calendario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
+    }
 
-        /*
-        *Se instancia un Calendario de la libreria Caldroid.
-        * Se pasan los argumentos de día, mes y año correspondientes.
-         */
+    /*
+    * Método para insertar un evento nuevo en el calendario
+    * Trae un poco de información preestablecida
+    * */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public void onClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra(Events.TITLE, "Info");
+        intent.putExtra(Events.EVENT_LOCATION, "Universidad de Costa Rica");
+        intent.putExtra(Events.DESCRIPTION, "Ingrese Descripción");
 
-        CaldroidFragment caldroidFragment = new CaldroidFragment();
-        Bundle args = new Bundle();
-        Calendar calendar = Calendar.getInstance();
-        args.putInt(CaldroidFragment.MONTH, calendar.get(Calendar.MONTH) + 1);
-        args.putInt(CaldroidFragment.YEAR, calendar.get(Calendar.YEAR));
-        caldroidFragment.setArguments(args);
+        Time now = new Time();
+        now.setToNow();
+        GregorianCalendar calDate = new GregorianCalendar(now.year, now.month, now.monthDay, now.hour, now.minute, now.second);
+        GregorianCalendar calEnd = new GregorianCalendar(now.year, now.month, now.monthDay, now.hour+2, now.minute, now.second);
 
-        android.support.v4.app.FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(R.id.calendar1, caldroidFragment);
-        t.commit();
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                calDate.getTimeInMillis());
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                calEnd.getTimeInMillis());
+
+        startActivity(intent);
 
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.calendario, menu);
-        return true;
+    /*
+    * Método para ver el estado del dia de hoy en el calendario
+    * */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public void queryCalendar(View view) {
+        Time now = new Time();
+        now.setToNow();
+        long startMillis = now.toMillis(true);
+        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+        builder.appendPath("time");
+        ContentUris.appendId(builder, startMillis);
+        Intent intent = new Intent(Intent.ACTION_VIEW)
+                .setData(builder.build());
+        startActivity(intent);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }
