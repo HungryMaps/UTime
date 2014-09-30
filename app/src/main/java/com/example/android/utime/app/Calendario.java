@@ -15,7 +15,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract;
-import android.provider.CalendarContract.*;
+import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -24,14 +25,6 @@ import java.util.GregorianCalendar;
 
 
 public class Calendario extends ActionBarActivity {
-
-
-    public static final String[] EVENT_PROJECTION = new String[] {
-            Calendars._ID,                           // 0
-            Calendars.ACCOUNT_NAME,                  // 1
-            Calendars.CALENDAR_DISPLAY_NAME,         // 2
-            Calendars.OWNER_ACCOUNT                  // 3
-    };
 
     /*
     *  Método para crear el activity cuando lo llama menú.
@@ -42,6 +35,10 @@ public class Calendario extends ActionBarActivity {
         setContentView(R.layout.activity_calendario);
     }
 
+    /*
+    * Método para insertar un evento nuevo en el calendario
+    * Trae un poco de información preestablecida
+    * */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_INSERT);
@@ -64,6 +61,10 @@ public class Calendario extends ActionBarActivity {
 
     }
 
+
+    /*
+    * Método para ver el estado del dia de hoy en el calendario
+    * */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void queryCalendar(View view) {
         Time now = new Time();
@@ -75,23 +76,6 @@ public class Calendario extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW)
                 .setData(builder.build());
         startActivity(intent);
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private long getCalendarId() {
-        Cursor calCursor =
-                getContentResolver().
-                        query(Calendars.CONTENT_URI,
-                                EVENT_PROJECTION,
-                                Calendars.VISIBLE + " = 1",
-                                null,
-                                Calendars._ID + " ASC");
-
-        if (calCursor.moveToFirst()) {
-            long id = calCursor.getLong(0);
-            return id;
-        }
-        return -1;
     }
 
 }
