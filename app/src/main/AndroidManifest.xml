@@ -52,9 +52,17 @@
             android:name=".ModificarNota"
             android:label="@string/title_activity_modificar_nota" >
         </activity>
+        <activity
+            android:name=".NotasGenerales"
+            android:label="@string/title_activity_notas_generales" >
+        </activity>
     </application>
+<!--
+Se piden permisos para poder escribir en el calendario
+-->
     <uses-permission android:name="android.permission.READ_CALENDAR" >
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" >
     </uses-permission>
+
 </manifest>
