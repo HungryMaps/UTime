@@ -48,7 +48,7 @@ public class AgregarNota extends Activity implements OnClickListener {
                 String name = et.getText().toString();
                 //inserta los datos en la tabla de la base de datos
                 dbconeccion.insertarDatosNotas(name);
-                Intent main = new Intent(AgregarNota.this, Horario.class)
+                Intent main = new Intent(AgregarNota.this, NotasGenerales.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(main);
                 break;

@@ -68,7 +68,7 @@ public class ModificarNota extends Activity implements OnClickListener {
     public void returnHome() {
 
         Intent home_intent = new Intent(getApplicationContext(),
-                Horario.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                NotasGenerales.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
 }
