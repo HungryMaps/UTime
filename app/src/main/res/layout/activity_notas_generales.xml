@@ -9,16 +9,11 @@
     tools:context="com.example.android.utime.app.NotasGenerales"
     android:background = "@color/fondo">
 
-    <!--
-    Se ponen momentaneamente las notas en este view mientras se programa lo
-    del calendario, luego hay que moverlo.
-    -->
-
     <Button
         android:id="@+id/btnAgregarNota"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Nuevo Nota" />
+        android:text="Nueva Nota" />
 
     <ListView
         android:id="@+id/listViewNotas"
