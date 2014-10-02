@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class ModificarNota extends Activity implements OnClickListener {
 
-    EditText editartexto;
+   /* EditText editartexto;
     Button btnActualizarNota, btnEliminarNota; //botones para actualizar y eliminar
     long nota_member_id;
     SQLControlador dbcon;
@@ -44,9 +44,11 @@ public class ModificarNota extends Activity implements OnClickListener {
      * Despliega las opciones de actualizar o eliminar el curso
      * @param vista
      */
+
+
     @Override
     public void onClick(View vista) {
-        // TODO Auto-generated method stub
+        /*// TODO Auto-generated method stub
         switch (vista.getId()) {
             case R.id.btnActualizarNota:
                 String notaNombre_upd = editartexto.getText().toString();
@@ -59,16 +61,18 @@ public class ModificarNota extends Activity implements OnClickListener {
                 this.returnHome();
                 break;
         }
+        */
     }
 
     /*
     *  Este método es para que, una vez que se ha modificado o eliminado una nota,
     *  Se sepa a dónde tiene que devolverse, en este caso a donde están todas las notas
-     */
+
     public void returnHome() {
 
         Intent home_intent = new Intent(getApplicationContext(),
                 NotasGenerales.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
+     */
 }

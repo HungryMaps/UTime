@@ -14,13 +14,13 @@ import android.widget.EditText;
 
 public class AgregarNota extends Activity implements OnClickListener {
 
-    EditText et;
+    /* EditText et;
     Button btnAgregarId, read_bt;
     SQLControlador dbconeccion;
 
     /*
     * Método que crea lo que se necesita para poder agregar una nota
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +39,11 @@ public class AgregarNota extends Activity implements OnClickListener {
 
     /*
     * Método que se acciona cuando se le da click al botón, esto para agregar una nota a la base
-     */
+    */
     @Override
+
     public void onClick(View v) {
-        // TODO Auto-generated method stub
+        /*/ // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.btnAgregarId:
                 String name = et.getText().toString();
@@ -55,6 +56,7 @@ public class AgregarNota extends Activity implements OnClickListener {
             default:
                 break;
         }
+        */
     }
 
 

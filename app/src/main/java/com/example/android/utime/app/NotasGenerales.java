@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class NotasGenerales extends ActionBarActivity {
 
-    Button btnAgregarNota;
+    /*Button btnAgregarNota;
     ListView lista;
     SQLControlador dbconeccion;
     TextView textView_notaID, textView_notaTexto;
@@ -28,7 +28,7 @@ public class NotasGenerales extends ActionBarActivity {
 
         /*
         En este caso, se accesa a la versión 2 de la base de datos
-         */
+
         dbconeccion = new SQLControlador(this);
         dbconeccion.abrirBaseDeDatos();
         btnAgregarNota = (Button) findViewById(R.id.btnAgregarNota);
@@ -36,7 +36,7 @@ public class NotasGenerales extends ActionBarActivity {
 
         /**
          * Acción del botón agregar nota.
-         */
+
         btnAgregarNota.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,4 +104,5 @@ public class NotasGenerales extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 }
