@@ -12,109 +12,107 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.SQLException;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SQLControlador {
 
-    private DBhelper dbhelper;
-    private Context context;
-    private SQLiteDatabase database;
+    private DBhelper dbHelper;
 
-    public SQLControlador(Context contexts) {
-        context = contexts;
+    public SQLControlador(Context context) {
+        dbHelper = new DBhelper(context);
     }
 
-    public SQLControlador abrirBaseDeDatos() throws SQLException {
-        dbhelper = new DBhelper(context);
-        database = dbhelper.getWritableDatabase();
-        return this;
-    }
+    public int insert(Curso curso) {
 
-    public void cerrar() {
-        dbhelper.close();
-    }
+        //Open connection to write data
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Curso.KEY_horas, curso.horas);
+        values.put(Curso.KEY_dias, curso.dias);
+        values.put(Curso.KEY_aula, curso.aula);
+        values.put(Curso.KEY_profesor,curso.profesor);
+        values.put(Curso.KEY_name, curso.name);
 
-    public void insertarDatos(String name) {
-        ContentValues cv = new ContentValues();
-        cv.put(DBhelper.CURSO_NOMBRE, name);
-        database.insert(DBhelper.TABLE_CURSOS, null, cv);
+        // Inserting Row
+        long student_Id = db.insert(Curso.TABLE, null, values);
+        db.close(); // Closing database connection
+        return (int) student_Id;
     }
+//Agregar delete, update
 
-    public void insertarDatosNotas(String name) {
-        ContentValues cv = new ContentValues();
-        cv.put(DBhelper.NOTA_TEXTO, name);
-        database.insert(DBhelper.TABLE_NOTAS, null, cv);
-    }
 
-    public Cursor leerDatos() {
-        String[] todasLasColumnas = new String[] {
-                DBhelper.CURSO_ID,
-                DBhelper.CURSO_NOMBRE
-        };
-        Cursor cursor = database.query(DBhelper.TABLE_CURSOS, todasLasColumnas, null,
-                null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+    public ArrayList<HashMap<String, String>>  getStudentList() {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                Curso.KEY_ID + "," +
+                Curso.KEY_name + "," +
+                Curso.KEY_profesor + "," +
+                Curso.KEY_aula + "," +
+                Curso.KEY_dias + "," +
+                Curso.KEY_horas +
+                " FROM " + Curso.TABLE;
+
+        //Student student = new Student();
+        ArrayList<HashMap<String, String>> cursoList = new ArrayList<HashMap<String, String>>();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> curso = new HashMap<String, String>();
+                curso.put("id", cursor.getString(cursor.getColumnIndex(Curso.KEY_ID)));
+                curso.put("name", cursor.getString(cursor.getColumnIndex(Curso.KEY_name)));
+                cursoList.add(curso);
+
+            } while (cursor.moveToNext());
         }
-        return cursor;
+
+        cursor.close();
+        db.close();
+        return cursoList;
+
     }
 
-    public Cursor leerDatosNotas() {
-        String[] todasLasColumnas = new String[] {
-                DBhelper.NOTA_ID,
-                DBhelper.NOTA_TEXTO
-        };
-        Cursor cursor = database.query(DBhelper.TABLE_NOTAS, todasLasColumnas, null,
-                null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+    public Curso getCursoById(int Id){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                Curso.KEY_ID + "," +
+                Curso.KEY_name + "," +
+                Curso.KEY_profesor + "," +
+                Curso.KEY_aula  + "," +
+                Curso.KEY_dias + "," +
+                Curso.KEY_horas  +
+                " FROM " + Curso.TABLE
+                + " WHERE " +
+                Curso.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string
+
+        int iCount =0;
+        Curso curso = new Curso();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
+
+        if (cursor.moveToFirst()) {
+            do {
+                curso.curso_ID =cursor.getInt(cursor.getColumnIndex(Curso.KEY_ID));
+                curso.name =cursor.getString(cursor.getColumnIndex(Curso.KEY_name));
+                curso.profesor  =cursor.getString(cursor.getColumnIndex(Curso.KEY_profesor));
+                curso.aula =cursor.getString(cursor.getColumnIndex(Curso.KEY_aula));
+                curso.dias =cursor.getString(cursor.getColumnIndex(Curso.KEY_dias));
+                curso.horas =cursor.getString(cursor.getColumnIndex(Curso.KEY_horas));
+
+            } while (cursor.moveToNext());
         }
-        return cursor;
-    }
 
-    /**
-     * Actualiza los datos en la base de datos
-     * @param memberID
-     * @param cursoName
-     * @return actualizado
-     */
-    public int actualizarDatos(long memberID, String cursoName) {
-        ContentValues cvActualizar = new ContentValues();
-        cvActualizar.put(DBhelper.CURSO_NOMBRE, cursoName);
-        int actualizado = database.update(DBhelper.TABLE_CURSOS, cvActualizar,
-                DBhelper.CURSO_ID + " = " + memberID, null);
-        return actualizado;
-    }
-
-    /**
-     * Elimina los datos de la base de datos
-     * @param cursoID
-     */
-    public void deleteData(long cursoID) {
-        database.delete(DBhelper.TABLE_CURSOS, DBhelper.CURSO_ID + "="
-                + cursoID, null);
-    }
-
-    /**
-     * Actualiza los datos  de la tabla nota
-     * @param memberID
-     * @param cursoName
-     * @return
-     */
-    public int actualizarDatosNotas(long memberID, String cursoName) {
-        ContentValues cvActualizar = new ContentValues();
-        cvActualizar.put(DBhelper.NOTA_TEXTO, cursoName);
-        int actualizado = database.update(DBhelper.TABLE_NOTAS, cvActualizar,
-                DBhelper.NOTA_ID + " = " + memberID, null);
-        return actualizado;
-    }
-
-    /**
-     * Elimina los datos de la tabla Nota
-     * @param notaID
-     */
-    public void eliminarDataNotas(long notaID) {
-        database.delete(DBhelper.TABLE_NOTAS, DBhelper.NOTA_ID + "="
-                + notaID, null);
+        cursor.close();
+        db.close();
+        return curso;
     }
 
 }

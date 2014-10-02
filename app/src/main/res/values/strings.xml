@@ -33,5 +33,6 @@
     <string name="title_activity_modificar_nota">ModificarNota</string>
     <string name="title_activity_formato_nota">formato_nota</string>
     <string name="title_activity_notas_generales">NotasGenerales</string>
+    <string name="title_activity_curso_detail">CursoDetail</string>
 
 </resources>

@@ -22,75 +22,74 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Cursos extends ActionBarActivity {
+import android.app.ListActivity;
 
-    Button btnAgregarCurso;
-    ListView lista;
-    SQLControlador dbconeccion;
-    TextView textView_cursoID, textView_cursoNombre;
+import android.widget.ListAdapter;
+
+import android.widget.SimpleAdapter;
+
+import android.widget.Toast;
+
+
+
+public class Cursos extends ListActivity implements android.view.View.OnClickListener {
+
+    Button btnAdd,btnGetAll;
+    TextView curso_Id;
+
+    @Override
+    public void onClick(View view) {
+        if (view== findViewById(R.id.btnAdd)){
+
+            Intent intent = new Intent(this,CursoDetail.class);
+            intent.putExtra("student_Id",0);
+            startActivity(intent);
+
+        }else {
+
+            SQLControlador repo = new SQLControlador(this);
+
+            ArrayList<HashMap<String, String>> cursoList =  repo.getStudentList();
+            if(cursoList.size()!=0) {
+                ListView lv = getListView();
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                        curso_Id = (TextView) view.findViewById(R.id.curso_Id);
+                        String cursoId = curso_Id.getText().toString();
+                        Intent objIndent = new Intent(getApplicationContext(),CursoDetail.class);
+                        objIndent.putExtra("curso_Id", Integer.parseInt( cursoId));
+                        startActivity(objIndent);
+                    }
+                });
+                ListAdapter adapter = new SimpleAdapter( Cursos.this,cursoList, R.layout.view_curso_entry, new String[] { "id","name"}, new int[] {R.id.curso_Id, R.id.curso_name});
+                setListAdapter(adapter);
+            }else{
+                Toast.makeText(this, "No existe el Curso!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos);
 
-        dbconeccion = new SQLControlador(this);
-        dbconeccion.abrirBaseDeDatos();
-        btnAgregarCurso = (Button) findViewById(R.id.btnAgregarCurso);
-        lista = (ListView) findViewById(R.id.listViewCursos);
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(this);
 
-        /**
-         * Acción del botón agregar curso
-         */
-        btnAgregarCurso.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentAgregar = new Intent(Cursos.this, AgregarCurso.class);
-                startActivity(intentAgregar);
-            }
-        });
+        btnGetAll = (Button) findViewById(R.id.btnGetAll);
+        btnGetAll.setOnClickListener(this);
 
-        // Tomar los datos para poner en el cursor y después en el adapter
-        Cursor cursor = dbconeccion.leerDatos();
-
-        String[] from = new String[] {
-                DBhelper.CURSO_ID,
-                DBhelper.CURSO_NOMBRE
-        };
-        int[] to = new int[] {
-                R.id.curso_id,
-                R.id.curso_nombre
-        };
-
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                Cursos.this, R.layout.formato_fila, cursor, from, to);
-
-        adapter.notifyDataSetChanged();
-        lista.setAdapter(adapter);
-
-        // acción cuando hacemos click en item para poder modificarlo o eliminarlo
-        lista.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-
-                textView_cursoID = (TextView) view.findViewById(R.id.curso_id);
-                textView_cursoNombre = (TextView) view.findViewById(R.id.curso_nombre);
-
-                String aux_cursoId = textView_cursoID.getText().toString();
-                String aux_cursoNombre = textView_cursoNombre.getText().toString();
-
-                Intent modify_intent = new Intent(getApplicationContext(), ModificarCurso.class);
-                modify_intent.putExtra("cursoId", aux_cursoId);
-                modify_intent.putExtra("cursoNombre", aux_cursoNombre);
-                startActivity(modify_intent);
-
-            }
-        });
-    }  //termina el onCreate
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.cursos, menu);
         return true;
@@ -107,4 +106,6 @@ public class Cursos extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 } //termina clase
