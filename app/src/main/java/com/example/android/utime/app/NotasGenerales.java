@@ -26,6 +26,9 @@ public class NotasGenerales extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas_generales);
 
+        /*
+        En este caso, se accesa a la versión 2 de la base de datos
+         */
         dbconeccion = new SQLControlador(this);
         dbconeccion.abrirBaseDeDatos();
         btnAgregarNota = (Button) findViewById(R.id.btnAgregarNota);
@@ -45,11 +48,13 @@ public class NotasGenerales extends ActionBarActivity {
         // Traer los datos de la base, se ponen en el cursor para después ponerlos en el adapter.
         Cursor cursor = dbconeccion.leerDatosNotas();
 
+        //Aquí se van a poner los nombres de las columnas de la tabla de Notas
         String[] from = new String[] {
                 DBhelper.NOTA_ID,
                 DBhelper.NOTA_TEXTO
         };
 
+        //Aquí se ponen los datos que se van a guardar en la tabla de  Notas
         int[] to = new int[] {
                 R.id.nota_id,
                 R.id.nota_texto
