@@ -30,7 +30,7 @@ public class MyMenu extends ActionBarActivity {
         setContentView(R.layout.activity_my_menu);
 
         Button botonCursos = (Button)findViewById(R.id.cursos);
-        Button botonFechImp = (Button)findViewById(R.id.fechas_importantes);
+        Button botonNotasGenerales = (Button)findViewById(R.id.notasGenerales);
         Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);
         Button botonHorario = (Button)findViewById(R.id.horario);
         Button botonCalendario = (Button)findViewById(R.id.caledario);
@@ -57,10 +57,10 @@ public class MyMenu extends ActionBarActivity {
         /**
          *Método que captura el boton al que se le ha dado click en este caso Fechas Importantes
          */
-        botonFechImp.setOnClickListener(new View.OnClickListener(){
+        botonNotasGenerales.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent in = new Intent(MyMenu.this, FechasImportantes.class);
+                Intent in = new Intent(MyMenu.this, NotasGenerales.class);
                 startActivity(in);
             }
         });
