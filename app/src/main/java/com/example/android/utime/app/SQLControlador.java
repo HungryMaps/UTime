@@ -11,11 +11,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.SQLException;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,7 +24,7 @@ public class SQLControlador {
 
     public int insert(Curso curso) {
 
-        //Open connection to write data
+        //Conneccion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Curso.KEY_horas, curso.horas);
@@ -38,16 +33,19 @@ public class SQLControlador {
         values.put(Curso.KEY_profesor,curso.profesor);
         values.put(Curso.KEY_name, curso.name);
 
-        // Inserting Row
+        // Insertando filas
         long student_Id = db.insert(Curso.TABLE, null, values);
-        db.close(); // Closing database connection
+        db.close(); // Cerrando la connecion de la base de datos
         return (int) student_Id;
     }
 //Agregar delete, update
 
-
-    public ArrayList<HashMap<String, String>>  getStudentList() {
-        //Open connection to read only
+    /**
+     * Obtiene la lista de cursos
+     * @return
+     */
+    public ArrayList<HashMap<String, String>>  getCursoList() {
+        //Abrir la base en modo read-only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Curso.KEY_ID + "," +
@@ -58,11 +56,9 @@ public class SQLControlador {
                 Curso.KEY_horas +
                 " FROM " + Curso.TABLE;
 
-        //Student student = new Student();
+        //Curso curso = new Curso();
         ArrayList<HashMap<String, String>> cursoList = new ArrayList<HashMap<String, String>>();
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
+        Cursor cursor = db.rawQuery(selectQuery, null);// Se agrega a la lista
 
         if (cursor.moveToFirst()) {
             do {
@@ -73,13 +69,16 @@ public class SQLControlador {
 
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return cursoList;
-
     }
 
+    /**
+     * Metodo para obtener el curso segun el id
+     * @param Id
+     * @return
+     */
     public Curso getCursoById(int Id){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
@@ -106,13 +105,10 @@ public class SQLControlador {
                 curso.aula =cursor.getString(cursor.getColumnIndex(Curso.KEY_aula));
                 curso.dias =cursor.getString(cursor.getColumnIndex(Curso.KEY_dias));
                 curso.horas =cursor.getString(cursor.getColumnIndex(Curso.KEY_horas));
-
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return curso;
     }
-
 }

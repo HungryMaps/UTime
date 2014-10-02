@@ -8,31 +8,20 @@
 package com.example.android.utime.app;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import android.app.ListActivity;
-
 import android.widget.ListAdapter;
-
 import android.widget.SimpleAdapter;
-
 import android.widget.Toast;
-
 
 
 public class Cursos extends ListActivity implements android.view.View.OnClickListener {
@@ -40,6 +29,10 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     Button btnAdd,btnGetAll;
     TextView curso_Id;
 
+    /**
+     *Evento al dar click en la vista
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         if (view== findViewById(R.id.btnAdd)){
@@ -52,7 +45,7 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
 
             SQLControlador repo = new SQLControlador(this);
 
-            ArrayList<HashMap<String, String>> cursoList =  repo.getStudentList();
+            ArrayList<HashMap<String, String>> cursoList =  repo.getCursoList();
             if(cursoList.size()!=0) {
                 ListView lv = getListView();
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,6 +67,10 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
         }
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +84,11 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
 
     }
 
+    /**
+     *Evento para mostrar una actiividad
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -95,6 +97,11 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
         return true;
     }
 
+    /**
+     * Seleccionar un item de la lista
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -108,4 +115,4 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     }
 
 
-} //termina clase
+} //termina clase Cursos
