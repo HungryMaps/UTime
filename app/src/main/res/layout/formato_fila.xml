@@ -10,6 +10,7 @@ android:orientation="vertical" >
     android:layout_height="wrap_content"
     android:visibility="gone" />
 
+    
 <TextView
     android:id="@+id/curso_nombre"
     android:layout_width="fill_parent"
