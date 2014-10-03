@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,14 +40,22 @@ public class SQLControlador {
         return (int) curso_Id;
     }
 
-    public void delete(int student_Id) {
+    /**
+     * Se encarga de eliminar un curso de la base de datos de manera temporal
+     * @param curso_Id
+     */
+    public void delete(int curso_Id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete(Curso.TABLE, Curso.KEY_ID + "= ?", new String[] { String.valueOf(student_Id) });
+        db.delete(Curso.TABLE, Curso.KEY_ID + "= ?", new String[] { String.valueOf(curso_Id) });
         db.close(); // Closing database connection
     }
 
+    /**
+     * Efectúa la modificacion de datos  existentes de la tabla curso
+     * @param curso
+     */
     public void update(Curso curso) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -112,9 +121,8 @@ public class SQLControlador {
                 Curso.KEY_horas  +
                 " FROM " + Curso.TABLE
                 + " WHERE " +
-                Curso.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string
+                Curso.KEY_ID + "=?";                              //se usa '?' para concatenar strings
 
-        int iCount =0;
         Curso curso = new Curso();
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
 
