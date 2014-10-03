@@ -1,43 +1,14 @@
 package com.example.android.utime.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
@@ -56,7 +27,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         setContentView(R.layout.activity_curso_detail);
 
         btnSave = (Button) findViewById(R.id.btnSave);
-
+        btnDelete = (Button) findViewById(R.id.btnDelete);
         btnClose = (Button) findViewById(R.id.btnClose);
 
         editTextName = (EditText) findViewById(R.id.editTextName);
@@ -66,13 +37,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextHoras = (EditText) findViewById(R.id.editTextHoras);
 
         btnSave.setOnClickListener(this);
-
+        btnDelete.setOnClickListener(this);
         btnClose.setOnClickListener(this);
-
 
         _Curso_Id =0;
         Intent intent = getIntent();
-        _Curso_Id =intent.getIntExtra("student_Id", 0);
+        _Curso_Id =intent.getIntExtra("curso_Id", 0);
         SQLControlador repo = new SQLControlador(this);
         Curso curso = new Curso();
         curso = repo.getCursoById(_Curso_Id);
@@ -84,11 +54,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextHoras.setText(curso.horas);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-
         getMenuInflater().inflate(R.menu.curso_detail, menu);
         return true;
     }
@@ -121,12 +88,21 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
                 Toast.makeText(this,"Nuevo Curso Insertado",Toast.LENGTH_SHORT).show();
             }
+            else{
+
+                repo.update(curso);
+                Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
+            }
         }
-        //falta update y delete
+
+        else if (view== findViewById(R.id.btnDelete)){
+            SQLControlador erase = new SQLControlador(this);
+            erase.delete(_Curso_Id);
+            Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
+            finish();
+        }
         else if (view== findViewById(R.id.btnClose)){
             finish();
         }
-
-
     }
 }

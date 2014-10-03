@@ -77,8 +77,6 @@
     <requestFocus />
     </EditText>
 
-
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,6 +132,7 @@
         <requestFocus />
     </EditText>
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -145,11 +144,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cerrar"
+        android:text="Volver"
         android:id="@+id/btnClose"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/btnDelete"
+        android:layout_alignTop="@+id/btnSave"
+        android:layout_toLeftOf="@+id/btnSave" />
 
 
 </RelativeLayout>
