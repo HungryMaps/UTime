@@ -34,11 +34,33 @@ public class SQLControlador {
         values.put(Curso.KEY_name, curso.name);
 
         // Insertando filas
-        long student_Id = db.insert(Curso.TABLE, null, values);
+        long curso_Id = db.insert(Curso.TABLE, null, values);
         db.close(); // Cerrando la connecion de la base de datos
-        return (int) student_Id;
+        return (int) curso_Id;
     }
-//Agregar delete, update
+
+    public void delete(int student_Id) {
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // It's a good practice to use parameter ?, instead of concatenate string
+        db.delete(Curso.TABLE, Curso.KEY_ID + "= ?", new String[] { String.valueOf(student_Id) });
+        db.close(); // Closing database connection
+    }
+
+    public void update(Curso curso) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(Curso.KEY_horas, curso.horas);
+        values.put(Curso.KEY_dias, curso.dias);
+        values.put(Curso.KEY_aula, curso.aula);
+        values.put(Curso.KEY_profesor,curso.profesor);
+        values.put(Curso.KEY_name, curso.name);
+
+        // It's a good practice to use parameter ?, instead of concatenate string
+        db.update(Curso.TABLE, values, Curso.KEY_ID + "= ?", new String[] { String.valueOf(curso.curso_ID) });
+        db.close(); // Closing database connection
+    }
 
     /**
      * Obtiene la lista de cursos
@@ -94,7 +116,6 @@ public class SQLControlador {
 
         int iCount =0;
         Curso curso = new Curso();
-
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
 
         if (cursor.moveToFirst()) {

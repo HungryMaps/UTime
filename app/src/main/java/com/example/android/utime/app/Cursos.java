@@ -7,6 +7,7 @@
 
 package com.example.android.utime.app;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,14 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import android.app.ListActivity;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 
 public class Cursos extends ListActivity implements android.view.View.OnClickListener {
@@ -38,7 +39,7 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
         if (view== findViewById(R.id.btnAdd)){
 
             Intent intent = new Intent(this,CursoDetail.class);
-            intent.putExtra("student_Id",0);
+            intent.putExtra("curso_Id",0);
             startActivity(intent);
 
         }else {
@@ -63,7 +64,6 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
             }else{
                 Toast.makeText(this, "No existe el Curso!", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
@@ -78,10 +78,8 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
-
         btnGetAll = (Button) findViewById(R.id.btnGetAll);
         btnGetAll.setOnClickListener(this);
-
     }
 
     /**
@@ -113,6 +111,4 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 } //termina clase Cursos
