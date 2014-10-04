@@ -40,6 +40,12 @@
 
 </LinearLayout>
 
+
+    <!--
+        *Se agrega imagen, fuera del LinearLayout
+        *Centrada
+        *Ajuste al contenido
+        -->
     <ImageView
         android:layout_width="304dp"
         android:layout_height="304dp"
