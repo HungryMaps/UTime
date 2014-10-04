@@ -87,7 +87,7 @@
         android:layout_toRightOf="@+id/textView2"
         android:layout_alignRight="@+id/editTextName"
         android:layout_alignEnd="@+id/editTextName" >
-        <requestFocus />
+
     </EditText>
 
     <EditText
@@ -100,7 +100,7 @@
         android:layout_toRightOf="@+id/textView3"
         android:layout_alignRight="@+id/editTextProfesor"
         android:layout_alignEnd="@+id/editTextProfesor" >
-        <requestFocus />
+
     </EditText>
 
     <EditText
@@ -113,7 +113,7 @@
         android:layout_toRightOf="@+id/textView4"
         android:layout_alignRight="@+id/editTextAula"
         android:layout_alignEnd="@+id/editTextAula" >
-        <requestFocus />
+
     </EditText>
 
 
@@ -129,9 +129,16 @@
         android:layout_alignStart="@+id/editTextDias"
         android:layout_alignRight="@+id/editTextDias"
         android:layout_alignEnd="@+id/editTextDias" >
-        <requestFocus />
+
     </EditText>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/btnDelete"
+        android:layout_alignParentBottom="true"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -139,24 +146,9 @@
         android:text="Guardar"
         android:id="@+id/btnSave"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnClose" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        android:id="@+id/btnClose"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eliminar"
-        android:id="@+id/btnDelete"
-        android:layout_alignTop="@+id/btnSave"
-        android:layout_toLeftOf="@+id/btnSave" />
 
 
 </RelativeLayout>

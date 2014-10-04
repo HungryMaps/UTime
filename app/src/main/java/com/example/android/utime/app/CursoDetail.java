@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
     Button btnSave ,  btnDelete;
-    Button btnClose;
+
     EditText editTextName;
     EditText editTextProfesor;
     EditText editTextAula;
@@ -28,7 +28,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
-        btnClose = (Button) findViewById(R.id.btnClose);
+
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
@@ -38,7 +38,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         btnSave.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
-        btnClose.setOnClickListener(this);
+       ;
 
         _Curso_Id =0;
         Intent intent = getIntent();
@@ -86,23 +86,34 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             if (_Curso_Id==0){
                 _Curso_Id = repo.insert(curso);
 
-                Toast.makeText(this,"Nuevo Curso Insertado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Se agrego un nuevo curso",Toast.LENGTH_SHORT).show();
             }
             else{
 
                 repo.update(curso);
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
             }
+
+           finish();
+
         }
 
         else if (view== findViewById(R.id.btnDelete)){
             SQLControlador erase = new SQLControlador(this);
             erase.delete(_Curso_Id);
             Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
+
             finish();
         }
-        else if (view== findViewById(R.id.btnClose)){
-            finish();
-        }
+
+    }
+
+    public void returnHome() {
+
+        Intent home_intent = new Intent(getApplicationContext(),
+                Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(home_intent);
+
     }
 }

@@ -44,14 +44,12 @@ public class SQLControlador {
      * Se encarga de eliminar un curso de la base de datos de manera temporal
      * @param curso_Id
      */
-    public void delete(int curso_Id) {
-
+    public void delete(long curso_Id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete(Curso.TABLE, Curso.KEY_ID + "= ?", new String[] { String.valueOf(curso_Id) });
-        db.close(); // Closing database connection
+        db.delete(Curso.TABLE, Curso.KEY_ID + "="
+                + curso_Id, null);
+        db.close();
     }
-
     /**
      * Efectúa la modificacion de datos  existentes de la tabla curso
      * @param curso
