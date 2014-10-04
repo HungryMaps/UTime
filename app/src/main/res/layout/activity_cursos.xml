@@ -23,12 +23,12 @@
         android:id="@android:id/list"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/btnAdd" />
+        android:layout_above="@+id/btnAdd"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Refrescar"
+        android:text="Lista de Cursos"
         android:id="@+id/btnGetAll"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/btnAdd" />

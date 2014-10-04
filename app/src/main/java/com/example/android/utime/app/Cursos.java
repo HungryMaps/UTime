@@ -62,9 +62,9 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
                 ListAdapter adapter = new SimpleAdapter( Cursos.this,cursoList, R.layout.view_curso_entry, new String[] { "id","name"}, new int[] {R.id.curso_Id, R.id.curso_name});
                 setListAdapter(adapter);
             }else{
-                Toast.makeText(this, "No existe el Curso!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No existen Cursos!", Toast.LENGTH_SHORT).show();
             }
-        }
+         }
     }
 
     /**
