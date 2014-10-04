@@ -89,13 +89,11 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 Toast.makeText(this,"Se agrego un nuevo curso",Toast.LENGTH_SHORT).show();
             }
             else{
-
                 repo.update(curso);
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
-            }
+                }
 
-           finish();
-
+           finish(); // para que vuelva a la pagina de cursos
         }
 
         else if (view== findViewById(R.id.btnDelete)){
@@ -103,7 +101,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             erase.delete(_Curso_Id);
             Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
 
-            finish();
+            finish(); // para que vuelva a la pagina de cursos
         }
 
     }
