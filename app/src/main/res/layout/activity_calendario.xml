@@ -1,22 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MergeRootFrame"
+    android:background="@color/fondo">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:layout_height="212dp"
+    android:layout_gravity="center|bottom"
+    android:background="@color/fondo">
+
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
         android:onClick="onClick"
-        android:text="Crear Evento" />
+        android:text="Crear Evento"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/azul1"
+        android:textColor="#000000"/>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
         android:onClick="queryCalendar"
-        android:text="Ver Calendario" />
+        android:text="Ver Calendario"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/amarillo"
+        android:textColor="#000000"/>
 
 
 </LinearLayout>
+
+
+    <!--
+        *Se agrega imagen, fuera del LinearLayout
+        *Centrada
+        *Ajuste al contenido
+        -->
+    <ImageView
+        android:layout_width="304dp"
+        android:layout_height="304dp"
+        android:src="@drawable/logo_calendario"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top" />
+
+
+</FrameLayout>
