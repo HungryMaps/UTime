@@ -36,7 +36,6 @@ public class Horario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
 
-
         // Se consulta la base de datos para ver los cursos que hay y sacar la información pertinente (horas, dias y nombre principalmente, para introducir datos en la tabla)
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
@@ -275,7 +274,8 @@ public class Horario extends ActionBarActivity {
             deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
             int rows = getContentResolver().delete(deleteUri, null, null);
         }*/
-    }
+
+    } //onCreate
 
 
     @Override
