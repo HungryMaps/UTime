@@ -78,6 +78,9 @@ public class Calendario extends ActionBarActivity {
         startActivity(intent);
     }
 
+    // Las siguientes líneas son para Consultar el ID y nombre del calendario (cuenta asociada)
+    // Se deja aquí en caso de necesitarlo para alguna verificación en el futuro
+
     /*String[] projection =
                 new String[]{
                         Calendars._ID,

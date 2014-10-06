@@ -36,6 +36,8 @@ public class Horario extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
 
+
+        // Se consulta la base de datos para ver los cursos que hay y sacar la información pertinente (horas, dias y nombre principalmente, para introducir datos en la tabla)
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String [] columnas =  {
@@ -52,6 +54,9 @@ public class Horario extends ActionBarActivity {
                 String QHoras = cursor.getString(cursor.getColumnIndex(Curso.KEY_horas));
                 String [] horas = QHoras.split(",");
 
+
+                // Cada Columna de la tabla tiene un ID, dependiendo de la hora del curso corresponde a una fila en la tabla
+                // este switch saca esa fila
                 int fila = 0;
                 switch(Integer.parseInt(horas[0])){
                     case 7:
@@ -106,6 +111,8 @@ public class Horario extends ActionBarActivity {
                 String QDias = cursor.getString(cursor.getColumnIndex(Curso.KEY_dias));
                 String [] dias = QDias.split(",");
 
+                // Mismo razonamiento del swtich anterior, pero para sacar la columna correspondiente al dia de la semana en la tabla
+
                 int [] columna = new int[dias.length];
                 for(int i=0; i<dias.length; i++){
                     if(dias[i].equals("Lunes")) {
@@ -128,6 +135,7 @@ public class Horario extends ActionBarActivity {
                     }
                 }
 
+                // Inserta en la tabla
                 for(int i=0; i<columna.length; i++){
                     String celda = "celda"+Integer.toString(fila)+Integer.toString(columna[i]);
 
@@ -140,8 +148,15 @@ public class Horario extends ActionBarActivity {
         }
     } //onCreate
 
+
+    /*
+        Este método se encarga de insertar los datos desde la base de datos hacia el calendario de modo que salgan los cursos que tengo que llevar en el semestre
+        en el calendario, según la hora y días especificados
+    */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void insertarHorarioEnCalendario(View view){
+
+        //Consulta la base de datos
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String [] columnas =  {
@@ -157,6 +172,7 @@ public class Horario extends ActionBarActivity {
 
         if (cursor.moveToFirst()) {
             do {
+                // Datos de curso de la iteración
                 curso.curso_ID =cursor.getInt(cursor.getColumnIndex(Curso.KEY_ID));
                 curso.name =cursor.getString(cursor.getColumnIndex(Curso.KEY_name));
                 curso.aula =cursor.getString(cursor.getColumnIndex(Curso.KEY_aula));
@@ -183,7 +199,7 @@ public class Horario extends ActionBarActivity {
                     fechaFinal = now.year+"1120T180000Z";
                 }
 
-
+                // Fecha del Evento a introducir en Calendario
                 beginTime.set(Calendar.HOUR, Integer.parseInt(horas[0]));
                 beginTime.set(Calendar.MINUTE, 0);
                 beginTime.set(Calendar.SECOND, 0);
@@ -195,6 +211,7 @@ public class Horario extends ActionBarActivity {
 
                 String [] days = new String[dias.length];
 
+                // Clave según el día de la semana
                 for(int i=0; i<dias.length; i++){
                     if(dias[i].equals("Lunes")){
                         days[i] = "MO";
@@ -232,6 +249,7 @@ public class Horario extends ActionBarActivity {
                     }
                 }
 
+                // Introduce datos a contenedor que se inserta como un evento en el calendario
                 ContentResolver cr = getContentResolver();
                 ContentValues values = new ContentValues();
                 values.put(Events.DTSTART, startMillis);
@@ -248,6 +266,8 @@ public class Horario extends ActionBarActivity {
         }
         cursor.close();
         db.close();
+
+        // las siguientes líneas sirven para borrar eventos del calendario, se deja aquí en caso de necesitarlo
 
         /*for(int i=0; i<1000; i++) {
             long eventID = i;
