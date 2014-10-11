@@ -1,6 +1,7 @@
 package com.example.android.utime.app;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -9,6 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
@@ -20,6 +27,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     EditText editTextDias;
     EditText editTextHoras;
     private int _Curso_Id=0;
+
+    private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
+    public String user = "Paula";
+    public String pass = "Lopez123#";
+    private Connection con;
+    String resultado = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +96,13 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             curso.name=editTextName.getText().toString();
             curso.curso_ID=_Curso_Id;
 
-            if (_Curso_Id==0){
+            if (_Curso_Id==0) {
                 _Curso_Id = repo.insert(curso);
 
                 Toast.makeText(this,"Se agrego un nuevo curso",Toast.LENGTH_SHORT).show();
+
             }
-            else{
+                else{
                 repo.update(curso);
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
                 }
@@ -104,6 +118,76 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             finish(); // para que vuelva a la pagina de cursos
         }
 
+
+        /*Prevista para conexión con la base remota */
+
+        Connect();
+
+    }
+
+    private class Connect extends AsyncTask <String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(databaseBaseURL, user, pass);
+                System.out.println("Database connection success");
+
+                Statement stmt = null;
+                ResultSet rs = null;
+
+                try {
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery("SELECT * FROM Curso WHERE id = 1");
+                    System.out.println("Hice Query");
+
+                    // Now do something with the ResultSet ....
+
+                    while(rs.next()){
+                        resultado = resultado + rs.getString("id") + "&" + rs.getString("name") + "&"+ rs.getString("profesor") + "&"+ rs.getString("aula");
+                        //Here "&"s are added to the return string. This is help to split the string in Android application
+                    }
+                    System.out.println("Resultado: " + resultado);
+                } catch (SQLException ex){
+                    // handle any errors
+                    System.out.println("SQLException: " + ex.getMessage());
+                    System.out.println("SQLState: " + ex.getSQLState());
+                    System.out.println("VendorError: " + ex.getErrorCode());
+                }
+
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException sqlEx) { } // ignore
+                    rs = null;
+                }
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException sqlEx) { } // ignore
+                    stmt = null;
+                }
+                // force garbage collection to unload the EmbeddedDriver
+// so Derby can be restarted
+                //System.gc();
+            }
+
+
+            catch (ClassNotFoundException e) {
+                int k=0;
+                Toast.makeText(getApplicationContext(), "Error1: " + e.getMessage(),Toast.LENGTH_LONG).show();
+            } catch (SQLException e) {
+                int k=0;
+                Toast.makeText(getApplicationContext(), "Error2: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return "";
+        }
+    }
+
+    public void Connect() {
+        Connect task = new Connect();
+        task.execute();
     }
 
     public void returnHome() {

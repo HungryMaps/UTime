@@ -1,2 +1,2 @@
 include ':app'
-
+include ':app:mysql-connector-java-gpl-5.1.33.msi'
