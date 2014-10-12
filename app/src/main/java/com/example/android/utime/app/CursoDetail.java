@@ -125,11 +125,16 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
     }
 
+    /*
+    * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
+     */
+
     private class Connect extends AsyncTask <String, Void, String>{
 
         @Override
         protected String doInBackground(String... strings) {
             try {
+                //Driver para abrir la conexión con la base de mysql
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection(databaseBaseURL, user, pass);
                 System.out.println("Database connection success");
@@ -142,7 +147,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                     rs = stmt.executeQuery("SELECT * FROM Curso WHERE id = 1");
                     System.out.println("Hice Query");
 
-                    // Now do something with the ResultSet ....
+                    // Un ejemplo sobre cómo traer datos de la base
 
                     while(rs.next()){
                         resultado = resultado + rs.getString("id") + "&" + rs.getString("name") + "&"+ rs.getString("profesor") + "&"+ rs.getString("aula");
@@ -168,11 +173,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                     } catch (SQLException sqlEx) { } // ignore
                     stmt = null;
                 }
-                // force garbage collection to unload the EmbeddedDriver
-// so Derby can be restarted
-                //System.gc();
             }
-
 
             catch (ClassNotFoundException e) {
                 int k=0;
@@ -184,6 +185,10 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             return "";
         }
     }
+
+    /*
+    Método que llama a la conexión de la base
+     */
 
     public void Connect() {
         Connect task = new Connect();

@@ -59,7 +59,9 @@
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" >
     </uses-permission>
-
+<!--
+Se agrega el permiso para que la aplicación tenga acceso a Internet
+-->
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
