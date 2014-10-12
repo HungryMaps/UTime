@@ -38,6 +38,8 @@ public class SQLControlador {
         values.put(Curso.KEY_aula, curso.aula);
         values.put(Curso.KEY_profesor,curso.profesor);
         values.put(Curso.KEY_name, curso.name);
+        values.put(Curso.KEY_semestre, curso.semestre);
+        values.put(Curso.KEY_anno, curso.anno);
 
         // Insertando filas
         long curso_Id = db.insert(Curso.TABLE, null, values);
@@ -94,6 +96,8 @@ public class SQLControlador {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(Curso.KEY_anno, curso.anno);
+        values.put(Curso.KEY_semestre, curso.semestre);
         values.put(Curso.KEY_horas, curso.horas);
         values.put(Curso.KEY_dias, curso.dias);
         values.put(Curso.KEY_aula, curso.aula);
@@ -133,7 +137,9 @@ public class SQLControlador {
                 Curso.KEY_profesor + "," +
                 Curso.KEY_aula + "," +
                 Curso.KEY_dias + "," +
-                Curso.KEY_horas +
+                Curso.KEY_horas + "," +
+                Curso.KEY_semestre + "," +
+                Curso.KEY_anno +
                 " FROM " + Curso.TABLE;
 
         //Curso curso = new Curso();
@@ -197,7 +203,9 @@ public class SQLControlador {
                 Curso.KEY_profesor + "," +
                 Curso.KEY_aula  + "," +
                 Curso.KEY_dias + "," +
-                Curso.KEY_horas  +
+                Curso.KEY_horas + "," +
+                Curso.KEY_semestre + "," +
+                Curso.KEY_anno +
                 " FROM " + Curso.TABLE
                 + " WHERE " +
                 Curso.KEY_ID + "=?";                              //se usa '?' para concatenar strings
@@ -213,6 +221,8 @@ public class SQLControlador {
                 curso.aula =cursor.getString(cursor.getColumnIndex(Curso.KEY_aula));
                 curso.dias =cursor.getString(cursor.getColumnIndex(Curso.KEY_dias));
                 curso.horas =cursor.getString(cursor.getColumnIndex(Curso.KEY_horas));
+                curso.semestre =cursor.getString(cursor.getColumnIndex(Curso.KEY_semestre));
+                curso.anno =cursor.getString(cursor.getColumnIndex(Curso.KEY_anno));
             } while (cursor.moveToNext());
         }
         cursor.close();

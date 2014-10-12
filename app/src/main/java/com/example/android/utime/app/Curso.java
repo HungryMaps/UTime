@@ -15,6 +15,8 @@ public class Curso {
     public static final String KEY_aula = "aula";
     public static final String KEY_dias = "dias";
     public static final String KEY_horas = "horas";
+    public static final String KEY_semestre = "semestre";
+    public static final String KEY_anno = "anno";
 
     // Ayuda a mantener los datos
     public int curso_ID;
@@ -23,5 +25,7 @@ public class Curso {
     public String aula;
     public String dias;
     public String horas;
+    public String semestre;
+    public String anno;
 
 }
