@@ -19,7 +19,7 @@ public class DBhelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Metodo para crear la tabla en la base de datos
+     * Metodo para crear las tablas en la base de datos
      * @param db
      */
     @Override
@@ -54,5 +54,4 @@ public class DBhelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Nota.TABLE);
         onCreate(db);
     }
-
 }

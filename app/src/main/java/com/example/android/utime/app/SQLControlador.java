@@ -23,6 +23,11 @@ public class SQLControlador {
         dbHelper = new DBhelper(context);
     }
 
+    /**
+     * Se encarga de hacer las inserciones en la tabla Curso
+     * @param curso
+     * @return
+     */
     public int insert(Curso curso) {
 
         //Conneccion para escribir en la base
@@ -40,6 +45,11 @@ public class SQLControlador {
         return (int) curso_Id;
     }
 
+    /**
+     * Se encarga de hacer las inserciones en la tabla Nota
+     * @param nota
+     * @return
+     */
     public int insertNota(Nota nota) {
 
         //Conneccion para escribir en la base
@@ -117,6 +127,10 @@ public class SQLControlador {
         return cursoList;
     }
 
+    /**
+     * Obtiene la lista de Notas
+     * @return
+     */
     public ArrayList<HashMap<String, String>>  getNotaList() {
         //Abrir la base en modo read-only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -178,7 +192,11 @@ public class SQLControlador {
         db.close();
         return curso;
     }
-
+    /**
+     * Metodo para obtener la nota segun el id
+     * @param Id
+     * @return
+     */
     public Nota getNotaById(int Id){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
