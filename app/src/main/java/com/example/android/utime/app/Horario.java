@@ -39,7 +39,7 @@ public class Horario extends ActionBarActivity {
         // Se consulta la base de datos para ver los cursos que hay y sacar la información pertinente (horas, dias y nombre principalmente, para introducir datos en la tabla)
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        String [] columnas =  {
+        String [] columnas =  { 
                 Curso.KEY_ID,
                 Curso.KEY_name,
                 Curso.KEY_aula,
