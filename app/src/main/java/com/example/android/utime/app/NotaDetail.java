@@ -78,23 +78,19 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
 
             if (_Nota_Id == 0) {
                 _Nota_Id = repo.insertNota(nota);
-
-                Toast.makeText(this, "Nueva Nota Insertada", Toast.LENGTH_SHORT).show();
-            }
+                 Toast.makeText(this, "Nueva Nota Insertada", Toast.LENGTH_SHORT).show();
+                }
                 else{
                     repo.updateNota(nota);
-                    Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Nota Actualizada",Toast.LENGTH_SHORT).show();
                 }
-            //aqui actualizar
            finish();
         }
-
         else if (view== findViewById(R.id.btnDelete)){
             SQLControlador erase = new SQLControlador(this);
             erase.deleteNota(_Nota_Id);
             Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
-
-            finish(); // para que vuelva a la pagina de cursos
+            finish(); // para que vuelva a la pagina de notas
         }
     }
 }
