@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class NotaDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
     Button btnSave;
-    Button btnClose;
+    Button btnDelete;
     EditText editTextNameNota;
     EditText editTextComentarioNota;
     private int _Nota_Id = 0;
@@ -30,9 +30,13 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         setContentView(R.layout.activity_nota_detail);
 
         btnSave = (Button) findViewById(R.id.btnSave);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
+
         btnSave.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
 
         _Nota_Id = 0;
         Intent intent = getIntent();
@@ -77,8 +81,20 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
 
                 Toast.makeText(this, "Nueva Nota Insertada", Toast.LENGTH_SHORT).show();
             }
+                else{
+                    repo.updateNota(nota);
+                    Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
+                }
             //aqui actualizar
            finish();
+        }
+
+        else if (view== findViewById(R.id.btnDelete)){
+            SQLControlador erase = new SQLControlador(this);
+            erase.deleteNota(_Nota_Id);
+            Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
+
+            finish(); // para que vuelva a la pagina de cursos
         }
     }
 }
