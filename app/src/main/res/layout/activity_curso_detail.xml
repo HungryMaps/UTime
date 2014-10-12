@@ -64,28 +64,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="29dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Semestre"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Año"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -149,32 +127,6 @@
         android:layout_alignStart="@+id/editTextDias"
         android:layout_alignRight="@+id/editTextDias"
         android:layout_alignEnd="@+id/editTextDias" >
-
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/editTextSemestre"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_alignRight="@+id/editTextHoras"
-        android:layout_alignEnd="@+id/editTextHoras"
-        android:layout_toRightOf="@+id/btnDelete">
-
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/editTextAnno"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_alignRight="@+id/editTextHoras"
-        android:layout_alignEnd="@+id/editTextHoras"
-        android:layout_toRightOf="@+id/textView5">
 
     </EditText>
 

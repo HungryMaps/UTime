@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBhelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 6; //Maneja la version de la base de datos
+    private static final int DATABASE_VERSION = 5; //Maneja la version de la base de datos
     private static final String DATABASE_NAME = "crud.db"; // es el nombre de la base de datos
 
     public DBhelper(Context context ) {
@@ -31,9 +31,7 @@ public class DBhelper extends SQLiteOpenHelper {
                 + Curso.KEY_profesor + " TEXT, "
                 + Curso.KEY_aula + " TEXT ,"
                 + Curso.KEY_dias + " TEXT ,"
-                + Curso.KEY_horas + " TEXT ,"
-                + Curso.KEY_semestre + " TEXT ,"
-                + Curso.KEY_anno + " TEXT )";
+                + Curso.KEY_horas + " TEXT )";
 
         String CREATE_TABLE_NOTA = "CREATE TABLE " + Nota.TABLE  + "("
                 + Nota.KEY_ID_NOTA + " INTEGER PRIMARY KEY AUTOINCREMENT ,"

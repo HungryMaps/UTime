@@ -19,8 +19,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     EditText editTextAula;
     EditText editTextDias;
     EditText editTextHoras;
-    EditText editTextSemestre;
-    EditText editTextAnno;
     private int _Curso_Id=0;
 
     @Override
@@ -37,11 +35,10 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextAula = (EditText) findViewById(R.id.editTextAula);
         editTextDias = (EditText) findViewById(R.id.editTextDias);
         editTextHoras = (EditText) findViewById(R.id.editTextHoras);
-        editTextSemestre = (EditText) findViewById(R.id.editTextSemestre);
-        editTextAnno = (EditText) findViewById(R.id.editTextAnno);
 
         btnSave.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+       ;
 
         _Curso_Id =0;
         Intent intent = getIntent();
@@ -55,8 +52,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextProfesor.setText(curso.profesor);
         editTextDias.setText(curso.dias);
         editTextHoras.setText(curso.horas);
-        editTextSemestre.setText(curso.semestre);
-        editTextAnno.setText(curso.anno);
     }
 
     @Override
@@ -81,8 +76,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         if (view == findViewById(R.id.btnSave)){
             SQLControlador repo = new SQLControlador(this);
             Curso curso = new Curso();
-            curso.anno = editTextAnno.getText().toString();
-            curso.semestre = editTextSemestre.getText().toString();
             curso.horas = editTextHoras.getText().toString();
             curso.dias = editTextDias.getText().toString();
             curso.aula= editTextAula.getText().toString();
