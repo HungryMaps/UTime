@@ -36,25 +36,20 @@
             android:name=".Calendario"
             android:label="@string/title_activity_calendario" >
         </activity>
-
-        <activity
-            android:name=".AgregarNota"
-            android:label="@string/title_activity_agregar_nota" >
-        </activity>
-        <activity
-            android:name=".ModificarNota"
-            android:label="@string/title_activity_modificar_nota" >
-        </activity>
-        <activity
-            android:name=".NotasGenerales"
-            android:label="@string/title_activity_notas_generales" >
-        </activity>
         <activity
             android:name=".CursoDetail"
             android:label="@string/title_activity_curso_detail" >
         </activity>
+        <activity
+            android:name=".NotaDetail"
+            android:label="@string/title_activity_nota_detail" >
+        </activity>
+        <activity
+            android:name=".Notas"
+            android:label="@string/title_activity_notas" >
+        </activity>
     </application>
-<!-- Se piden permisos para poder escribir en el calendario -->
+    <!-- Se piden permisos para poder escribir en el calendario -->
     <uses-permission android:name="android.permission.READ_CALENDAR" >
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" >
