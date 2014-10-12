@@ -203,6 +203,8 @@ public class Horario extends ActionBarActivity {
                 String [] dias = curso.dias.split(",");
                 boolean entrar = false;
 
+                // Se verifica si el año y el semestre del curso corresponden al presente
+
                 if(now.month <= 6 && curso.semestre.equals("I") && now.year == Integer.parseInt(curso.anno)){
                     beginTime = new GregorianCalendar(now.year, 2, 1);
                     endTime = new GregorianCalendar(now.year, 2, 1);
