@@ -106,7 +106,7 @@ public class SQLControlador {
     }
 
     /**
-     * Efectúa la modificacion de datos  existentes de la tabla curso
+     * Efectúa la modificacion de datos  existentes de la tabla nota
      * @param nota
      */
     public void updateNota(Nota nota) {
