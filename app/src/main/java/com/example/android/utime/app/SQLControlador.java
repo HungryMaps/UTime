@@ -40,6 +40,20 @@ public class SQLControlador {
         return (int) curso_Id;
     }
 
+    public int insertNota(Nota nota) {
+
+        //Conneccion para escribir en la base
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Nota.KEY_comentario, nota.comentarioNota);
+        values.put(Nota.KEY_name_nota, nota.nameNota);
+
+        // Insertando filas
+        long nota_Id = db.insert(Nota.TABLE, null, values);
+        db.close(); // Cerrando la connecion de la base de datos
+        return (int) nota_Id;
+    }
+
     /**
      * Se encarga de eliminar un curso de la base de datos de manera temporal
      * @param curso_Id
@@ -103,6 +117,32 @@ public class SQLControlador {
         return cursoList;
     }
 
+    public ArrayList<HashMap<String, String>>  getNotaList() {
+        //Abrir la base en modo read-only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                Nota.KEY_ID_NOTA + "," +
+                Nota.KEY_name_nota + "," +
+                Nota.KEY_comentario +
+                " FROM " + Nota.TABLE;
+
+        ArrayList<HashMap<String, String>> notaList = new ArrayList<HashMap<String, String>>();
+        Cursor cursor = db.rawQuery(selectQuery, null);// Se agrega a la lista
+
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> nota = new HashMap<String, String>();
+                nota.put("idNota", cursor.getString(cursor.getColumnIndex(Nota.KEY_ID_NOTA)));
+                nota.put("nameNota", cursor.getString(cursor.getColumnIndex(Nota.KEY_name_nota)));
+                notaList.add(nota);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return notaList;
+    }
+
     /**
      * Metodo para obtener el curso segun el id
      * @param Id
@@ -137,5 +177,31 @@ public class SQLControlador {
         cursor.close();
         db.close();
         return curso;
+    }
+
+    public Nota getNotaById(int Id){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                Nota.KEY_ID_NOTA + "," +
+                Nota.KEY_name_nota + "," +
+                Nota.KEY_comentario +
+                " FROM " + Nota.TABLE
+                + " WHERE " +
+                Nota.KEY_ID_NOTA + "=?";                              //se usa '?' para concatenar strings
+
+        Nota nota = new Nota();
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
+
+        if (cursor.moveToFirst()) {
+            do {
+                nota.nota_ID =cursor.getInt(cursor.getColumnIndex(Nota.KEY_ID_NOTA));
+                nota.nameNota =cursor.getString(cursor.getColumnIndex(Nota.KEY_name_nota));
+                nota.comentarioNota  =cursor.getString(cursor.getColumnIndex(Nota.KEY_comentario));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return nota;
     }
 }

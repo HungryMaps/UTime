@@ -94,7 +94,7 @@ aplicación para mantener la coherencia a traves de toda ella-->
             android:layout_width="287dp"
             android:layout_height="wrap_content"
             android:text="NOTAS GENERALES"
-            android:id="@+id/notasGenerales"
+            android:id="@+id/notas"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:clickable="true"

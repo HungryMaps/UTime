@@ -6,29 +6,31 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.utime.app.AgregarNota">
+    tools:context="com.instinctcoder.sqlitedb.MyActivity$PlaceholderFragment">
 
     <Button
-        android:id="@+id/btnAgregarId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:text="Agregar"
+        android:id="@+id/btnAdd"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/nota_texto"
+        android:id="@android:id/list"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/btnAgregarId"
-        android:hint="Escriba su nota"/>
+        android:layout_above="@+id/btnAdd"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista de Notas"
+        android:id="@+id/btnGetAll"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnAdd" />
 
 </RelativeLayout>
