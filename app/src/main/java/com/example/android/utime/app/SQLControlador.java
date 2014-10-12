@@ -74,6 +74,18 @@ public class SQLControlador {
                 + curso_Id, null);
         db.close();
     }
+
+    /**
+     * Se encarga de eliminar una nota de la base de datos de manera temporal
+     * @param nota_Id
+     */
+    public void deleteNota(long nota_Id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(Nota.TABLE, Nota.KEY_ID_NOTA + "="
+                + nota_Id, null);
+        db.close();
+    }
+
     /**
      * Efectúa la modificacion de datos  existentes de la tabla curso
      * @param curso
@@ -90,6 +102,21 @@ public class SQLControlador {
 
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update(Curso.TABLE, values, Curso.KEY_ID + "= ?", new String[] { String.valueOf(curso.curso_ID) });
+        db.close(); // Closing database connection
+    }
+
+    /**
+     * Efectúa la modificacion de datos  existentes de la tabla curso
+     * @param nota
+     */
+    public void updateNota(Nota nota) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Nota.KEY_comentario,nota.comentarioNota);
+        values.put(Nota.KEY_name_nota, nota.nameNota);
+
+        // It's a good practice to use parameter ?, instead of concatenate string
+        db.update(Nota.TABLE, values, Nota.KEY_ID_NOTA + "= ?", new String[] { String.valueOf(nota.nota_ID) });
         db.close(); // Closing database connection
     }
 
