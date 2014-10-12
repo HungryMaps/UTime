@@ -1,3 +1,9 @@
+/*
+ * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco
+ * Clase NotaDetail: Mantiene la conexión entre las funciones propias de sql y la interfaz
+ */
+
 package com.example.android.utime.app;
 
 import android.content.Intent;
@@ -9,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 public class NotaDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
@@ -25,15 +30,9 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         setContentView(R.layout.activity_nota_detail);
 
         btnSave = (Button) findViewById(R.id.btnSave);
-
-
-
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
-
-
         btnSave.setOnClickListener(this);
-
 
         _Nota_Id = 0;
         Intent intent = getIntent();

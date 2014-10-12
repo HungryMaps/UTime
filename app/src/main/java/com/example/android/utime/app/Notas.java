@@ -1,3 +1,9 @@
+/*
+ * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco
+ * Clase Cursos: Muestra las notas en la app por el usuario, y opción de interactuar
+ *               de distintas formas con estos (crear un nuevo curso, editar, eliminar)
+ */
 package com.example.android.utime.app;
 
 import android.app.ListActivity;
@@ -16,7 +22,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class Notas extends ListActivity implements android.view.View.OnClickListener {
 
