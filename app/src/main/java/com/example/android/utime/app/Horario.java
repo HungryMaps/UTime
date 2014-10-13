@@ -63,57 +63,60 @@ public class Horario extends ActionBarActivity {
                 if((semestre.equals("II") && now.month > 7 && now.year == Integer.parseInt(anno)) || (semestre.equals("I") && now.month < 7 && now.year == Integer.parseInt(anno))){
                     // Cada Columna de la tabla tiene un ID, dependiendo de la hora del curso corresponde a una fila en la tabla
                     // este switch saca esa fila
-                    int fila = 0;
-                    switch(Integer.parseInt(horas[0])){
-                        case 7:
-                            fila = 1;
-                            break;
-                        case 8:
-                            fila = 2;
-                            break;
-                        case 9:
-                            fila = 3;
-                            break;
-                        case 10:
-                            fila = 4;
-                            break;
-                        case 11:
-                            fila = 5;
-                            break;
-                        case 12:
-                            fila = 6;
-                            break;
-                        case 13:
-                            fila = 7;
-                            break;
-                        case 14:
-                            fila = 8;
-                            break;
-                        case 15:
-                            fila = 9;
-                            break;
-                        case 16:
-                            fila = 10;
-                            break;
-                        case 17:
-                            fila = 11;
-                            break;
-                        case 18:
-                            fila = 12;
-                            break;
-                        case 19:
-                            fila = 13;
-                            break;
-                        case 20:
-                            fila = 14;
-                            break;
-                        case 21:
-                            fila = 15;
-                            break;
-                        default:
-                            break;
+                    int tamano = horas.length/2;
+                    int [] fila = new int[tamano];
+                    //Toast.makeText(this, cursor.getString(cursor.getColumnIndex(Curso.KEY_name))+" "+tamano, Toast.LENGTH_SHORT).show();
+                    for(int i=0; i< fila.length; i++) {
+                        switch (Integer.parseInt(horas[2*i])) {
+                            case 7:
+                                fila[i] = 1;
+                                break;
+                            case 8:
+                                fila[i] = 2;
+                                break;
+                            case 9:
+                                fila[i] = 3;
+                                break;
+                            case 10:
+                                fila[i] = 4;
+                                break;
+                            case 11:
+                                fila[i] = 5;
+                                break;
+                            case 12:
+                                fila[i] = 6;
+                                break;
+                            case 13:
+                                fila[i] = 7;
+                                break;
+                            case 14:
+                                fila[i] = 8;
+                                break;
+                            case 15:
+                                fila[i] = 9;
+                                break;
+                            case 16:
+                                fila[i] = 10;
+                                break;
+                            case 17:
+                                fila[i] = 11;
+                                break;
+                            case 18:
+                                fila[i] = 12;
+                                break;
+                            case 19:
+                                fila[i] = 13;
+                                break;
+                            case 20:
+                                fila[i] = 14;
+                                break;
+                            case 21:
+                                fila[i] = 15;
+                                break;
+                            default:
+                                break;
+                        }
                     }
-
                     String QDias = cursor.getString(cursor.getColumnIndex(Curso.KEY_dias));
                     String [] dias = QDias.split(",");
 
@@ -143,9 +146,9 @@ public class Horario extends ActionBarActivity {
 
                     // Inserta en la tabla
                     for(int i=0; i<columna.length; i++){
-
-                        for(int j=0; j < Integer.parseInt(horas[1]) - Integer.parseInt(horas[0]); j++  ){
-                            String celda = "celda"+Integer.toString(fila+j)+Integer.toString(columna[i]);
+                        String [] indice = horas[2*i+1].split(":");
+                        for(int j=0; j < Integer.parseInt(indice[0])+1 - Integer.parseInt(horas[2*i]); j++  ){
+                            String celda = "celda"+Integer.toString(fila[i]+j)+Integer.toString(columna[i]);
                             int id = getResources().getIdentifier(celda, "id", getPackageName());
                             TextView currcell = (TextView) findViewById(id);
                             currcell.setText(cursor.getString(cursor.getColumnIndex(Curso.KEY_name)));
@@ -201,87 +204,77 @@ public class Horario extends ActionBarActivity {
                 String fechaFinal = "";
                 String [] horas = curso.horas.split(",");
                 String [] dias = curso.dias.split(",");
-                boolean entrar = false;
 
-                // Se verifica si el año y el semestre del curso corresponden al presente
+                for(int i=0; i < dias.length; i++) {
 
-                if(now.month <= 6 && curso.semestre.equals("I") && now.year == Integer.parseInt(curso.anno)){
-                    beginTime = new GregorianCalendar(now.year, 2, 1);
-                    endTime = new GregorianCalendar(now.year, 2, 1);
-                    fechaFinal = now.year+"0620T180000Z";
-                    entrar = true;
-                }
-                if(now.month > 7 && curso.semestre.equals("II") && now.year == Integer.parseInt(curso.anno)){
-                    beginTime = new GregorianCalendar(now.year, 7, 1);
-                    endTime = new GregorianCalendar(now.year, 7, 1);
-                    fechaFinal = now.year+"1120T180000Z";
-                    entrar = true;
-                }
+                    boolean entrar = false;
 
-                if(entrar) {
-                    // Fecha del Evento a introducir en Calendario
-                    beginTime.set(Calendar.HOUR, Integer.parseInt(horas[0]));
-                    beginTime.set(Calendar.MINUTE, 0);
-                    beginTime.set(Calendar.SECOND, 0);
-                    endTime.set(Calendar.HOUR, Integer.parseInt(horas[1]));
-                    endTime.set(Calendar.MINUTE, 50);
-                    endTime.set(Calendar.SECOND, 0);
-                    long startMillis = beginTime.getTimeInMillis();
-                    long endMillis = endTime.getTimeInMillis();
+                    // Se verifica si el año y el semestre del curso corresponden al presente
 
-                    String[] days = new String[dias.length];
-
-                    // Clave según el día de la semana
-                    for (int i = 0; i < dias.length; i++) {
-                        if (dias[i].equals("Lunes")) {
-                            days[i] = "MO";
-                        }
-                        if (dias[i].equals("Martes")) {
-                            days[i] = "TU";
-                        }
-                        if (dias[i].equals("Miercoles")) {
-                            days[i] = "WE";
-                        }
-                        if (dias[i].equals("Jueves")) {
-                            days[i] = "TH";
-                        }
-                        if (dias[i].equals("Viernes")) {
-                            days[i] = "FR";
-                        }
-                        if (dias[i].equals("Sabado")) {
-                            days[i] = "SA";
-                        }
-                        if (dias[i].equals("Domingo")) {
-                            days[i] = "SU";
-                        }
+                    if (now.month <= 6 && curso.semestre.equals("I") && now.year == Integer.parseInt(curso.anno)) {
+                        beginTime = new GregorianCalendar(now.year, 2, 1);
+                        endTime = new GregorianCalendar(now.year, 2, 1);
+                        fechaFinal = now.year + "0620T180000Z";
+                        entrar = true;
+                    }
+                    if (now.month > 7 && curso.semestre.equals("II") && now.year == Integer.parseInt(curso.anno)) {
+                        beginTime = new GregorianCalendar(now.year, 7, 1);
+                        endTime = new GregorianCalendar(now.year, 7, 1);
+                        fechaFinal = now.year + "1120T210000Z";
+                        entrar = true;
                     }
 
-                    String BYDAY = "";
-                    boolean seguir = true;
-                    int i = 0;
-                    while (seguir) {
-                        BYDAY += days[i];
-                        i++;
-                        if (days.length == i) {
-                            seguir = false;
-                        } else {
-                            BYDAY += ",";
-                        }
+                    if (entrar) {
+                        // Fecha del Evento a introducir en Calendario
+                        beginTime.set(Calendar.HOUR, Integer.parseInt(horas[2*i]));
+                        beginTime.set(Calendar.MINUTE, 0);
+                        beginTime.set(Calendar.SECOND, 0);
+
+                        String [] indice = horas[2*i+1].split(":");
+                        endTime.set(Calendar.HOUR, Integer.parseInt(indice[0]));
+                        endTime.set(Calendar.MINUTE, 50);
+                        endTime.set(Calendar.SECOND, 0);
+                        long startMillis = beginTime.getTimeInMillis();
+                        long endMillis = endTime.getTimeInMillis();
+
+                        String days = "";
+
+                        // Clave según el día de la semana
+                            if (dias[i].equals("Lunes")) {
+                                days = "MO";
+                            }
+                            if (dias[i].equals("Martes")) {
+                                days = "TU";
+                            }
+                            if (dias[i].equals("Miercoles")) {
+                                days = "WE";
+                            }
+                            if (dias[i].equals("Jueves")) {
+                                days = "TH";
+                            }
+                            if (dias[i].equals("Viernes")) {
+                                days = "FR";
+                            }
+                            if (dias[i].equals("Sabado")) {
+                                days = "SA";
+                            }
+                            if (dias[i].equals("Domingo")) {
+                                days = "SU";
+                            }
+
+                        // Introduce datos a contenedor que se inserta como un evento en el calendario
+                        ContentResolver cr = getContentResolver();
+                        ContentValues values = new ContentValues();
+                        values.put(Events.DTSTART, startMillis);
+                        values.put(Events.DTEND, endMillis);
+                        values.put(Events.TITLE, curso.name);
+                        values.put(Events.CALENDAR_ID, calID);
+                        values.put(Events.RRULE, "FREQ=WEEKLY;BYDAY=" + days + ";WKST=MO;UNTIL=" + fechaFinal);
+                        values.put(Events.EVENT_TIMEZONE, tz.getID());
+
+                        Uri uri = cr.insert(Events.CONTENT_URI, values);
                     }
-
-                    // Introduce datos a contenedor que se inserta como un evento en el calendario
-                    ContentResolver cr = getContentResolver();
-                    ContentValues values = new ContentValues();
-                    values.put(Events.DTSTART, startMillis);
-                    values.put(Events.DTEND, endMillis);
-                    values.put(Events.TITLE, curso.name);
-                    values.put(Events.CALENDAR_ID, calID);
-                    values.put(Events.RRULE, "FREQ=WEEKLY;BYDAY=" + BYDAY + ";WKST=MO;UNTIL=" + fechaFinal);
-                    values.put(Events.EVENT_TIMEZONE, tz.getID());
-
-                    Uri uri = cr.insert(Events.CONTENT_URI, values);
                 }
-
             } while (cursor.moveToNext());
         }
         cursor.close();
