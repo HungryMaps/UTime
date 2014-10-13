@@ -22,6 +22,7 @@ import java.sql.Statement;
 
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
+    // Variable Global para ver cuantos spinners hay visibles
     int contadorSpinners = 1;
 
     Button btnSave ,  btnDelete;
@@ -29,6 +30,9 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     EditText editTextName;
     EditText editTextProfesor;
     EditText editTextAula;
+
+    // Variables para guardar los combobox que contienen los posibles días y horas
+    // Así como los poisbles valores
     Spinner[][] spinners = new Spinner[5][3];
     private String array_spinner[];
     private String horasi_spinner[];
@@ -161,7 +165,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                     curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
                     curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
             }
-           // Toast.makeText(this, curso.horas, Toast.LENGTH_LONG).show();
+
             Time now = new Time();
             now.setToNow();
             curso.anno = Integer.toString(now.year);
@@ -283,6 +287,9 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
     }
 
+
+    // Método Para reaccionar ante la inclusión de otro posible día para ese curso
+    // Ubica las posibles combobox y vuelve visible una más
     public void Agregar(View view){
         if(contadorSpinners < 5) {
             for(int i=0;i<3;i++) {

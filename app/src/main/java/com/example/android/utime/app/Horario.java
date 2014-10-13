@@ -65,7 +65,6 @@ public class Horario extends ActionBarActivity {
                     // este switch saca esa fila
                     int tamano = horas.length/2;
                     int [] fila = new int[tamano];
-                    //Toast.makeText(this, cursor.getString(cursor.getColumnIndex(Curso.KEY_name))+" "+tamano, Toast.LENGTH_SHORT).show();
                     for(int i=0; i< fila.length; i++) {
                         switch (Integer.parseInt(horas[2*i])) {
                             case 7:
