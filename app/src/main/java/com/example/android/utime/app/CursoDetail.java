@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -19,15 +22,22 @@ import java.sql.Statement;
 
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
+    // Variable Global para ver cuantos spinners hay visibles
+    int contadorSpinners = 1;
+
     Button btnSave ,  btnDelete;
 
     EditText editTextName;
     EditText editTextProfesor;
     EditText editTextAula;
-    EditText editTextDias;
-    EditText editTextHoras;
-    EditText editTextSemestre;
-    EditText editTextAnno;
+
+    // Variables para guardar los combobox que contienen los posibles días y horas
+    // Así como los poisbles valores
+    Spinner[][] spinners = new Spinner[5][3];
+    private String array_spinner[];
+    private String horasi_spinner[];
+    private String horasf_spinner[];
+
     private int _Curso_Id=0;
 
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
@@ -48,10 +58,14 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
         editTextAula = (EditText) findViewById(R.id.editTextAula);
-        editTextDias = (EditText) findViewById(R.id.editTextDias);
-        editTextHoras = (EditText) findViewById(R.id.editTextHoras);
-        editTextSemestre = (EditText) findViewById(R.id.editTextSemestre);
-        editTextAnno = (EditText) findViewById(R.id.editTextAnno);
+
+        for(int k=0; k<5; k++){
+            for(int i=0; i<3; i++){
+                String spinner = "spinner"+Integer.toString(k)+Integer.toString(i);
+                int id = getResources().getIdentifier(spinner, "id", getPackageName());
+                spinners[k][i] = (Spinner) findViewById(id);
+            }
+        }
 
         btnSave.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -66,10 +80,61 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         editTextAula.setText(curso.aula);
         editTextName.setText(curso.name);
         editTextProfesor.setText(curso.profesor);
-        editTextDias.setText(curso.dias);
-        editTextHoras.setText(curso.horas);
-        editTextSemestre.setText(curso.semestre);
-        editTextAnno.setText(curso.anno);
+
+        array_spinner=new String[6];
+        array_spinner[0]="Lunes";
+        array_spinner[1]="Martes";
+        array_spinner[2]="Miercoles";
+        array_spinner[3]="Jueves";
+        array_spinner[4]="Viernes";
+        array_spinner[5]="Sabado";
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, array_spinner);
+        for(int i=0; i<5; i++){
+            spinners[i][0].setAdapter(adapter);
+        }
+
+        horasi_spinner=new String[13];
+        horasi_spinner[0]="7";
+        horasi_spinner[1]="8";
+        horasi_spinner[2]="9";
+        horasi_spinner[3]="10";
+        horasi_spinner[4]="11";
+        horasi_spinner[5]="12";
+        horasi_spinner[6]="13";
+        horasi_spinner[7]="14";
+        horasi_spinner[8]="15";
+        horasi_spinner[9]="16";
+        horasi_spinner[10]="17";
+        horasi_spinner[11]="19";
+        horasi_spinner[12]="20";
+        adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, horasi_spinner);
+        for(int i=0; i<5; i++){
+            spinners[i][1].setAdapter(adapter);
+        }
+
+        horasf_spinner=new String[13];
+        horasf_spinner[0]="7:50";
+        horasf_spinner[1]="8:50";
+        horasf_spinner[2]="9:50";
+        horasf_spinner[3]="10:50";
+        horasf_spinner[4]="11:50";
+        horasf_spinner[5]="12:50";
+        horasf_spinner[6]="13:50";
+        horasf_spinner[7]="14:50";
+        horasf_spinner[8]="15:50";
+        horasf_spinner[9]="16:50";
+        horasf_spinner[10]="17:50";
+        horasf_spinner[11]="19:50";
+        horasf_spinner[12]="20:50";
+        horasf_spinner[12]="21:50";
+        adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, horasf_spinner);
+        for(int i=0; i<5; i++){
+            spinners[i][2].setAdapter(adapter);
+        }
+
     }
 
     @Override
@@ -94,10 +159,21 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         if (view == findViewById(R.id.btnSave)){
             SQLControlador repo = new SQLControlador(this);
             Curso curso = new Curso();
-            curso.anno = editTextAnno.getText().toString();
-            curso.semestre = editTextSemestre.getText().toString();
-            curso.horas = editTextHoras.getText().toString();
-            curso.dias = editTextDias.getText().toString();
+            curso.dias = "";
+            curso.horas = "";
+            for(int i=0; i<contadorSpinners; i++){
+                    curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
+                    curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
+            }
+
+            Time now = new Time();
+            now.setToNow();
+            curso.anno = Integer.toString(now.year);
+            if(now.month < 7){
+                curso.semestre = "I";
+            }else{
+                curso.semestre = "II";
+            }
             curso.aula= editTextAula.getText().toString();
             curso.profesor=editTextProfesor.getText().toString();
             curso.name=editTextName.getText().toString();
@@ -209,5 +285,22 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         startActivity(home_intent);
 
+    }
+
+
+    // Método Para reaccionar ante la inclusión de otro posible día para ese curso
+    // Ubica las posibles combobox y vuelve visible una más
+    public void Agregar(View view){
+        if(contadorSpinners < 5) {
+            for(int i=0;i<3;i++) {
+                String spinner = "spinner" + Integer.toString(contadorSpinners) + Integer.toString(i);
+                int id = getResources().getIdentifier(spinner, "id", getPackageName());
+                Spinner local = (Spinner) findViewById(id);
+                local.setVisibility(View.VISIBLE);
+            }
+            contadorSpinners++;
+        }else{
+            Toast.makeText(this, "Número de días máximo", Toast.LENGTH_LONG).show();
+        }
     }
 }
