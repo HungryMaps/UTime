@@ -24,7 +24,7 @@ public class SQLControlador {
 
     private DBhelper dbHelper;
 
-    //Variables para la conección con la base de datos externa
+    //Variables para la conexión con la base de datos externa
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
     public String user = "Paula";
     public String pass = "Lopez123#";
@@ -57,9 +57,8 @@ public class SQLControlador {
         long curso_Id = db.insert(Curso.TABLE, null, values);
         db.close(); // Cerrando la connecion de la base de datos
 
+        //Base de datos externa
         InsertarCurso(curso);
-
-
         return (int) curso_Id;
     }
 
@@ -80,6 +79,7 @@ public class SQLControlador {
         int nota_Id = (int) db.insert(Nota.TABLE, null, values);
         db.close(); // Cerrando la connecion de la base de datos
 
+        //Base de datos externa
         InsertarNota(nota, nota_Id);
         return (int) nota_Id;
     }
@@ -280,10 +280,9 @@ public class SQLControlador {
 
     /*
     * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
-     */
+    */
 
     private class InsertarNota extends AsyncTask<String, Void, String> {
-
         Nota nota;
 
         public InsertarNota(Nota nota, int nota_Id){
@@ -303,20 +302,12 @@ public class SQLControlador {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
             Statement stmt = null;
             try {
                 stmt = con.createStatement();
                 String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '"+nota.nameNota+"', '"+nota.comentarioNota+"');";
                 stmt.executeUpdate(query);
                 System.out.println("Hice Query");
-
-                // Un ejemplo sobre cómo traer datos de la base
-
-                    /*while(rs.next()){
-                        resultado = resultado + rs.getString("id") + "&" + rs.getString("name") + "&"+ rs.getString("profesor") + "&"+ rs.getString("aula") + "\n";
-                        //Here "&"s are added to the return string. This is help to split the string in Android application
-                    }*/
                 System.out.println("Resultado: " + resultado);
             } catch (SQLException ex){
                 // handle any errors
@@ -336,8 +327,8 @@ public class SQLControlador {
     }
 
     /*
-    Método que llama a la conexión de la base
-     */
+    * Método que llama a la conexión de la base
+    */
 
     public void InsertarNota(Nota nota, int nota_Id) {
         InsertarNota task = new InsertarNota(nota, nota_Id);
@@ -371,13 +362,6 @@ public class SQLControlador {
                 String query = "INSERT INTO  `Paula`.`Curso` (id, name, profesor, aula, dias, horas) VALUES (" + curso.curso_ID + ", '"+curso.name+"', '"+curso.profesor+"', '"+curso.aula+"', '"+curso.dias+"', '"+curso.horas+"');";
                 stmt.executeUpdate(query);
                 System.out.println("Hice Query");
-
-                // Un ejemplo sobre cómo traer datos de la base
-
-                    /*while(rs.next()){
-                        resultado = resultado + rs.getString("id") + "&" + rs.getString("name") + "&"+ rs.getString("profesor") + "&"+ rs.getString("aula") + "\n";
-                        //Here "&"s are added to the return string. This is help to split the string in Android application
-                    }*/
                 System.out.println("Resultado: " + resultado);
             } catch (SQLException ex){
                 // handle any errors
@@ -385,7 +369,6 @@ public class SQLControlador {
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-
             if (stmt != null) {
                 try {
                     stmt.close();
@@ -397,8 +380,8 @@ public class SQLControlador {
     }
 
     /*
-    Método que llama a la conexión de la base
-     */
+    * Método que llama a la conexión de la base
+    */
 
     public void InsertarCurso(Curso curso) {
         InsertarCurso task = new InsertarCurso(curso);
