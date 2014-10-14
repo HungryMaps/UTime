@@ -11,13 +11,25 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SQLControlador {
 
     private DBhelper dbHelper;
+
+    //Variables para la conexión con la base de datos externa
+    private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
+    public String user = "Paula";
+    public String pass = "Lopez123#";
+    private Connection con;
+    String resultado = "";
 
     public SQLControlador(Context context) {
         dbHelper = new DBhelper(context);
@@ -44,6 +56,9 @@ public class SQLControlador {
         // Insertando filas
         long curso_Id = db.insert(Curso.TABLE, null, values);
         db.close(); // Cerrando la connecion de la base de datos
+
+        //Base de datos externa
+        InsertarCurso(curso);
         return (int) curso_Id;
     }
 
@@ -61,8 +76,11 @@ public class SQLControlador {
         values.put(Nota.KEY_name_nota, nota.nameNota);
 
         // Insertando filas
-        long nota_Id = db.insert(Nota.TABLE, null, values);
+        int nota_Id = (int) db.insert(Nota.TABLE, null, values);
         db.close(); // Cerrando la connecion de la base de datos
+
+        //Base de datos externa
+        InsertarNota(nota, nota_Id);
         return (int) nota_Id;
     }
 
@@ -258,5 +276,115 @@ public class SQLControlador {
         cursor.close();
         db.close();
         return nota;
+    }
+
+    /*
+    * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
+    */
+
+    private class InsertarNota extends AsyncTask<String, Void, String> {
+        Nota nota;
+
+        public InsertarNota(Nota nota, int nota_Id){
+            this.nota = nota;
+            nota.nota_ID = nota_Id;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                //Driver para abrir la conexión con la base de mysql
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(databaseBaseURL, user, pass);
+                System.out.println("Database connection success");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Statement stmt = null;
+            try {
+                stmt = con.createStatement();
+                String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '"+nota.nameNota+"', '"+nota.comentarioNota+"');";
+                stmt.executeUpdate(query);
+                System.out.println("Hice Query");
+                System.out.println("Resultado: " + resultado);
+            } catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) { } // ignore
+                stmt = null;
+            }
+            return "";
+        }
+    }
+
+    /*
+    * Método que llama a la conexión de la base
+    */
+
+    public void InsertarNota(Nota nota, int nota_Id) {
+        InsertarNota task = new InsertarNota(nota, nota_Id);
+        task.execute();
+    }
+
+    private class InsertarCurso extends AsyncTask<String, Void, String> {
+
+        Curso curso;
+
+        public InsertarCurso(Curso curso){
+            this.curso = curso;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                //Driver para abrir la conexión con la base de mysql
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(databaseBaseURL, user, pass);
+                System.out.println("Database connection success");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Statement stmt = null;
+            try {
+                stmt = con.createStatement();
+                String query = "INSERT INTO  `Paula`.`Curso` (id, name, profesor, aula, dias, horas) VALUES (" + curso.curso_ID + ", '"+curso.name+"', '"+curso.profesor+"', '"+curso.aula+"', '"+curso.dias+"', '"+curso.horas+"');";
+                stmt.executeUpdate(query);
+                System.out.println("Hice Query");
+                System.out.println("Resultado: " + resultado);
+            } catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) { } // ignore
+                stmt = null;
+            }
+            return "";
+        }
+    }
+
+    /*
+    * Método que llama a la conexión de la base
+    */
+
+    public void InsertarCurso(Curso curso) {
+        InsertarCurso task = new InsertarCurso(curso);
+        task.execute();
     }
 }
