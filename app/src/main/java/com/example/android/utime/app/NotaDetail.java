@@ -67,6 +67,10 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Al hacer click en los botones me permite completar una accion
+     * @param view
+     */
     public void onClick(View view) {
         if (view == findViewById(R.id.btnSave)) {
             SQLControlador repo = new SQLControlador(this);
@@ -78,7 +82,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
 
             if (_Nota_Id == 0) {
                 _Nota_Id = repo.insertNota(nota);
-                 Toast.makeText(this, "Nueva Nota Insertada", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     repo.updateNota(nota);
@@ -90,17 +94,17 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             SQLControlador erase = new SQLControlador(this);
             erase.deleteNota(_Nota_Id);
             Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
-            returnHome(); // para que vuelva a la pagina de cursos
+            returnHome(); // para que vuelva a la pagina de notas
         }
     }
 
+    /**
+     * Me permite volver a la página principal
+     */
     public void returnHome() {
-
         Intent home_intent = new Intent(getApplicationContext(),
-                Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+         Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
-
     }
 
 }

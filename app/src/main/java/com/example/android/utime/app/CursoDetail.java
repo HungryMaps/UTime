@@ -155,6 +155,10 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Al hacer click en los botones me permite completar una accion
+     * @param view
+     */
     public void onClick(View view) {
         if (view == findViewById(R.id.btnSave)){
             SQLControlador repo = new SQLControlador(this);
@@ -182,7 +186,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             if (_Curso_Id==0) {
                 _Curso_Id = repo.insert(curso);
 
-                Toast.makeText(this,"Se agrego un nuevo curso",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
 
             }
                 else{
@@ -208,10 +212,9 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
     }
 
-    /*
-    * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
+    /**
+     * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
      */
-
     private class Connect extends AsyncTask <String, Void, String>{
 
         @Override
@@ -269,27 +272,28 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         }
     }
 
-    /*
-    Método que llama a la conexión de la base
+    /**
+     * Método que llama a la conexión de la base
      */
-
     public void Connect() {
         Connect task = new Connect();
         task.execute();
     }
 
+    /**
+     * Me permite volver a la pagina principal
+     */
     public void returnHome() {
-
         Intent home_intent = new Intent(getApplicationContext(),
-                Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+         Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
-
     }
 
-
-    // Método Para reaccionar ante la inclusión de otro posible día para ese curso
-    // Ubica las posibles combobox y vuelve visible una más
+    /**
+     * Método Para reaccionar ante la inclusión de otro posible día para ese curso
+     * Ubica las posibles combobox y vuelve visible una más
+     * @param view
+     */
     public void Agregar(View view){
         if(contadorSpinners < 5) {
             for(int i=0;i<3;i++) {
