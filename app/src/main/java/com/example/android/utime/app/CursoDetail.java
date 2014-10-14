@@ -190,15 +190,15 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
                 }
 
-           finish(); // para que vuelva a la pagina de cursos
+            returnHome();// para que vuelva a la pagina de cursos
         }
 
         else if (view== findViewById(R.id.btnDelete)){
             SQLControlador erase = new SQLControlador(this);
             erase.delete(_Curso_Id);
             Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
+            returnHome(); // para que vuelva a la pagina de cursos
 
-            finish(); // para que vuelva a la pagina de cursos
         }
 
 
