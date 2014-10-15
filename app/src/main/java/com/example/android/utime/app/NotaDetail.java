@@ -45,8 +45,10 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         Nota nota = new Nota();
         nota = repo.getNotaById(_Nota_Id);
 
-        editTextNameNota.setText(nota.nameNota);
-        editTextComentarioNota.setText(nota.comentarioNota);
+        if(nota != null) {
+            editTextNameNota.setText(nota.nameNota);
+            editTextComentarioNota.setText(nota.comentarioNota);
+        }
     }
 
     @Override
