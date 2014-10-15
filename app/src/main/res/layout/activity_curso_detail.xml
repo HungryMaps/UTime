@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Curso"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -24,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Profesor"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -35,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Aula"
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
@@ -46,25 +43,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Dias"
+        android:hint ="  Días"
         android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-
+        android:layout_below="@+id/textView3" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:hint ="Curso"
         android:id="@+id/editTextName"
         android:layout_above="@+id/textView2"
         android:layout_toRightOf="@+id/textView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
-    <requestFocus />
+        <requestFocus />
     </EditText>
 
     <EditText
@@ -72,12 +68,12 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="8"
+        android:hint ="Profesor"
         android:id="@+id/editTextProfesor"
         android:layout_above="@+id/textView3"
         android:layout_toRightOf="@+id/textView2"
         android:layout_alignRight="@+id/editTextName"
         android:layout_alignEnd="@+id/editTextName" >
-
     </EditText>
 
     <EditText
@@ -85,12 +81,12 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
+        android:hint ="Aula"
         android:id="@+id/editTextAula"
         android:layout_above="@+id/textView4"
         android:layout_toRightOf="@+id/textView3"
         android:layout_alignRight="@+id/editTextProfesor"
         android:layout_alignEnd="@+id/editTextProfesor" >
-
     </EditText>
 
     <Button
@@ -98,16 +94,16 @@
         android:layout_height="wrap_content"
         android:text="Eliminar"
         android:id="@+id/btnDelete"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:id="@+id/btnSave"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentBottom="true" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -226,6 +222,5 @@
         android:onClick="Agregar"
         android:layout_below="@+id/editTextAula"
         android:layout_toRightOf="@+id/spinner02" />
-
 
 </RelativeLayout>
