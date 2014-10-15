@@ -37,34 +37,10 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view== findViewById(R.id.btnAdd)){
-
             Intent intent = new Intent(this,CursoDetail.class);
             intent.putExtra("curso_Id",0);
             startActivity(intent);
-
-        }else {
-
-            SQLControlador repo = new SQLControlador(this);
-
-            ArrayList<HashMap<String, String>> cursoList =  repo.getCursoList();
-            if(cursoList.size()!=0) {
-                ListView lv = getListView();
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                        curso_Id = (TextView) view.findViewById(R.id.curso_Id);
-                        String cursoId = curso_Id.getText().toString();
-                        Intent objIndent = new Intent(getApplicationContext(),CursoDetail.class);
-                        objIndent.putExtra("curso_Id", Integer.parseInt( cursoId));
-                        startActivity(objIndent);
-                    }
-                });
-                ListAdapter adapter = new SimpleAdapter( Cursos.this,cursoList, R.layout.view_curso_entry, new String[] { "id","name"}, new int[] {R.id.curso_Id, R.id.curso_name});
-                setListAdapter(adapter);
-            }else{
-                Toast.makeText(this, "No has ingresado cursos!", Toast.LENGTH_SHORT).show();
-            }
-         }
+        }
     }
 
     /**
@@ -78,8 +54,27 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
-        btnGetAll = (Button) findViewById(R.id.btnGetAll);
-        btnGetAll.setOnClickListener(this);
+
+        SQLControlador repo = new SQLControlador(this);
+
+        ArrayList<HashMap<String, String>> cursoList =  repo.getCursoList();
+        if(cursoList.size()!=0) {
+            ListView lv = getListView();
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                    curso_Id = (TextView) view.findViewById(R.id.curso_Id);
+                    String cursoId = curso_Id.getText().toString();
+                    Intent objIndent = new Intent(getApplicationContext(),CursoDetail.class);
+                    objIndent.putExtra("curso_Id", Integer.parseInt( cursoId));
+                    startActivity(objIndent);
+                }
+            });
+            ListAdapter adapter = new SimpleAdapter( Cursos.this,cursoList, R.layout.view_curso_entry, new String[] { "id","name"}, new int[] {R.id.curso_Id, R.id.curso_name});
+            setListAdapter(adapter);
+        }else{
+            Toast.makeText(this, "No has ingresado cursos!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

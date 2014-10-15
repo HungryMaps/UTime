@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 public class Notas extends ListActivity implements android.view.View.OnClickListener {
 
-    Button btnAdd,btnGetAll;
+    Button btnAdd;
     TextView nota_Id;
 
     /**
@@ -35,32 +35,9 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
     @Override
     public void onClick(View view) {
         if (view== findViewById(R.id.btnAdd)){
-
             Intent intent = new Intent(this,NotaDetail.class);
             intent.putExtra("nota_Id",0);
             startActivity(intent);
-        }else {
-
-            SQLControlador repo = new SQLControlador(this);
-
-            ArrayList<HashMap<String, String>> notaList =  repo.getNotaList();
-            if(notaList.size()!=0) {
-                ListView lv = getListView();
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                        nota_Id = (TextView) view.findViewById(R.id.nota_Id);
-                        String notaId = nota_Id.getText().toString();
-                        Intent objIndent = new Intent(getApplicationContext(),NotaDetail.class);
-                        objIndent.putExtra("nota_Id", Integer.parseInt( notaId));
-                        startActivity(objIndent);
-                    }
-                });
-                ListAdapter adapter = new SimpleAdapter( Notas.this,notaList, R.layout.view_nota_entry, new String[] { "idNota","nameNota"}, new int[] {R.id.nota_Id, R.id.nota_name});
-                setListAdapter(adapter);
-            }else{
-                Toast.makeText(this, "No existe la Nota!", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
@@ -75,8 +52,27 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
-        btnGetAll = (Button) findViewById(R.id.btnGetAll);
-        btnGetAll.setOnClickListener(this);
+
+        SQLControlador repo = new SQLControlador(this);
+
+        ArrayList<HashMap<String, String>> notaList =  repo.getNotaList();
+        if(notaList.size()!=0) {
+            ListView lv = getListView();
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                    nota_Id = (TextView) view.findViewById(R.id.nota_Id);
+                    String notaId = nota_Id.getText().toString();
+                    Intent objIndent = new Intent(getApplicationContext(),NotaDetail.class);
+                    objIndent.putExtra("nota_Id", Integer.parseInt( notaId));
+                    startActivity(objIndent);
+                }
+            });
+            ListAdapter adapter = new SimpleAdapter( Notas.this,notaList, R.layout.view_nota_entry, new String[] { "idNota","nameNota"}, new int[] {R.id.nota_Id, R.id.nota_name});
+            setListAdapter(adapter);
+        }else{
+            Toast.makeText(this, "No existe la Nota!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
