@@ -1,9 +1,6 @@
 package com.example.android.utime.app;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import android.util.Log;
 
 /**
  * Created by JENNIFER on 23/09/2014.
@@ -11,178 +8,91 @@ import android.util.Log;
  */
 
 public class DbTest extends AndroidTestCase {
+    Curso curso;
+    Nota nota;
 
-    public static final String LOG_TAG = DbTest.class.getSimpleName();
+    // Inicializa los valores que se utilizan en las pruebas
+    public void Setup(){
+        curso = new Curso();
+        curso.name = "Ingeniería del Software";
+        curso.profesor = "Carlos";
+        curso.anno = "2014";
+        curso.semestre = "II";
+        curso.dias = "Martes,Miercoles";
+        curso.aula = "203";
+        curso.horas = "8,8:50,7,9:50";
 
-    /**
-     * Limpia la base de datos y prueba si la está creando y si la puede abrir
-     * @throws Throwable
-     */
-    public void testPrueba()throws Throwable{
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
-        assertEquals(true, db.isOpen());
-        db.close();
+        nota = new Nota();
+        nota.comentarioNota = "Prueba";
+        nota.nameNota = "Primera Nota";
     }
 
-    /**
-     * Prueba Unitaria para hacer el Insertar en la DB
-     * @throws Throwable
-     */
+    // Prueba el Insert en curso
     public void testInsert()throws Throwable{
-        String name = "Ingeniería del Software";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        int id = sql.insert(curso);
+        Curso curso2 = sql.getCursoById(id);
 
-        SQLControlador ctrl = new SQLControlador(mContext);
-        ctrl.abrirBaseDeDatos();
-        ctrl.insertarDatos(name);
-        Cursor cursor = ctrl.leerDatos();
-        String[] cadena;
-        cadena = new String[] {
-                DBhelper.CURSO_ID,
-                DBhelper.CURSO_NOMBRE
-        };
-        int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
-        String nombre = cursor.getString(nombreC);
-        Log.d(LOG_TAG, "PRUEBA "+nombre);
-
-        assertEquals("Prueba acertada", nombre, name);
-        db.close();
+        assertEquals("Prueba acertada", curso.name, curso2.name);
+        assertEquals("Prueba acertada", curso.profesor, curso2.profesor);
+        assertEquals("Prueba acertada", curso.anno, curso2.anno);
+        assertEquals("Prueba acertada", curso.semestre, curso2.semestre);
+        assertEquals("Prueba acertada", curso.dias, curso2.dias);
+        assertEquals("Prueba acertada", curso.aula, curso2.aula);
     }
 
-    /**
-     * Prueba que verifica si se agrega bien una nota a la tabla de notas
-     */
+    // Prueba el Insert en nota
     public void testInsertarNota()throws Throwable{
-        //La nota contiene "Ana 88888888" como si fuera un número de teléfono
-        String nota = "Ana 88888888";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        int id = sql.insertNota(nota);
+        Nota nota2 = sql.getNotaById(id);
 
-        SQLControlador controlador = new SQLControlador(mContext);
-        controlador.abrirBaseDeDatos();
-        //Se inserta en la base
-        controlador.insertarDatosNotas(nota);
-
-        //Aquí vamos a revisar si se insertó bien esa nota
-        Cursor cursor = controlador.leerDatosNotas();
-
-        int textoNota = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
-        String texto = cursor.getString(textoNota);
-        Log.d(LOG_TAG, "PRUEBA "+texto);
-
-        assertEquals("Prueba correcta", texto, nota);
-        db.close();
+        assertEquals("Prueba acertada", nota.comentarioNota, nota2.comentarioNota);
+        assertEquals("Prueba acertada", nota.nameNota, nota2.nameNota);
     }
-    
-    /**
-     * Elimina una nota de la base de datos
-     * @throws Throwable
-     */
+
+    // Prueba el delete en nota
     public void testDeleteNota()throws Throwable{
-        String name = "Ensamblador";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
-
-        SQLControlador ctrl = new SQLControlador(mContext);
-        ctrl.abrirBaseDeDatos();
-        ctrl.insertarDatosNotas(name);
-        Cursor cursor = ctrl.leerDatosNotas();
-
-        int idnota = cursor.getColumnIndex(DBhelper.NOTA_ID); //para tomar el id
-        int nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
-        String nombre = cursor.getString(nombreC);
-        String id = cursor.getString(idnota);
-        long idnum = Integer.parseInt(id);
-        ctrl.deleteDataNotas(idnum); //elimina la nota
-        Cursor  cursor2 = ctrl.leerDatosNotas();
-        nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
-       assertNotSame("Prueba delete",cursor,cursor2);
-      //assertEquals("Prueba acertada", nombre, name); //esta prueba tambien sirve y la intencion es que falle
-        db.close();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        int id = nota.nota_ID;
+        sql.deleteNota(id);
+        Nota nota2 = sql.getNotaById(id);
+        assertNull("Prueba acertada", nota2);
     }
 
-    /**
-     * Elimina un curso de la base de datos
-     * @throws Throwable
-     */
+    // Prueba el delete en curso
     public void testDeleteCurso()throws Throwable{
-        String name = "Ensamblador";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
-
-        SQLControlador ctrl = new SQLControlador(mContext);
-        ctrl.abrirBaseDeDatos();
-        ctrl.insertarDatos(name);
-        Cursor cursor = ctrl.leerDatos();
-
-        int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
-        int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
-        String nombre = cursor.getString(nombreC);
-        String id = cursor.getString(idcurso);
-        long idnum = Integer.parseInt(id);
-        ctrl.deleteData(idnum);// elimina el curso de la base
-        Cursor  cursor2 = ctrl.leerDatos();
-        assertNotSame("Prueba delete",cursor,cursor2);
-
-        db.close();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        int id = curso.curso_ID;
+        sql.delete(id);
+        Curso curso2 = sql.getCursoById(id);
+        assertNull("Prueba acertada", curso2);
     }
 
-    /**
-     * Prueba que verifica que se actualizo el nombre del curso
-     * @throws Throwable
-     */
+    // Prueba el modificar en curso
     public void testModificarCurso()throws Throwable{
-        String name = "Ensamblador";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
-
-        SQLControlador ctrl = new SQLControlador(mContext);
-        ctrl.abrirBaseDeDatos();
-        ctrl.insertarDatos(name);
-        Cursor cursor = ctrl.leerDatos();
-        int idcurso = cursor.getColumnIndex(DBhelper.CURSO_ID); //para tomar el id
-        String id = cursor.getString(idcurso);
-        long idnum = Integer.parseInt(id);
-        String nuevoNombre = "Estructuras Discretas";
-
-        ctrl.actualizarDatos(idnum,nuevoNombre);
-        cursor = ctrl.leerDatos();
-        int nombreC = cursor.getColumnIndex(DBhelper.CURSO_NOMBRE);
-        String nombre = cursor.getString(nombreC);
-        assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
-
-        db.close();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        curso.name = "Ensamblador";
+        int id = curso.curso_ID;
+        sql.update(curso);
+        Curso curso2 = sql.getCursoById(id);
+        assertEquals("Prueba acertada", curso.name, curso.name);
     }
 
-    /**
-     * Prueba para actualizar una nota
-     * @throws Throwable
-     */
+    // Prueba el modificar en nota
     public void testModificarNota()throws Throwable{
-        String name = "Hola,hello,";
-        mContext.deleteDatabase(DBhelper.DB_NAME);
-        SQLiteDatabase db = new DBhelper(this.mContext).getWritableDatabase();
-
-        SQLControlador ctrl = new SQLControlador(mContext);
-        ctrl.abrirBaseDeDatos();
-        ctrl.insertarDatosNotas(name);
-        Cursor cursor = ctrl.leerDatosNotas();
-
-        int idcurso = cursor.getColumnIndex(DBhelper.NOTA_ID); //para tomar el id
-
-        String id = cursor.getString(idcurso);
-        long idnum = Integer.parseInt(id);
-        String nuevoNombre = "adios,good bye";
-
-        ctrl.actualizarDatosNotas(idnum,nuevoNombre);
-        cursor = ctrl.leerDatosNotas();
-        int nombreC = cursor.getColumnIndex(DBhelper.NOTA_TEXTO);
-        String nombre = cursor.getString(nombreC);
-
-        assertEquals("Prueba Modifica Curso",nombre,nuevoNombre );
-
-        db.close();
+        Setup();
+        SQLControlador sql = new SQLControlador(mContext);
+        nota.nameNota = "Super Nota";
+        int id = nota.nota_ID;
+        sql.updateNota(nota);
+        Nota nota2 = sql.getNotaById(id);
+        assertEquals("Prueba acertada", nota.nameNota, nota.nameNota);
     }
+
 }

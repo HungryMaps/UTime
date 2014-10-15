@@ -228,10 +228,11 @@ public class SQLControlador {
                 + " WHERE " +
                 Curso.KEY_ID + "=?";                              //se usa '?' para concatenar strings
 
-        Curso curso = new Curso();
+        Curso curso = null;
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
 
         if (cursor.moveToFirst()) {
+            curso = new Curso();
             do {
                 curso.curso_ID =cursor.getInt(cursor.getColumnIndex(Curso.KEY_ID));
                 curso.name =cursor.getString(cursor.getColumnIndex(Curso.KEY_name));
@@ -262,10 +263,11 @@ public class SQLControlador {
                 + " WHERE " +
                 Nota.KEY_ID_NOTA + "=?";                              //se usa '?' para concatenar strings
 
-        Nota nota = new Nota();
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
+        Nota nota = null;
 
         if (cursor.moveToFirst()) {
+            nota = new Nota();
             do {
                 nota.nota_ID =cursor.getInt(cursor.getColumnIndex(Nota.KEY_ID_NOTA));
                 nota.nameNota =cursor.getString(cursor.getColumnIndex(Nota.KEY_name_nota));
