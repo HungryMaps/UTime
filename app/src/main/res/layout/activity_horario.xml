@@ -17,7 +17,8 @@
         android:id="@+id/llenarCalendario"
         android:onClick="insertarHorarioEnCalendario"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/verde1"/>
 
     <TableLayout
         android:layout_width="match_parent"
