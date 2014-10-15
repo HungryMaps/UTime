@@ -16,7 +16,8 @@
         android:id="@+id/btnAdd"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@color/amarillo"/>
 
     <ListView
         android:layout_width="wrap_content"
@@ -31,7 +32,9 @@
         android:layout_height="wrap_content"
         android:text="Lista de Cursos"
         android:id="@+id/btnGetAll"
+        android:background="@color/verde1"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnAdd" />
+        android:layout_alignRight="@android:id/list"
+        android:layout_alignEnd="@android:id/list" />
 
 </RelativeLayout>
