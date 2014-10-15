@@ -263,10 +263,9 @@ public class SQLControlador {
                 + " WHERE " +
                 Nota.KEY_ID_NOTA + "=?";                              //se usa '?' para concatenar strings
 
-
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
-
         Nota nota = null;
+
         if (cursor.moveToFirst()) {
             nota = new Nota();
             do {

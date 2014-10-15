@@ -137,7 +137,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             editTextAula.setText(curso.aula);
             editTextName.setText(curso.name);
             editTextProfesor.setText(curso.profesor);
-
             String[] dias = curso.dias.split(",");
             String[] horas = curso.horas.split(",");
 
@@ -452,6 +451,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             Toast.makeText(this, "Número de días máximo", Toast.LENGTH_LONG).show();
         }
     }
+
+    /**
+     * Método para reaccionar ante la reducción de la cantidad de días disponibles
+     * Ubica las posibles combobox y vuelve invisible una más
+     * @param view
+     */
 
     public void Quitar(View view){
         if(contadorSpinners > 1) {

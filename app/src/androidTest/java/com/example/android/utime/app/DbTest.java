@@ -11,6 +11,7 @@ public class DbTest extends AndroidTestCase {
     Curso curso;
     Nota nota;
 
+    // Inicializa los valores que se utilizan en las pruebas
     public void Setup(){
         curso = new Curso();
         curso.name = "Ingeniería del Software";
@@ -26,7 +27,7 @@ public class DbTest extends AndroidTestCase {
         nota.nameNota = "Primera Nota";
     }
 
-
+    // Prueba el Insert en curso
     public void testInsert()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
@@ -41,7 +42,7 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba acertada", curso.aula, curso2.aula);
     }
 
-
+    // Prueba el Insert en nota
     public void testInsertarNota()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
@@ -52,7 +53,7 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba acertada", nota.nameNota, nota2.nameNota);
     }
 
-
+    // Prueba el delete en nota
     public void testDeleteNota()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
@@ -62,6 +63,7 @@ public class DbTest extends AndroidTestCase {
         assertNull("Prueba acertada", nota2);
     }
 
+    // Prueba el delete en curso
     public void testDeleteCurso()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
@@ -71,6 +73,7 @@ public class DbTest extends AndroidTestCase {
         assertNull("Prueba acertada", curso2);
     }
 
+    // Prueba el modificar en curso
     public void testModificarCurso()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
@@ -81,6 +84,7 @@ public class DbTest extends AndroidTestCase {
         assertEquals("Prueba acertada", curso.name, curso.name);
     }
 
+    // Prueba el modificar en nota
     public void testModificarNota()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
