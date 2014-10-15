@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar"
+        android:text="  Agregar  "
         android:id="@+id/btnAdd"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista de Notas"
+        android:text="  Lista de Notas  "
         android:id="@+id/btnGetAll"
         android:background="@color/verde1"
         android:layout_below="@android:id/list"

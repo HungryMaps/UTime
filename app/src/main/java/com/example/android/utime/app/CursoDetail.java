@@ -23,7 +23,7 @@ import java.sql.Statement;
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
     // Variable Global para ver cuantos spinners hay visibles
-    int contadorSpinners = 1;
+    int contadorSpinners = 0;
 
     Button btnSave ,  btnDelete;
 
@@ -77,10 +77,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         Curso curso = new Curso();
         curso = repo.getCursoById(_Curso_Id);
 
-        editTextAula.setText(curso.aula);
-        editTextName.setText(curso.name);
-        editTextProfesor.setText(curso.profesor);
-
         array_spinner=new String[6];
         array_spinner[0]="Lunes";
         array_spinner[1]="Martes";
@@ -114,7 +110,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             spinners[i][1].setAdapter(adapter);
         }
 
-        horasf_spinner=new String[13];
+        horasf_spinner=new String[15];
         horasf_spinner[0]="7:50";
         horasf_spinner[1]="8:50";
         horasf_spinner[2]="9:50";
@@ -126,15 +122,164 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         horasf_spinner[8]="15:50";
         horasf_spinner[9]="16:50";
         horasf_spinner[10]="17:50";
-        horasf_spinner[11]="19:50";
-        horasf_spinner[12]="20:50";
-        horasf_spinner[12]="21:50";
+        horasf_spinner[11]="18:50";
+        horasf_spinner[12]="19:50";
+        horasf_spinner[13]="20:50";
+        horasf_spinner[14]="21:50";
         adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, horasf_spinner);
         for(int i=0; i<5; i++){
             spinners[i][2].setAdapter(adapter);
         }
 
+        if(curso != null) {
+
+            editTextAula.setText(curso.aula);
+            editTextName.setText(curso.name);
+            editTextProfesor.setText(curso.profesor);
+
+            String[] dias = curso.dias.split(",");
+            String[] horas = curso.horas.split(",");
+
+            for (int i = 0; i < dias.length; i++) {
+
+                int posicion = 0;
+
+                if (dias[i].equals("Lunes")) {
+                    posicion = 0;
+                }
+                if (dias[i].equals("Martes")) {
+                    posicion = 1;
+                }
+                if (dias[i].equals("Miercoles")) {
+                    posicion = 2;
+                }
+                if (dias[i].equals("Jueves")) {
+                    posicion = 3;
+                }
+                if (dias[i].equals("Viernes")) {
+                    posicion = 4;
+                }
+                if (dias[i].equals("Sabado")) {
+                    posicion = 5;
+                }
+
+                contadorSpinners++;
+                spinners[i][0].setVisibility(View.VISIBLE);
+                spinners[i][0].setSelection(posicion);
+
+                int fila = 0;
+
+                switch (Integer.parseInt(horas[2 * i])) {
+                    case 7:
+                        fila = 0;
+                        break;
+                    case 8:
+                        fila = 1;
+                        break;
+                    case 9:
+                        fila = 2;
+                        break;
+                    case 10:
+                        fila = 3;
+                        break;
+                    case 11:
+                        fila = 4;
+                        break;
+                    case 12:
+                        fila = 5;
+                        break;
+                    case 13:
+                        fila = 6;
+                        break;
+                    case 14:
+                        fila = 7;
+                        break;
+                    case 15:
+                        fila = 8;
+                        break;
+                    case 16:
+                        fila = 9;
+                        break;
+                    case 17:
+                        fila = 10;
+                        break;
+                    case 18:
+                        fila = 11;
+                        break;
+                    case 19:
+                        fila = 12;
+                        break;
+                    case 20:
+                        fila = 13;
+                        break;
+                    case 21:
+                        fila = 14;
+                        break;
+                    default:
+                        break;
+                }
+
+                int fila2 = 0;
+                String[] temp = horas[2 * i + 1].split(":");
+                switch (Integer.parseInt(temp[0])) {
+                    case 7:
+                        fila2 = 0;
+                        break;
+                    case 8:
+                        fila2 = 1;
+                        break;
+                    case 9:
+                        fila2 = 2;
+                        break;
+                    case 10:
+                        fila2 = 3;
+                        break;
+                    case 11:
+                        fila2 = 4;
+                        break;
+                    case 12:
+                        fila2 = 5;
+                        break;
+                    case 13:
+                        fila2 = 6;
+                        break;
+                    case 14:
+                        fila2 = 7;
+                        break;
+                    case 15:
+                        fila2 = 8;
+                        break;
+                    case 16:
+                        fila2 = 9;
+                        break;
+                    case 17:
+                        fila2 = 10;
+                        break;
+                    case 18:
+                        fila2 = 11;
+                        break;
+                    case 19:
+                        fila2 = 12;
+                        break;
+                    case 20:
+                        fila2 = 13;
+                        break;
+                    case 21:
+                        fila2 = 14;
+                        break;
+                    default:
+                        break;
+                }
+
+                spinners[i][1].setVisibility(View.VISIBLE);
+                spinners[i][1].setSelection(fila);
+                spinners[i][2].setVisibility(View.VISIBLE);
+                spinners[i][2].setSelection(fila2);
+            }
+        }else{
+            contadorSpinners++;
+        }
     }
 
     @Override
@@ -305,6 +450,20 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             contadorSpinners++;
         }else{
             Toast.makeText(this, "Número de días máximo", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void Quitar(View view){
+        if(contadorSpinners > 1) {
+            for(int i=0;i<3;i++) {
+                String spinner = "spinner" + Integer.toString(contadorSpinners-1) + Integer.toString(i);
+                int id = getResources().getIdentifier(spinner, "id", getPackageName());
+                Spinner local = (Spinner) findViewById(id);
+                local.setVisibility(View.INVISIBLE);
+            }
+            contadorSpinners--;
+        }else{
+            Toast.makeText(this, "Número de días mínimo", Toast.LENGTH_LONG).show();
         }
     }
 }
