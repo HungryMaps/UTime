@@ -1,61 +1,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+
     tools:context="com.instinctcoder.sqlitedb.StudentDetail$PlaceholderFragment"
     android:background="@color/fondo">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
+        android:width="45px"
+        android:layout_alignBottom="@+id/editTextNameNota"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editTextNameNota"
+        android:hint ="Título"
+        android:layout_width="600px"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_below="@+id/RelativeLayout01">
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextComentarioNota"
+        android:layout_width="600px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextNameNota"
+        android:layout_alignLeft="@+id/editTextNameNota"
+        android:minLines="2"
+        android:hint ="Nota">
+    </EditText>
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:hint ="Título"
-        android:id="@+id/editTextNameNota"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textLongMessage"
-        android:ems="10"
-        android:hint ="Nota"
-        android:id="@+id/editTextComentarioNota"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignLeft="@+id/editTextNameNota"
-        android:layout_alignStart="@+id/editTextNameNota"
-        android:layout_alignRight="@+id/editTextNameNota"
-        android:layout_alignEnd="@+id/editTextNameNota" >
-    </EditText>
+        android:width="45px"
+        android:layout_below="@+id/editTextNameNota"
+        android:layout_toLeftOf="@+id/editTextComentarioNota" />
 
     <Button
         android:layout_width="wrap_content"
@@ -63,7 +51,9 @@
         android:text="  Eliminar  "
         android:id="@+id/btnDelete"
         android:background="@color/amarillo"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/editTextComentarioNota"
+        android:layout_alignStart="@+id/editTextComentarioNota" />
 
     <Button
         android:layout_width="wrap_content"
@@ -71,8 +61,9 @@
         android:text="  Guardar  "
         android:id="@+id/btnSave"
         android:background="@color/verde1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignBaseline="@+id/btnDelete"
+        android:layout_alignBottom="@+id/btnDelete"
+        android:layout_alignRight="@+id/editTextComentarioNota"
+        android:layout_alignEnd="@+id/editTextComentarioNota" />
 
 </RelativeLayout>
