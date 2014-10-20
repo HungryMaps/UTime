@@ -39,15 +39,16 @@ android {
 
 
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     /*
                         *Agregar compilación a la Libreria de Caldroid
                          */
-    compile 'com.android.support:appcompat-v7:20.0.0'
-    compile 'com.roomorama:caldroid:1.1.1'
     /*
     Se agrega el módulo de mysql para poder conectarse con la base de datos remota
      */
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.roomorama:caldroid:1.1.1'
     compile 'mysql:mysql-connector-java:5.1.33'
 }

@@ -48,15 +48,17 @@
             android:name=".Notas"
             android:label="@string/title_activity_notas" >
         </activity>
+        <activity
+            android:name=".Evaluacion"
+            android:label="@string/title_activity_evaluacion" >
+        </activity>
     </application>
     <!-- Se piden permisos para poder escribir en el calendario -->
     <uses-permission android:name="android.permission.READ_CALENDAR" >
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" >
     </uses-permission>
-<!--
-Se agrega el permiso para que la aplicación tenga acceso a Internet
--->
+<!-- Se agrega el permiso para que la aplicación tenga acceso a Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

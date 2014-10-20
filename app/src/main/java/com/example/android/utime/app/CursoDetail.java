@@ -53,7 +53,23 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
+        Button btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
 
+        btnEvaluacion.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             * REQ: que se haya capturado bien el botón al que se le hizo click
+             * @param view
+             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
+             */
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(CursoDetail.this, Evaluacion.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
