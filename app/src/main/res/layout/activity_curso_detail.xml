@@ -95,6 +95,7 @@
         android:layout_height="wrap_content"
         android:text="Eliminar"
         android:id="@+id/btnDelete"
+        android:background="@color/amarillo"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btnDelete" />
 
@@ -103,6 +104,7 @@
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:id="@+id/btnSave"
+        android:background="@color/verde1"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
