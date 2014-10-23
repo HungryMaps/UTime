@@ -29,7 +29,7 @@
 
     <EditText
         android:id="@+id/editTextComentarioNota"
-        android:layout_width="600px"
+        android:layout_width="900px"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextNameNota"
         android:layout_alignLeft="@+id/editTextNameNota"

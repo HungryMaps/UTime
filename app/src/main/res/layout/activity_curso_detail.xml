@@ -112,7 +112,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ealuacion"
+        android:text="Evaluacion"
         android:id="@+id/btnEvaluacion"
         android:layout_alignTop="@+id/btnSave"
         android:layout_toLeftOf="@+id/btnSave" />
