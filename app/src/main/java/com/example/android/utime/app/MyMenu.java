@@ -72,7 +72,7 @@ public class MyMenu extends ActionBarActivity {
             @Override
             public void onClick(View view){
                 //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-                Intent in = new Intent(MyMenu.this, Ubicaciones.class);
+                Intent in = new Intent(MyMenu.this, MapsActivity.class);
                 //lanza la siguiente ventana
                 startActivity(in);
             }

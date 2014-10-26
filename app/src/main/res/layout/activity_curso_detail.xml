@@ -93,7 +93,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eliminar"
+        android:text="  Eliminar  "
         android:id="@+id/btnDelete"
         android:background="@color/amarillo"
         android:layout_alignParentBottom="true"
@@ -102,7 +102,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar"
+        android:text="  Guardar  "
         android:id="@+id/btnSave"
         android:background="@color/verde1"
         android:layout_alignParentBottom="true"
@@ -112,7 +112,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Evaluacion"
+        android:text="  Evaluación  "
         android:id="@+id/btnEvaluacion"
         android:layout_alignTop="@+id/btnSave"
         android:layout_toLeftOf="@+id/btnSave" />
