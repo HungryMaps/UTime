@@ -1,3 +1,10 @@
+/*
+ * Autores: Jennifer Ledezma
+ *
+ * Clase MapsActivity: Se encarga de las funcionalidades referentes a las ubicaciones más importantes
+ *                     de la Universidad de Costa Rica
+ */
+
 package com.example.android.utime.app;
 
 import android.support.v4.app.FragmentActivity;
