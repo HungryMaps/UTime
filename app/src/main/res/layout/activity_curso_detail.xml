@@ -236,14 +236,14 @@
     android:layout_toRightOf="@+id/spinner02" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/Menos"
-        android:onClick="Quitar"
-        android:layout_below="@+id/editTextAula"
-        android:layout_toRightOf="@+id/Mas" />
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="-"
+    android:id="@+id/Menos"
+    android:onClick="Quitar"
+    android:layout_below="@+id/editTextAula"
+    android:layout_toRightOf="@+id/Mas" />
 
 
 </RelativeLayout>

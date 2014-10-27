@@ -25,7 +25,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     // Variable Global para ver cuantos spinners hay visibles
     int contadorSpinners = 0;
 
-    Button btnSave ,  btnDelete;
+    Button btnSave ,  btnDelete, btnEvaluacion;
 
     EditText editTextName;
     EditText editTextProfesor;
@@ -53,23 +53,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
-        Button btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
+        btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
 
-        btnEvaluacion.setOnClickListener(new View.OnClickListener(){
-
-            /**
-             * REQ: que se haya capturado bien el botón al que se le hizo click
-             * @param view
-             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
-             */
-            @Override
-            public void onClick(View view){
-                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-                Intent in = new Intent(CursoDetail.this, Evaluacion.class);
-                //lanza la siguiente ventana
-                startActivity(in);
-            }
-        });
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
@@ -85,6 +70,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         btnSave.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        btnEvaluacion.setOnClickListener(this);
 
         _Curso_Id =0;
         Intent intent = getIntent();
@@ -364,6 +350,22 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             returnHome(); // para que vuelva a la pagina de cursos
 
         }
+
+        else if (view== findViewById(R.id.btnEvaluacion)){
+                _Curso_Id =0;
+                Intent intent = getIntent();
+                _Curso_Id =intent.getIntExtra("curso_Id", 0);
+                SQLControlador repo = new SQLControlador(this);
+                Curso curso = new Curso();
+                curso = repo.getCursoById(_Curso_Id);
+
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(CursoDetail.this, Evaluacion.class);
+                // Envía parámetro de id del curso
+                in.putExtra("curso_ID",curso.curso_ID);
+                startActivity(in);
+        }
+
 
 
         /*Prevista para conexión con la base remota */
