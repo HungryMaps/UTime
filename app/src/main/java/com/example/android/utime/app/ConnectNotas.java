@@ -9,12 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Created by Pau on 26/10/2014.
+ * Created by Paula on 26/10/2014.
+ */
+
+
+/**
+ * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
  */
 public class ConnectNotas extends AsyncTask<String, Void, String> {
 
     Nota nota;
-
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
     public String user = "Paula";
     public String pass = "Lopez123#";
@@ -25,8 +29,9 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
         nota.nota_ID = nota_Id;
     }
 
-    /**
-     * Clase que usa AsyncTask para poder abrir la conexión con la base de datos
+    /*
+    * Método que se encarga de abrir una conexión con la base de datos remota
+    * y de insertar los datos de la nota en la tabla de Nota de ahí.
      */
 
     @Override
