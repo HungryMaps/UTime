@@ -32,7 +32,7 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
     /*
     * Método que se encarga de abrir una conexión con la base de datos remota
     * y de insertar los datos de la nota en la tabla de Nota de ahí.
-     */
+    */
 
     @Override
     protected String doInBackground(String... strings) {
@@ -45,17 +45,13 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
         }catch(SQLException e){
         }
             if (con != null) {
-
-
                 System.out.println("Database connection success");
-
-                Statement stmt = null;
-                ResultSet rs = null;
-
+                Statement statement = null;
+                ResultSet result= null;
                 try {
-                    stmt = con.createStatement();
+                    statement = con.createStatement();
                     String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '" + nota.nameNota + "', '" + nota.comentarioNota + "');";
-                    stmt.executeUpdate(query);
+                    statement.executeUpdate(query);
                     System.out.println("Hice Query");
 
                 } catch (SQLException ex) {
@@ -64,20 +60,19 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
                     System.out.println("SQLState: " + ex.getSQLState());
                     System.out.println("VendorError: " + ex.getErrorCode());
                 }
-
-                if (rs != null) {
+                if (result != null) {
                     try {
-                        rs.close();
+                        result.close();
                     } catch (SQLException sqlEx) {
                     } // ignore
-                    rs = null;
+                    result = null;
                 }
-                if (stmt != null) {
+                if (statement != null) {
                     try {
-                        stmt.close();
+                        statement.close();
                     } catch (SQLException sqlEx) {
                     } // ignore
-                    stmt = null;
+                    statement = null;
                 }
             }
             return "";

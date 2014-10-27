@@ -30,55 +30,47 @@ import java.sql.Statement;
         /*
         * Método que se encarga de abrir una conexión con la base de datos remota y guardar los datos de un curso
         * en la tabla de Curso de ahí
-         */
-
+        */
         @Override
         protected String doInBackground(String... strings) {
             try {
                 //Driver para abrir la conexión con la base de mysql
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection(databaseBaseURL, user, pass);
-
             }
-
             catch (ClassNotFoundException e) {
                 return "Class not found";
             } catch (SQLException e) {
                 return "SQL Exception";
             }
-
             if(con != null){
                 System.out.println("Database connection success");
-
-                Statement stmt = null;
-                ResultSet rs = null;
-
+                Statement statement = null;
+                ResultSet result = null;
                 try {
-                    stmt = con.createStatement();
+                    statement = con.createStatement();
                     String query = "INSERT INTO  `Paula`.`Curso` (id, name, profesor, aula, dias, horas) VALUES (" + curso.curso_ID + ", '" + curso.name + "', '" + curso.profesor + "', '" + curso.aula + "', '" + curso.dias + "', '" + curso.horas + "');";
-                    stmt.executeUpdate(query);
+                    statement.executeUpdate(query);
                     System.out.println("Hice Query");
-
                 } catch (SQLException ex) {
                     // handle any errors
                     System.out.println("SQLException: " + ex.getMessage());
                     System.out.println("SQLState: " + ex.getSQLState());
                     System.out.println("VendorError: " + ex.getErrorCode());
                 }
-
-                if (rs != null) {
+                if (result != null) {
                     try {
-                        rs.close();
+                        result.close();
                     } catch (SQLException sqlEx) {
                     } // ignore
-                    rs = null;
+                    result = null;
                 }
-                if (stmt != null) {
+                if (statement != null) {
                     try {
-                        stmt.close();
+                        statement.close();
                     } catch (SQLException sqlEx) {
                     } // ignore
-                    stmt = null;
+                    statement = null;
                 }
             }
             return "";
