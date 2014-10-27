@@ -343,6 +343,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             returnHome();// para que vuelva a la pagina de cursos
         }
 
+
+        // Para que se use el botón de borrar
         else if (view== findViewById(R.id.btnDelete)){
             SQLControlador erase = new SQLControlador(this);
             erase.delete(_Curso_Id);
@@ -351,6 +353,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         }
 
+        // para que se use el botón de evaluación
         else if (view== findViewById(R.id.btnEvaluacion)){
                 _Curso_Id =0;
                 Intent intent = getIntent();

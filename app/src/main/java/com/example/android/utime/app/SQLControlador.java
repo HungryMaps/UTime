@@ -175,6 +175,7 @@ public class SQLControlador {
         db.close(); // Closing database connection
     }
 
+    // Actualiza Tabla con los datos de la evaluacion entrante como parámetro
     public void updateEvaluacion(EvaluacionPorCurso evaluacion) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

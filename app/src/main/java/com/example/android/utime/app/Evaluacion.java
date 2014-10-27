@@ -19,10 +19,8 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
 
     private int Curso_Id=0;
     Button btnSave;
-    int contador = 2;
+    int contador = 2; // Para uso futuro
     List<Integer> evaluaciones = new ArrayList<Integer>();
-
-    EditText[] editTextNombre, editTextEvaluacion, editTextCalificacion = new EditText[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +32,8 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
 
         Intent intent = getIntent();
         Curso_Id = intent.getIntExtra("curso_ID", 0);
+
+        // Aquí se consulta con un Where respecto al Curso cuyas evaluaciones tiene asociadas
 
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
@@ -52,6 +52,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         if (cursor.moveToFirst()) {
             int i=2;
 
+            // Se presentan las evaluaciones en el layout
             do {
 
                 evaluaciones.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_ID))));
@@ -96,12 +97,14 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         return super.onOptionsItemSelected(item);
     }
 
+    // Para cuando se apreta el botón de salvar
     @Override
     public void onClick(View view) {
         int k=0;
         for(int i=2; i<29; i+=3) {
             String[] dato = new String[3];
 
+            // Saca datos del layout
             String celda = "editText" + Integer.toString(i);
             int id = getResources().getIdentifier(celda, "id", getPackageName());
             EditText currcell = (EditText) findViewById(id);
@@ -117,6 +120,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
             currcell = (EditText) findViewById(id);
             dato[2] = currcell.getText().toString();
 
+            // Si no hay evaluaciones nuevas Update, de lo contrario Insert
             if(k < evaluaciones.size()){
                 if(!dato[0].equals("")){
                     SQLControlador repo = new SQLControlador(this);
