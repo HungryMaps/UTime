@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBhelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 6; //Maneja la version de la base de datos
+    private static final int DATABASE_VERSION = 7; //Maneja la version de la base de datos
     private static final String DATABASE_NAME = "crud.db"; // es el nombre de la base de datos
 
     public DBhelper(Context context ) {
@@ -40,7 +40,15 @@ public class DBhelper extends SQLiteOpenHelper {
                 + Nota.KEY_name_nota + " TEXT, "
                 + Nota.KEY_comentario + " TEXT )";
 
+        String CREATE_TABLE_EVALUACION = "CREATE TABLE " + EvaluacionPorCurso.TABLE  + "("
+                + EvaluacionPorCurso.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + EvaluacionPorCurso.KEY_name + " TEXT ,"
+                + EvaluacionPorCurso.KEY_ID_Curso + " INTEGER , "
+                + EvaluacionPorCurso.KEY_Calificacion + " TEXT,"
+                + EvaluacionPorCurso.KEY_Evaluacion + " TEXT )";
+
         db.execSQL(CREATE_TABLE_CURSO);
+        db.execSQL(CREATE_TABLE_EVALUACION);
         db.execSQL(CREATE_TABLE_NOTA);
     }
 
@@ -54,6 +62,7 @@ public class DBhelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Curso.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Nota.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + EvaluacionPorCurso.TABLE);
         onCreate(db);
     }
 }

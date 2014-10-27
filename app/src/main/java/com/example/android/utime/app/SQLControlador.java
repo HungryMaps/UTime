@@ -84,10 +84,36 @@ public class SQLControlador {
         return (int) nota_Id;
     }
 
+    // Inserta Evaluacion
+    public int insertEvaluacion(EvaluacionPorCurso evaluacion) {
+
+        //Conneccion para escribir en la base
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(EvaluacionPorCurso.KEY_ID_Curso, evaluacion.curso_ID);
+        values.put(EvaluacionPorCurso.KEY_name, evaluacion.name);
+        values.put(EvaluacionPorCurso.KEY_Evaluacion, evaluacion.evaluacion);
+        values.put(EvaluacionPorCurso.KEY_Calificacion, evaluacion.calificacion);
+
+        // Insertando filas
+        int id = (int) db.insert(EvaluacionPorCurso.TABLE, null, values);
+        db.close(); // Cerrando la connecion de la base de datos
+
+        //Base de datos externa
+        //InsertarNota(nota, nota_Id);
+        return (int) id;
+    }
+
+
+
+
     /**
      * Se encarga de eliminar un curso de la base de datos de manera temporal
      * @param curso_Id
      */
+
+
+
     public void delete(long curso_Id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(Curso.TABLE, Curso.KEY_ID + "="
@@ -103,6 +129,13 @@ public class SQLControlador {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(Nota.TABLE, Nota.KEY_ID_NOTA + "="
                 + nota_Id, null);
+        db.close();
+    }
+
+    public void deleteEvaluacion (long id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(EvaluacionPorCurso.TABLE, EvaluacionPorCurso.KEY_ID + "="
+                + id, null);
         db.close();
     }
 
@@ -139,6 +172,19 @@ public class SQLControlador {
 
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update(Nota.TABLE, values, Nota.KEY_ID_NOTA + "= ?", new String[] { String.valueOf(nota.nota_ID) });
+        db.close(); // Closing database connection
+    }
+
+    // Actualiza Tabla con los datos de la evaluacion entrante como parámetro
+    public void updateEvaluacion(EvaluacionPorCurso evaluacion) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(EvaluacionPorCurso.KEY_name, evaluacion.name);
+        values.put(EvaluacionPorCurso.KEY_Evaluacion, evaluacion.calificacion);
+        values.put(EvaluacionPorCurso.KEY_Calificacion, evaluacion.calificacion);
+
+        // It's a good practice to use parameter ?, instead of concatenate string
+        db.update(EvaluacionPorCurso.TABLE, values, EvaluacionPorCurso.KEY_ID + "= ?", new String[] { String.valueOf(evaluacion.evaluacion_ID) });
         db.close(); // Closing database connection
     }
 
