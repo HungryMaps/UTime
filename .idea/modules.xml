@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mapsutime.iml" filepath="$PROJECT_DIR$/mapsutime.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/mysql-connector-java-gpl-5.1.33.msi/mysql-connector-java-gpl-5.1.33.msi.iml" filepath="$PROJECT_DIR$/app/mysql-connector-java-gpl-5.1.33.msi/mysql-connector-java-gpl-5.1.33.msi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uTime.iml" filepath="$PROJECT_DIR$/uTime.iml" />
     </modules>
   </component>
 </project>
