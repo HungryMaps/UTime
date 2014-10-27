@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/app/mysql-connector-java-gpl-5.1.33.msi" />
           </set>
         </option>
       </GradleProjectSettings>
