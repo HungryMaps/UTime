@@ -40,41 +40,47 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
             //Driver para abrir la conexión con la base de mysql
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(databaseBaseURL, user, pass);
-            System.out.println("Database connection success");
-
-            Statement stmt = null;
-            ResultSet rs = null;
-
-            try {
-                stmt = con.createStatement();
-                String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '"+nota.nameNota+"', '"+nota.comentarioNota+"');";
-                stmt.executeUpdate(query);
-                System.out.println("Hice Query");
-
-            } catch (SQLException ex) {
-                // handle any errors
-                System.out.println("SQLException: " + ex.getMessage());
-                System.out.println("SQLState: " + ex.getSQLState());
-                System.out.println("VendorError: " + ex.getErrorCode());
-            }
-
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException sqlEx) {
-                } // ignore
-                rs = null;
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException sqlEx) {
-                } // ignore
-                stmt = null;
-            }
-        } catch (ClassNotFoundException e) {
-        } catch (SQLException e) {
         }
-        return "";
+        catch(ClassNotFoundException e){
+        }catch(SQLException e){
+        }
+            if (con != null) {
+
+
+                System.out.println("Database connection success");
+
+                Statement stmt = null;
+                ResultSet rs = null;
+
+                try {
+                    stmt = con.createStatement();
+                    String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '" + nota.nameNota + "', '" + nota.comentarioNota + "');";
+                    stmt.executeUpdate(query);
+                    System.out.println("Hice Query");
+
+                } catch (SQLException ex) {
+                    // handle any errors
+                    System.out.println("SQLException: " + ex.getMessage());
+                    System.out.println("SQLState: " + ex.getSQLState());
+                    System.out.println("VendorError: " + ex.getErrorCode());
+                }
+
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException sqlEx) {
+                    } // ignore
+                    rs = null;
+                }
+                if (stmt != null) {
+                    try {
+                        stmt.close();
+                    } catch (SQLException sqlEx) {
+                    } // ignore
+                    stmt = null;
+                }
+            }
+            return "";
+        }
     }
-}
+
