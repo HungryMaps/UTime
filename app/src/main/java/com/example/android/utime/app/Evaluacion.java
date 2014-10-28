@@ -152,14 +152,11 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
                         repo.insertEvaluacion(evaluacion);
                     }
                 }
-            /*else{
-                    if(k < evaluaciones.size()) {
-                        SQLControlador repo = new SQLControlador(this);
-                        repo.deleteEvaluacion(evaluaciones.get(k++));
-                    }
-            }*/
-
         }
+
+        /*
+        *Ciclo para eliminar tuplas de la Base de Datos.
+         */
 
         int j = contador;
         for(int i=2+contador*3; i<29; i+=3) {
@@ -181,11 +178,10 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
             currcell = (EditText) findViewById(id);
             dato[2] = currcell.getText().toString();
 
-                    if(j < evaluaciones.size()) {
-                        SQLControlador repo = new SQLControlador(this);
-                        repo.deleteEvaluacion(evaluaciones.get(j++));
-                    }
-
+            if(j < evaluaciones.size()) {
+               SQLControlador repo = new SQLControlador(this);
+               repo.deleteEvaluacion(evaluaciones.get(j++));
+            }
         }
 
         returnHome();
@@ -197,6 +193,10 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         startActivity(home_intent);
     }
 
+    /**
+     * Método para reaccionar ante la aumento de la cantidad de evaluaciones disponibles
+     * @param view
+     */
     public void Agregar(View view){
         if(contador < 10) {
             for(int i=0;i<3;i++) {
@@ -212,8 +212,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
     }
 
     /**
-     * Método para reaccionar ante la reducción de la cantidad de días disponibles
-     * Ubica las posibles combobox y vuelve invisible una más
+     * Método para reaccionar ante la reducción de la cantidad de evaluaciones disponibles
      * @param view
      */
 
