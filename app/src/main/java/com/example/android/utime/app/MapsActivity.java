@@ -21,9 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private CameraUpdate miposicion;
-
-
+    private CameraUpdate miposicion; //para visualizar mi ubicacion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,7 @@ public class MapsActivity extends FragmentActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                mMap.setMyLocationEnabled(true);
+                mMap.setMyLocationEnabled(true); //Es para activar mi poscion
                 setUpMap();
             }
         }
@@ -74,10 +72,11 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        //Latitud segun la ubicacion del mapa de la Universidad de Costa Rica
         mMap.addMarker(new MarkerOptions().position(new LatLng(9.939667, -84.047341)).title("Marker")
         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        .snippet("Universidad de Costa Rica"));
-        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341),14);
+        .snippet("Universidad de Costa Rica")); //etiqueta
+        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341),14); //Se modifica el zoom del mapa
         mMap.animateCamera(miposicion);
     }
 }
