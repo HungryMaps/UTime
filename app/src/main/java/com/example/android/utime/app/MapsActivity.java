@@ -24,10 +24,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity
-        implements GooglePlayServicesClient.ConnectionCallbacks,
-        com.google.android.gms.location.LocationListener,
-        GooglePlayServicesClient.OnConnectionFailedListener{
+public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
+                                                              com.google.android.gms.location.LocationListener,
+                                                              GooglePlayServicesClient.OnConnectionFailedListener{
 
     private GoogleMap mMap;                 // Referencia al mapa
     private CameraUpdate miposicion;
@@ -176,5 +175,5 @@ public class MapsActivity extends FragmentActivity
     private void cambiarCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
         mMap.moveCamera(update);
     }
-
+    
 }
