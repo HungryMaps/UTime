@@ -11,16 +11,22 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+<<<<<<< HEAD
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
+=======
+>>>>>>> 67c05fda013a2e8f6742f9519e9ce490a0a3e2b7
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+<<<<<<< HEAD
 import com.google.android.gms.maps.model.CameraPosition;
+=======
+>>>>>>> 67c05fda013a2e8f6742f9519e9ce490a0a3e2b7
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -28,6 +34,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
                                                               com.google.android.gms.location.LocationListener,
                                                               GooglePlayServicesClient.OnConnectionFailedListener{
 
+<<<<<<< HEAD
     private GoogleMap mMap;                 // Referencia al mapa
     private CameraUpdate miposicion;
     private LocationClient miLocalizacion;
@@ -35,6 +42,10 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
             .setInterval(5000)              // 5 segundos
             .setFastestInterval(16)         // Conversion 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+=======
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private CameraUpdate miposicion; //para visualizar mi ubicacion
+>>>>>>> 67c05fda013a2e8f6742f9519e9ce490a0a3e2b7
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +127,11 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
+<<<<<<< HEAD
                 mMap.setMyLocationEnabled(true);
+=======
+                mMap.setMyLocationEnabled(true); //Es para activar mi poscion
+>>>>>>> 67c05fda013a2e8f6742f9519e9ce490a0a3e2b7
                 setUpMap();
             }
         }
@@ -129,6 +144,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+<<<<<<< HEAD
         mMap.addMarker(new MarkerOptions().position(new LatLng(9.939667, -84.047341)).title("Marker")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                 .snippet("Universidad de Costa Rica"));
@@ -174,6 +190,14 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
     private void cambiarCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
         mMap.moveCamera(update);
+=======
+        //Latitud segun la ubicacion del mapa de la Universidad de Costa Rica
+        mMap.addMarker(new MarkerOptions().position(new LatLng(9.939667, -84.047341)).title("Marker")
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        .snippet("Universidad de Costa Rica")); //etiqueta
+        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341),14); //Se modifica el zoom del mapa
+        mMap.animateCamera(miposicion);
+>>>>>>> 67c05fda013a2e8f6742f9519e9ce490a0a3e2b7
     }
     
 }
