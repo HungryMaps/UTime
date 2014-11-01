@@ -60,6 +60,10 @@ public class MapsActivity extends FragmentActivity
         }
     }
 
+    /**
+     * Medodo que establece mi localización como conectada
+     * @param bundle
+     */
     @Override
     public void onConnected(Bundle bundle) {
         // This= Localizacion Listener
@@ -71,6 +75,10 @@ public class MapsActivity extends FragmentActivity
 
     }
 
+    /**
+     * Se encarga la llamar a ver mi ubicación esto para cada vez que se cambia nuestra ubicación
+     * @param location Localización del objeto con toda la información acerca de la ubicación
+     */
     @Override
     public void onLocationChanged(Location location) {
         verMiUbicacion(location.getLatitude(), location.getLongitude());
@@ -80,12 +88,6 @@ public class MapsActivity extends FragmentActivity
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
-
-
-
-
-
-
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -101,6 +103,11 @@ public class MapsActivity extends FragmentActivity
      * have been completely destroyed during this process (it is likely that it would only be
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
+     */
+
+    /**
+     *  Obtiene una referencia  del Mapa de objeto si no existe ninguno y lo pone el color icono de
+     *  la flecha en el mapa
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
@@ -130,6 +137,10 @@ public class MapsActivity extends FragmentActivity
         mMap.animateCamera(miposicion);
     }
 
+    /**
+     * Cuando hay un dispotivo en la app crea un objeto de localizacion
+     * del cliente si no hay ninguno
+     */
     private void levantarLocalizacion() {
         if(miLocalizacion == null){
             //El primer this indica llamado a la conexión
@@ -138,11 +149,16 @@ public class MapsActivity extends FragmentActivity
         }
     }
 
+    /**
+     * Metodo que permite poner mi ubicacion en el mapa
+     * @param lat Referente a la latitud
+     * @param lng Referente a la longitus
+     */
     private void verMiUbicacion(double lat, double lng) {
         cambiarCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng))
                         .zoom(15.5f)
-                        .bearing(0)
-                        .tilt(25)
+                        .bearing(0)              //Establece la orientacion
+                        .tilt(25)                // Baja el punto de vista de la camara 25 grados
                         .build()
         ), new GoogleMap.CancelableCallback() {
             @Override
