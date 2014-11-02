@@ -63,7 +63,7 @@
         <!--Se establece la KEY para usar los mapas de Google generada en console developers-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDlW3HuB40-MBG2rxSPrg8o1__rtnEfQ4k" />
+            android:value="AIzaSyA9H1eGNOOGF-kSt3ll1kuXJkzm9hMnrJM" />
 
     </application>
 
