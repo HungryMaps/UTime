@@ -29,6 +29,14 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nota_detail);
 
+
+
+
+
+
+
+
+
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
 

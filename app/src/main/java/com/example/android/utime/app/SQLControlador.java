@@ -7,12 +7,16 @@
 
 package com.example.android.utime.app;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.CalendarContract;
+
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class SQLControlador {
@@ -53,6 +57,7 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
+
         InsertarCurso(curso);
         return (int) curso_Id;
     }
@@ -75,7 +80,9 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
+        String prueba = CalendarContract.Calendars.NAME;
         InsertarNota(nota, nota_Id);
+
         return (int) nota_Id;
     }
 
@@ -95,7 +102,7 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
-        //InsertarNota(nota, nota_Id);
+        InsertarEvaluacion(evaluacion);
         return (int) id;
     }
 
@@ -319,6 +326,11 @@ public class SQLControlador {
         cursor.close();
         db.close();
         return nota;
+    }
+
+    public void InsertarEvaluacion(EvaluacionPorCurso evaluacion) {
+        ConnectEvaluacion task = new ConnectEvaluacion(evaluacion);
+        task.execute();
     }
 
     /*
