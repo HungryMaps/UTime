@@ -9,16 +9,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Created by Pau on 02/11/2014.
+ * Created by Paula on 02/11/2014.
+ */
+
+/*
+* Clase que se encarga de la conexión con la base de datos remota
  */
 public class ConnectEvaluacion extends AsyncTask<String, Void, String> {
     EvaluacionPorCurso evaluacion;
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
     public String user = "Paula";
     public String pass = "Lopez123#";
-    private Connection con;
+    private Connection conexion;
 
-    public ConnectEvaluacion(EvaluacionPorCurso evaluacion){
+    public ConnectEvaluacion(EvaluacionPorCurso evaluacion) {
         this.evaluacion = evaluacion;
     }
 
@@ -32,17 +36,18 @@ public class ConnectEvaluacion extends AsyncTask<String, Void, String> {
         try {
             //Driver para abrir la conexión con la base de mysql
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(databaseBaseURL, user, pass);
+            conexion = DriverManager.getConnection(databaseBaseURL, user, pass);
+        } catch (ClassNotFoundException e) {
+            System.out.println("ClassNotFound: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
         }
-        catch(ClassNotFoundException e){
-        }catch(SQLException e){
-        }
-        if (con != null) {
+        if (conexion != null) {
             System.out.println("Database connection success");
             Statement statement = null;
-            ResultSet result= null;
+            ResultSet result = null;
             try {
-                statement = con.createStatement();
+                statement = conexion.createStatement();
                 String query = "INSERT INTO  `Paula`.`Evaluacion` (id, name, idCurso, calificacion, evaluacion) VALUES (" + evaluacion.evaluacion_ID + ", '" + evaluacion.name
                         + "', '" + evaluacion.curso_ID + "', '" + evaluacion.calificacion + "', '" + evaluacion.evaluacion + "');";
                 statement.executeUpdate(query);

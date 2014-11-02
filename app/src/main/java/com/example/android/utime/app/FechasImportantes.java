@@ -75,9 +75,4 @@ public class FechasImportantes extends ActionBarActivity {
             return rootView;
         }
     }
-
-
-
-
-
 }
