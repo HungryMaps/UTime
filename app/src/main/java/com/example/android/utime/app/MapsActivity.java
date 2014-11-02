@@ -27,7 +27,6 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
                                                               com.google.android.gms.location.LocationListener,
                                                               GooglePlayServicesClient.OnConnectionFailedListener{
 
-
     private GoogleMap mMap;                 // Referencia al mapa
     private CameraUpdate miposicion;
     private LocationClient miLocalizacion;
@@ -69,6 +68,9 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         miLocalizacion.requestLocationUpdates( REQUEST, this);
     }
 
+    /**
+     * Metodo que debe se debe sobreescribir pero no es usado
+     */
     @Override
     public void onDisconnected() {
 
@@ -83,6 +85,10 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         verMiUbicacion(location.getLatitude(), location.getLongitude());
     }
 
+    /**
+     * Metodo que debe se debe sobreescribir pero no es usado
+     * @param connectionResult
+     */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -177,12 +183,6 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
     private void cambiarCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
         mMap.moveCamera(update);
-        //Latitud segun la ubicacion del mapa de la Universidad de Costa Rica
-        mMap.addMarker(new MarkerOptions().position(new LatLng(9.939667, -84.047341)).title("Marker")
-        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        .snippet("Universidad de Costa Rica")); //etiqueta
-        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341),14); //Se modifica el zoom del mapa
-        mMap.animateCamera(miposicion);
     }
     
 }
