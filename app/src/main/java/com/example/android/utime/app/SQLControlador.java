@@ -182,7 +182,7 @@ public class SQLControlador {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(EvaluacionPorCurso.KEY_name, evaluacion.name);
-        values.put(EvaluacionPorCurso.KEY_Evaluacion, evaluacion.calificacion);
+        values.put(EvaluacionPorCurso.KEY_Evaluacion, evaluacion.evaluacion);
         values.put(EvaluacionPorCurso.KEY_Calificacion, evaluacion.calificacion);
 
         // It's a good practice to use parameter ?, instead of concatenate string
