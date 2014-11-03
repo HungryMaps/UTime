@@ -57,6 +57,8 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         Cursor cursor = db.query(EvaluacionPorCurso.TABLE, columnas, EvaluacionPorCurso.KEY_ID_Curso+" = ?", parametros, null, null, null);
         TableLayout tabla = (TableLayout) findViewById(R.id.tablaEvaluacion);
 
+        // Se recorren todos los cursos obtenidos de la consulta de la base de datos y se crean dinámicamente los campos en el layout
+
         if (cursor.moveToFirst()) {
             int indice = 0;
             contador = 0;
@@ -152,7 +154,8 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         return super.onOptionsItemSelected(item);
     }
 
-    // Para cuando se apreta el botón de salvar
+    // Para cuando se apreta el botón de salvar, o el de + y -
+    // llama al método correspondiente para reaccionar ante la acción
     @Override
     public void onClick(View view) {
 
@@ -173,6 +176,11 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
                 Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
+
+    /*
+    * Método que guarda el contenido de los EditText que tienen los datos en la base local
+    * También elimina de la base si corresponde
+    * */
 
     public void Guardar(){
 
@@ -216,9 +224,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
             }
         }
 
-
         //Ciclo para eliminar tuplas de la Base de Datos.
-
 
         int j = contador;
         for(int i=contador*3; i < evaluaciones.size()*3; i+=3) {
