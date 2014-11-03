@@ -2,6 +2,7 @@ package com.example.android.utime.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
 import android.view.Menu;
@@ -34,6 +35,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     private String horasf_spinner[];
 
     private int _Curso_Id=0;
+
+    String sb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,6 +273,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         }else{
             contadorSpinners++;
         }
+        sb = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + "\n";
+        System.out.println("sb: " + sb);
     }
 
     @Override
@@ -319,7 +324,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             curso.curso_ID=_Curso_Id;
 
             if (_Curso_Id==0) {
-                _Curso_Id = repo.insert(curso);
+                _Curso_Id = repo.insert(curso, sb);
 
                 Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
 

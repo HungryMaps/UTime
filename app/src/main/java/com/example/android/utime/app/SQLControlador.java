@@ -39,7 +39,7 @@ public class SQLControlador {
      * @param curso
      * @return
      */
-    public int insert(Curso curso) {
+    public int insert(Curso curso, String usuario) {
 
         //Conneccion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -57,8 +57,8 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
-
-        InsertarCurso(curso);
+        //Se envía el curso y el usuario que es el id del device
+        InsertarCurso(curso, usuario);
         return (int) curso_Id;
     }
 
@@ -67,7 +67,7 @@ public class SQLControlador {
      * @param nota
      * @return
      */
-    public int insertNota(Nota nota) {
+    public int insertNota(Nota nota, String usuario) {
 
         //Conneccion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -80,9 +80,8 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
-        String prueba = CalendarContract.Calendars.NAME;
-        InsertarNota(nota, nota_Id);
-
+        //Se envían la nota, el id y el usuario que es el id del device
+        InsertarNota(nota, nota_Id, usuario);
         return (int) nota_Id;
     }
 
@@ -106,15 +105,10 @@ public class SQLControlador {
         return (int) id;
     }
 
-
-
-
     /**
      * Se encarga de eliminar un curso de la base de datos de manera temporal
      * @param curso_Id
      */
-
-
 
     public void delete(long curso_Id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -337,8 +331,8 @@ public class SQLControlador {
     * Método que llama a la conexión de la base
     */
 
-    public void InsertarNota(Nota nota, int nota_Id) {
-        ConnectNotas task = new ConnectNotas(nota, nota_Id);
+    public void InsertarNota(Nota nota, int nota_Id, String usuario) {
+        ConnectNotas task = new ConnectNotas(nota, nota_Id, usuario);
         task.execute();
     }
 
@@ -346,8 +340,8 @@ public class SQLControlador {
     * Método que llama a la conexión de la base
     */
 
-    public void InsertarCurso(Curso curso) {
-        ConnectCurso task = new ConnectCurso(curso);
+    public void InsertarCurso(Curso curso, String usuario) {
+        ConnectCurso task = new ConnectCurso(curso, usuario);
         task.execute();
     }
 }

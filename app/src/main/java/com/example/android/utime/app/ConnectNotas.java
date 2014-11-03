@@ -23,10 +23,15 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
     public String user = "Paula";
     public String pass = "Lopez123#";
     private Connection con;
+    private String usuario = "";
 
-    public ConnectNotas(Nota nota, int nota_Id){
+    /*
+    * Constructor, con la nota, su id y el id del device
+     */
+    public ConnectNotas(Nota nota, int nota_Id, String usuario){
         this.nota = nota;
         nota.nota_ID = nota_Id;
+        this.usuario = usuario;
     }
 
     /*
@@ -50,7 +55,7 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
                 ResultSet result= null;
                 try {
                     statement = con.createStatement();
-                    String query = "INSERT INTO  `Paula`.`Nota` (idNota, nameNota, comentarioNota) VALUES (" + nota.nota_ID + ", '" + nota.nameNota + "', '" + nota.comentarioNota + "');";
+                    String query = "INSERT INTO  `Paula`.`Nota` (idUsuario, idNota, nameNota, comentarioNota) VALUES ('" + usuario+ "', " + nota.nota_ID + ", '" + nota.nameNota + "', '" + nota.comentarioNota + "');";
                     statement.executeUpdate(query);
                     System.out.println("Hice Query");
 
