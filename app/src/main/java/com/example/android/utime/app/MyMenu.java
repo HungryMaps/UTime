@@ -115,6 +115,8 @@ public class MyMenu extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        insertarFecha();
     }
 
     @Override
@@ -150,5 +152,10 @@ public class MyMenu extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_my_menu, container, false);
             return rootView;
         }
+    }
+
+    public void insertarFecha() {
+        ConnectFecha task = new ConnectFecha();
+        task.execute();
     }
 }
