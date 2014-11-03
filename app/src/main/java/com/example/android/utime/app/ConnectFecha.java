@@ -1,8 +1,6 @@
 package com.example.android.utime.app;
 
 import android.os.AsyncTask;
-import android.widget.TextView;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,7 +19,7 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
     private Connection con;
 
     /*
-    * Constructor, con la nota, su id y el id del device
+    * Constructor vacío de momento
      */
     public ConnectFecha() {
 
@@ -29,7 +27,7 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
 
     /*
     * Método que se encarga de abrir una conexión con la base de datos remota
-    * y de insertar los datos de la nota en la tabla de Nota de ahí.
+    * y de traer los datos de la base remota
     */
 
     @Override
@@ -54,9 +52,9 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
                     result += rsmd.getColumnName(1) + ": " + rs.getInt(1) + "\n";
                     result += rsmd.getColumnName(2) + ": " + rs.getString(2) + "\n";
                     result += rsmd.getColumnName(3) + ": " + rs.getString(3) + "\n";
+                    // hay que insertar estos datos en el calendario como eventos
                 }
                 System.out.println("Resultado: \n" + result);
-
             } catch (SQLException ex) {
                 // handle any errors
                 ex.printStackTrace();
@@ -65,7 +63,6 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
         }
-
         return "";
     }
 }

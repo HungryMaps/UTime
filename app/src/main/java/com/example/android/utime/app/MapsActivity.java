@@ -184,5 +184,5 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     private void cambiarCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
         mMap.moveCamera(update);
     }
-    
+
 }
