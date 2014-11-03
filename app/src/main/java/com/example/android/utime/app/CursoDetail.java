@@ -18,18 +18,16 @@ import android.widget.Toast;
 public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
     // Variable Global para ver cuantos spinners hay visibles
-    int contadorSpinners = 0;
+    private int contadorSpinners = 0;
 
-    Button btnSave ,  btnDelete, btnEvaluacion;
-
-    EditText editTextName;
-    EditText editTextProfesor;
-
-    EditText [] editTextAula = new EditText[5];
+    private Button btnSave ,  btnDelete, btnEvaluacion;
+    private EditText editTextName;
+    private EditText editTextProfesor;
+    private EditText [] editTextAula = new EditText[5];
 
     // Variables para guardar los combobox que contienen los posibles días y horas
-    // Así como los poisbles valores
-    Spinner[][] spinners = new Spinner[5][3];
+    // Así como los posibles valores
+    private Spinner[][] spinners = new Spinner[5][3];
     private String array_spinner[];
     private String horasi_spinner[];
     private String horasf_spinner[];
@@ -80,8 +78,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         array_spinner[3]="Jueves";
         array_spinner[4]="Viernes";
         array_spinner[5]="Sabado";
-        ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, array_spinner);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, array_spinner);
         for(int i=0; i<5; i++){
             spinners[i][0].setAdapter(adapter);
         }

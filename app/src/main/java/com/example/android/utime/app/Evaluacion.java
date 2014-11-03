@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,9 +23,9 @@ import java.util.List;
 public class Evaluacion extends ActionBarActivity implements android.view.View.OnClickListener{
 
     private int Curso_Id=0;
-    Button btnSave;
-    int contador = 1;
-    List<Integer> evaluaciones = new ArrayList<Integer>();
+    private Button btnSave;
+    private int contador = 1;
+    private List<Integer> evaluaciones = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +130,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
                 contador++;
                 indice+=3;
             } while (cursor.moveToNext());
-        }else{
+        }else{ // Considera caso en que no haya ninguna evaluación ingresada en el curso
 
             TableRow fila = new TableRow(this);
             int ind = 0;
