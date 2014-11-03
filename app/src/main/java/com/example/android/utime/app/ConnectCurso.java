@@ -22,9 +22,11 @@ import java.sql.Statement;
         public String user = "Paula";
         public String pass = "Lopez123#";
         private Connection con;
+    private String usuario="";
 
-        public ConnectCurso(Curso curso) {
+        public ConnectCurso(Curso curso, String usuario) {
             this.curso = curso;
+            this.usuario = usuario;
         }
 
         /*
@@ -49,7 +51,7 @@ import java.sql.Statement;
                 ResultSet result = null;
                 try {
                     statement = con.createStatement();
-                    String query = "INSERT INTO  `Paula`.`Curso` (id, name, profesor, aula, dias, horas) VALUES (" + curso.curso_ID + ", '" + curso.name + "', '" + curso.profesor + "', '" + curso.aula + "', '" + curso.dias + "', '" + curso.horas + "');";
+                    String query = "INSERT INTO  `Paula`.`Curso` (idUsuario, id, name, profesor, aula, dias, horas) VALUES ('"+ usuario +"' ," + curso.curso_ID + ", '" + curso.name + "', '" + curso.profesor + "', '" + curso.aula + "', '" + curso.dias + "', '" + curso.horas + "');";
                     statement.executeUpdate(query);
                     System.out.println("Hice Query");
                 } catch (SQLException ex) {

@@ -8,6 +8,7 @@ package com.example.android.utime.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,19 +24,12 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     EditText editTextNameNota;
     EditText editTextComentarioNota;
     private int _Nota_Id = 0;
+    String sb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nota_detail);
-
-
-
-
-
-
-
-
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
@@ -53,10 +47,12 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         Nota nota = new Nota();
         nota = repo.getNotaById(_Nota_Id);
 
-        if(nota != null) {
+        if (nota != null) {
             editTextNameNota.setText(nota.nameNota);
             editTextComentarioNota.setText(nota.comentarioNota);
         }
+        sb = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + "\n";
+        System.out.println("sb: " + sb);
     }
 
     @Override
@@ -79,6 +75,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
 
     /**
      * Al hacer click en los botones me permite completar una accion
+     *
      * @param view
      */
     public void onClick(View view) {
@@ -91,16 +88,14 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             nota.nota_ID = _Nota_Id;
 
             if (_Nota_Id == 0) {
-                _Nota_Id = repo.insertNota(nota);
-                 Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    repo.updateNota(nota);
-                    Toast.makeText(this,"Nota Actualizada",Toast.LENGTH_SHORT).show();
-                }
+                _Nota_Id = repo.insertNota(nota, sb);
+                Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
+            } else {
+                repo.updateNota(nota);
+                Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
+            }
             returnHome();// para que vuelva a la pagina de notas
-        }
-        else if (view== findViewById(R.id.btnDelete)){
+        } else if (view == findViewById(R.id.btnDelete)) {
             SQLControlador erase = new SQLControlador(this);
             erase.deleteNota(_Nota_Id);
             Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
@@ -113,7 +108,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
      */
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(),
-         Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
 

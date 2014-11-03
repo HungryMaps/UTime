@@ -39,7 +39,7 @@ public class SQLControlador {
      * @param curso
      * @return
      */
-    public int insert(Curso curso) {
+    public int insert(Curso curso, String usuario) {
 
         //Conneccion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -58,7 +58,7 @@ public class SQLControlador {
 
         //Base de datos externa
 
-        InsertarCurso(curso);
+        InsertarCurso(curso, usuario);
         return (int) curso_Id;
     }
 
@@ -67,7 +67,7 @@ public class SQLControlador {
      * @param nota
      * @return
      */
-    public int insertNota(Nota nota) {
+    public int insertNota(Nota nota, String usuario) {
 
         //Conneccion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -81,7 +81,7 @@ public class SQLControlador {
 
         //Base de datos externa
         String prueba = CalendarContract.Calendars.NAME;
-        InsertarNota(nota, nota_Id);
+        InsertarNota(nota, nota_Id, usuario);
 
         return (int) nota_Id;
     }
@@ -337,8 +337,8 @@ public class SQLControlador {
     * Método que llama a la conexión de la base
     */
 
-    public void InsertarNota(Nota nota, int nota_Id) {
-        ConnectNotas task = new ConnectNotas(nota, nota_Id);
+    public void InsertarNota(Nota nota, int nota_Id, String usuario) {
+        ConnectNotas task = new ConnectNotas(nota, nota_Id, usuario);
         task.execute();
     }
 
@@ -346,8 +346,8 @@ public class SQLControlador {
     * Método que llama a la conexión de la base
     */
 
-    public void InsertarCurso(Curso curso) {
-        ConnectCurso task = new ConnectCurso(curso);
+    public void InsertarCurso(Curso curso, String usuario) {
+        ConnectCurso task = new ConnectCurso(curso, usuario);
         task.execute();
     }
 }
