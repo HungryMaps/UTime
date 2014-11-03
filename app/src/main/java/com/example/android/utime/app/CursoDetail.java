@@ -24,7 +24,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
     EditText editTextName;
     EditText editTextProfesor;
-    EditText editTextAula;
+
+    EditText [] editTextAula = new EditText[5];
 
     // Variables para guardar los combobox que contienen los posibles días y horas
     // Así como los poisbles valores
@@ -44,10 +45,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
 
-
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
-        editTextAula = (EditText) findViewById(R.id.editTextAula);
 
         for(int k=0; k<5; k++){
             for(int i=0; i<3; i++){
@@ -55,6 +54,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 int id = getResources().getIdentifier(spinner, "id", getPackageName());
                 spinners[k][i] = (Spinner) findViewById(id);
             }
+        }
+
+        for(int k=0; k<5; k++){
+                String campo = "editTextAula"+Integer.toString(k);
+                int id = getResources().getIdentifier(campo, "id", getPackageName());
+                editTextAula[k] = (EditText) findViewById(id);
         }
 
         btnSave.setOnClickListener(this);
@@ -125,13 +130,16 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         if(curso != null) {
 
-            editTextAula.setText(curso.aula);
             editTextName.setText(curso.name);
             editTextProfesor.setText(curso.profesor);
             String[] dias = curso.dias.split(",");
             String[] horas = curso.horas.split(",");
+            String[] editAula = curso.aula.split(",");
 
             for (int i = 0; i < dias.length; i++) {
+
+                editTextAula[i].setText(editAula[i]);
+                editTextAula[i].setVisibility(View.VISIBLE);
 
                 int posicion = 0;
 
@@ -300,9 +308,11 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             Curso curso = new Curso();
             curso.dias = "";
             curso.horas = "";
+            curso.aula = "";
             for(int i=0; i<contadorSpinners; i++){
                     curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
                     curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
+                    curso.aula += editTextAula[i].getText().toString() + ",";
             }
 
             Time now = new Time();
@@ -313,7 +323,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             }else{
                 curso.semestre = "II";
             }
-            curso.aula= editTextAula.getText().toString();
             curso.profesor=editTextProfesor.getText().toString();
             curso.name=editTextName.getText().toString();
             curso.curso_ID=_Curso_Id;
@@ -379,6 +388,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 Spinner local = (Spinner) findViewById(id);
                 local.setVisibility(View.VISIBLE);
             }
+
+            String editText = "editTextAula" + Integer.toString(contadorSpinners);
+            int id2 = getResources().getIdentifier(editText, "id", getPackageName());
+            EditText temp = (EditText) findViewById(id2);
+            temp.setVisibility(View.VISIBLE);
+
             contadorSpinners++;
         }else{
             Toast.makeText(this, "Número de días máximo", Toast.LENGTH_LONG).show();
@@ -399,6 +414,12 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 Spinner local = (Spinner) findViewById(id);
                 local.setVisibility(View.INVISIBLE);
             }
+
+            String editText = "editTextAula" + Integer.toString(contadorSpinners-1);
+            int id2 = getResources().getIdentifier(editText, "id", getPackageName());
+            EditText temp = (EditText) findViewById(id2);
+            temp.setVisibility(View.INVISIBLE);
+
             contadorSpinners--;
         }else{
             Toast.makeText(this, "Número de días mínimo", Toast.LENGTH_LONG).show();

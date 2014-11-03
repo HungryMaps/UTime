@@ -57,36 +57,36 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         Cursor cursor = db.query(EvaluacionPorCurso.TABLE, columnas, EvaluacionPorCurso.KEY_ID_Curso+" = ?", parametros, null, null, null);
         TableLayout tabla = (TableLayout) findViewById(R.id.tablaEvaluacion);
 
+        TableRow head = new TableRow(this);
+        TextView columna = new TextView(this);
+
+        columna.setText("Nombre");
+        columna.setPadding(5,5,5,5);
+        columna.setTypeface(null, Typeface.BOLD);
+        columna.setTextSize(20);
+        head.addView(columna);
+
+        columna = new TextView(this);
+        columna.setPadding(5,5,5,5);
+        columna.setText("Evaluación(%)");
+        columna.setTypeface(null, Typeface.BOLD);
+        columna.setTextSize(20);
+        head.addView(columna);
+
+        columna = new TextView(this);
+        columna.setPadding(5,5,5,5);
+        columna.setText("Calificación");
+        columna.setTypeface(null, Typeface.BOLD);
+        columna.setTextSize(20);
+        head.addView(columna);
+
+        tabla.addView(head);
+
         // Se recorren todos los cursos obtenidos de la consulta de la base de datos y se crean dinámicamente los campos en el layout
 
         if (cursor.moveToFirst()) {
             int indice = 0;
             contador = 0;
-
-            TableRow head = new TableRow(this);
-            TextView columna = new TextView(this);
-
-            columna.setText("Nombre");
-            columna.setPadding(5,5,5,5);
-            columna.setTypeface(null, Typeface.BOLD);
-            columna.setTextSize(20);
-            head.addView(columna);
-
-            columna = new TextView(this);
-            columna.setPadding(5,5,5,5);
-            columna.setText("Evaluación");
-            columna.setTypeface(null, Typeface.BOLD);
-            columna.setTextSize(20);
-            head.addView(columna);
-
-            columna = new TextView(this);
-            columna.setPadding(5,5,5,5);
-            columna.setText("Calificación");
-            columna.setTypeface(null, Typeface.BOLD);
-            columna.setTextSize(20);
-            head.addView(columna);
-
-            tabla.addView(head);
 
                     // Se presentan las evaluaciones en el layout
             do {
@@ -96,16 +96,19 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
 
                 EditText editText = new EditText(this);
                 editText.setId(indice);
+                editText.setHint("Examen, Quiz, Tarea, etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_name)));
                 fila.addView(editText);
 
                 editText = new EditText(this);
                 editText.setId(indice+1);
+                editText.setHint("30 , 25 , etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Evaluacion)));
                 fila.addView(editText);
 
                 editText = new EditText(this);
                 editText.setId(indice+2);
+                editText.setHint("9.5 , 9 , etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Calificacion)));
                 fila.addView(editText);
 
@@ -130,6 +133,40 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
                 indice+=3;
             } while (cursor.moveToNext());
         }else{
+
+            TableRow fila = new TableRow(this);
+            int ind = 0;
+
+            EditText editText = new EditText(this);
+            editText.setId(ind);
+            editText.setHint("Examen, Quiz, Tarea, etc");
+            fila.addView(editText);
+
+            editText = new EditText(this);
+            editText.setId(ind+1);
+            editText.setHint("30 , 25 , etc");
+            fila.addView(editText);
+
+            editText = new EditText(this);
+            editText.setId(ind+2);
+            editText.setHint("9.5 , 9 , etc");
+            fila.addView(editText);
+
+            Button Mas = new Button(this);
+            Mas.setId(R.id.Mas);
+            Mas.setOnClickListener(this);
+            Mas.setText("+");
+
+            Button Menos = new Button(this);
+            Menos.setId(R.id.Menos);
+            Menos.setOnClickListener(this);
+            Menos.setText("-");
+
+            fila.addView(Mas);
+            fila.addView(Menos);
+
+            tabla.addView(fila);
+
             contador = 1;
         }
     }
@@ -242,12 +279,20 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         TableLayout tabla = (TableLayout) findViewById(R.id.tablaEvaluacion);
         TableRow fila = new TableRow(this);
 
-        for(int i=0;i<3;i++) {
-            EditText editText = new EditText(this);
-            editText.setId(contador*3+i);
-            editText.setText("");
-            fila.addView(editText);
-        }
+        EditText editText = new EditText(this);
+        editText.setId(contador*3);
+        editText.setHint("Examen, Quiz, Tarea, etc");
+        fila.addView(editText);
+
+        editText = new EditText(this);
+        editText.setId(contador*3+1);
+        editText.setHint("30 , 25 , etc");
+        fila.addView(editText);
+
+        editText = new EditText(this);
+        editText.setId(contador*3+2);
+        editText.setHint("9.5 , 9 , etc");
+        fila.addView(editText);
 
         tabla.addView(fila);
 
