@@ -9,23 +9,36 @@
     android:orientation="vertical"
     tools:context="com.example.android.utime.app.Evaluacion">
 
-    <TableLayout
-        android:id="@+id/tablaEvaluacion"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </TableLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+            <TableLayout
+                android:id="@+id/tablaEvaluacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Guardar  "
-        android:id="@+id/btnSave"
-        android:background="@color/verde1"/>
+            </TableLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Guardar  "
+                android:id="@+id/btnSave"
+                android:background="@color/verde1"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
