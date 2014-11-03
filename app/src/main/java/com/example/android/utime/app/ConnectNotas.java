@@ -25,6 +25,9 @@ public class ConnectNotas extends AsyncTask<String, Void, String> {
     private Connection con;
     private String usuario = "";
 
+    /*
+    * Constructor, con la nota, su id y el id del device
+     */
     public ConnectNotas(Nota nota, int nota_Id, String usuario){
         this.nota = nota;
         nota.nota_ID = nota_Id;

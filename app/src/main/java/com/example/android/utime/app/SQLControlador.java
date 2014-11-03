@@ -57,7 +57,7 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
-
+        //Se envía el curso y el usuario que es el id del device
         InsertarCurso(curso, usuario);
         return (int) curso_Id;
     }
@@ -80,9 +80,8 @@ public class SQLControlador {
         db.close(); // Cerrando la connecion de la base de datos
 
         //Base de datos externa
-        String prueba = CalendarContract.Calendars.NAME;
+        //Se envían la nota, el id y el usuario que es el id del device
         InsertarNota(nota, nota_Id, usuario);
-
         return (int) nota_Id;
     }
 
@@ -106,15 +105,10 @@ public class SQLControlador {
         return (int) id;
     }
 
-
-
-
     /**
      * Se encarga de eliminar un curso de la base de datos de manera temporal
      * @param curso_Id
      */
-
-
 
     public void delete(long curso_Id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
