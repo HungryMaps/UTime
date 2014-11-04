@@ -31,7 +31,7 @@ public class DbTest extends AndroidTestCase {
     public void testInsert()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
-        int id = sql.insert(curso);
+        int id = sql.insert(curso, "");
         Curso curso2 = sql.getCursoById(id);
 
         assertEquals("Prueba acertada", curso.name, curso2.name);
@@ -46,7 +46,7 @@ public class DbTest extends AndroidTestCase {
     public void testInsertarNota()throws Throwable{
         Setup();
         SQLControlador sql = new SQLControlador(mContext);
-        int id = sql.insertNota(nota);
+        int id = sql.insertNota(nota, "");
         Nota nota2 = sql.getNotaById(id);
 
         assertEquals("Prueba acertada", nota.comentarioNota, nota2.comentarioNota);
@@ -94,5 +94,7 @@ public class DbTest extends AndroidTestCase {
         Nota nota2 = sql.getNotaById(id);
         assertEquals("Prueba acertada", nota.nameNota, nota.nameNota);
     }
+
+
 
 }

@@ -322,6 +322,37 @@ public class SQLControlador {
         return nota;
     }
 
+
+    public EvaluacionPorCurso getEvaluacionByID(int Id){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                EvaluacionPorCurso.KEY_ID + "," +
+                EvaluacionPorCurso.KEY_ID_Curso + "," +
+                EvaluacionPorCurso.KEY_Evaluacion +  "," +
+                EvaluacionPorCurso.KEY_Calificacion + "," +
+                EvaluacionPorCurso.KEY_name +
+                " FROM " + EvaluacionPorCurso.TABLE
+                + " WHERE " +
+                EvaluacionPorCurso.KEY_Evaluacion + "=?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
+        EvaluacionPorCurso evaluacion = null;
+
+        if (cursor.moveToFirst()) {
+            evaluacion = new EvaluacionPorCurso();
+            do {
+                evaluacion.curso_ID =cursor.getInt(cursor.getColumnIndex(EvaluacionPorCurso.KEY_ID_Curso));
+                evaluacion.evaluacion = Double.parseDouble(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Evaluacion)));
+                evaluacion.calificacion  = Double.parseDouble(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Calificacion)));
+                evaluacion.name  =cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_name));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return evaluacion;
+    }
+
     public void InsertarEvaluacion(EvaluacionPorCurso evaluacion) {
         ConnectEvaluacion task = new ConnectEvaluacion(evaluacion);
         task.execute();
