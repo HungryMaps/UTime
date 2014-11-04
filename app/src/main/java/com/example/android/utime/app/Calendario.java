@@ -67,12 +67,11 @@ public class Calendario extends ActionBarActivity {
 
         /*
         * FALTA CONTROLAR MEJOR QUE SOLO SE INSERTE 1 VEZ ESTAS FECHAS
-         */
-        if(fechasActualizadas==1) {
+        */
+        if (fechasActualizadas == 1) {
             insertarFecha();
             fechasActualizadas--;
         }
-
     }
 
     /*
@@ -90,15 +89,13 @@ public class Calendario extends ActionBarActivity {
         Time now = new Time();
         now.setToNow();
         GregorianCalendar calDate = new GregorianCalendar(now.year, now.month, now.monthDay, now.hour, now.minute, now.second);
-        GregorianCalendar calEnd = new GregorianCalendar(now.year, now.month, now.monthDay, now.hour+2, now.minute, now.second);
+        GregorianCalendar calEnd = new GregorianCalendar(now.year, now.month, now.monthDay, now.hour + 2, now.minute, now.second);
 
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
                 calDate.getTimeInMillis());
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
                 calEnd.getTimeInMillis());
-
         startActivity(intent);
-
     }
 
 
@@ -174,7 +171,6 @@ public class Calendario extends ActionBarActivity {
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, tz.getID());
 
-
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
     }
 
@@ -182,8 +178,8 @@ public class Calendario extends ActionBarActivity {
         task = new ConnectFecha();
         task.execute();
 
-        int k=0;
-        while(k < fechas.length){
+        int k = 0;
+        while (k < fechas.length) {
             fechas[k] = "";
             ++k;
         }
@@ -206,10 +202,9 @@ public class Calendario extends ActionBarActivity {
                     dia = Integer.parseInt(fechas[i]);
                 }
                 ++i;
-                if(fechas[i] == null){
+                if (fechas[i] == null) {
                     mes = 1;
-                }
-                else {
+                } else {
                     mes = Integer.parseInt(fechas[i]);
                 }
                 ++i;

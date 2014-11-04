@@ -1,6 +1,7 @@
 package com.example.android.utime.app;
 
 import android.os.AsyncTask;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,9 +22,7 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
     public String[] fechas = new String[300];
     public boolean continuar = false;
 
-    /*
-    * Constructor vacío de momento
-     */
+
     public ConnectFecha() {
         calendario = new Calendario();
     }
@@ -82,6 +81,7 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
         cambiarContinuar();
         return "";
     }
+
     public String[] getFechas() {
         return fechas;
     }
