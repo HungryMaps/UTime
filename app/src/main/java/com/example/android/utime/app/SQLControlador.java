@@ -322,7 +322,11 @@ public class SQLControlador {
         return nota;
     }
 
-
+    /**
+     * Metodo para obtener la Evaluacion segun el id
+     * @param Id
+     * @return
+     */
     public EvaluacionPorCurso getEvaluacionByID(int Id){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +

@@ -94,7 +94,4 @@ public class DbTest extends AndroidTestCase {
         Nota nota2 = sql.getNotaById(id);
         assertEquals("Prueba acertada", nota.nameNota, nota.nameNota);
     }
-
-
-
 }
