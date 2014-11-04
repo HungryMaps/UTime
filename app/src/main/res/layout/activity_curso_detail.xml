@@ -91,28 +91,29 @@
         android:layout_height="wrap_content"
         android:text="  Evaluación  "
         android:id="@+id/btnEvaluacion"
+        android:background="@color/azul1"
         android:layout_alignTop="@+id/btnSave"
         android:layout_toLeftOf="@+id/btnSave" />
+
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner00"
-        android:layout_below="@+id/editTextProfesor"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_below="@+id/textView3"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner01"
-        android:layout_below="@+id/editTextProfesor"
+        android:layout_below="@+id/textView3"
         android:layout_toRightOf="@+id/spinner00"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner02"
-        android:layout_below="@+id/editTextProfesor"
+        android:layout_below="@+id/textView3"
         android:layout_toRightOf="@+id/spinner01"/>
 
     <Spinner
@@ -120,8 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner10"
-        android:layout_below="@+id/spinner00"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_below="@+id/spinner00"/>
 
     <Spinner
         android:visibility="invisible"
@@ -142,8 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner20"
-        android:layout_below="@+id/spinner10"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_below="@+id/spinner10"/>
 
     <Spinner
         android:visibility="invisible"
@@ -164,8 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner30"
-        android:layout_below="@+id/spinner20"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_below="@+id/spinner20"/>
     <Spinner
         android:visibility="invisible"
         android:layout_width="wrap_content"
@@ -185,8 +183,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner40"
-        android:layout_below="@+id/spinner30"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_below="@+id/spinner30"/>
     <Spinner
         android:visibility="invisible"
         android:layout_width="wrap_content"
@@ -209,7 +206,7 @@
         android:ems="8"
         android:hint ="ED 206 , IF 203, etc"
         android:id="@+id/editTextAula0"
-        android:layout_below="@+id/editTextProfesor"
+        android:layout_below="@+id/textView3"
         android:layout_toRightOf="@+id/spinner02">
     </EditText>
 
@@ -268,7 +265,7 @@
     android:text="+"
     android:id="@+id/Mas"
     android:onClick="Agregar"
-    android:layout_below="@+id/editTextProfesor"
+    android:layout_below="@+id/textView3"
     android:layout_toRightOf="@+id/editTextAula0" />
 
     <Button
@@ -278,7 +275,7 @@
     android:text="-"
     android:id="@+id/Menos"
     android:onClick="Quitar"
-    android:layout_below="@+id/editTextProfesor"
+    android:layout_below="@+id/textView3"
     android:layout_toRightOf="@+id/Mas" />
 
 

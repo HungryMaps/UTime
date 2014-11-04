@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,6 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,25 +24,30 @@
 
             <TableLayout
                 android:id="@+id/tablaEvaluacion"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
             </TableLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  Guardar  "
-                android:id="@+id/btnSave"
-                android:background="@color/verde1"/>
-
         </LinearLayout>
-
+        </HorizontalScrollView>
     </ScrollView>
 
-</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Guardar  "
+        android:id="@+id/btnSave"
+        android:background="@color/verde1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Nota"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/btnSave"
+        android:text="NOTA"
+        android:textColor="@color/azul1"
+        android:textSize="30dp"/>
+</RelativeLayout>

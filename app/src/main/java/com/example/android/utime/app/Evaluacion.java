@@ -86,7 +86,7 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
             int indice = 0;
             contador = 0;
 
-                    // Se presentan las evaluaciones en el layout
+              // Se presentan las evaluaciones en el layout
             do {
 
                 evaluaciones.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_ID))));
@@ -167,8 +167,26 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
 
             contador = 1;
         }
+        this.CalcularNota();
     }
 
+
+    public void CalcularNota(){
+        double notaFinal = 0;  //se le va sumando
+        int j = 2;
+        for(int i= 0; i < contador; i++){
+            EditText currcell = (EditText) findViewById(j-1);
+            String datoPorcentaje = currcell.getText().toString();
+            double porcentaje = Double.parseDouble(datoPorcentaje);
+            currcell = (EditText) findViewById(j);
+            String datoNota = currcell.getText().toString();
+            double nota = Double.parseDouble(datoNota);
+            notaFinal += (nota*porcentaje)/100;
+            j+=3;
+        }
+        TextView texto = (TextView) findViewById(R.id.Nota);
+        texto.setText("NOTA: " + notaFinal);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
