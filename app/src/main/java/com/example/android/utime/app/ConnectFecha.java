@@ -17,12 +17,15 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
     public String user = "Paula";
     public String pass = "Lopez123#";
     private Connection con;
+    private Calendario calendario;
+    public String[] fechas = new String[300];
+    public boolean continuar = false;
 
     /*
     * Constructor vacío de momento
      */
     public ConnectFecha() {
-
+        calendario = new Calendario();
     }
 
     /*
@@ -48,13 +51,26 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
                 ResultSet rs = st.executeQuery("select * from Fecha");
                 ResultSetMetaData rsmd = rs.getMetaData();
 
+                int indice = 0;
+
                 while (rs.next()) {
                     result += rsmd.getColumnName(1) + ": " + rs.getInt(1) + "\n";
                     result += rsmd.getColumnName(2) + ": " + rs.getString(2) + "\n";
                     result += rsmd.getColumnName(3) + ": " + rs.getString(3) + "\n";
                     // hay que insertar estos datos en el calendario como eventos
+                    fechas[indice] = rs.getInt(1) + "";
+                    ++indice;
+                    fechas[indice] = rs.getInt(3) + "";
+                    ++indice;
+                    fechas[indice] = rs.getString(2) + "";
+                    ++indice;
+                }
+                while (indice < fechas.length) {
+                    fechas[indice] = "";
+                    ++indice;
                 }
                 System.out.println("Resultado: \n" + result);
+
             } catch (SQLException ex) {
                 // handle any errors
                 ex.printStackTrace();
@@ -63,6 +79,18 @@ public class ConnectFecha extends AsyncTask<String, Void, String> {
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
         }
+        cambiarContinuar();
         return "";
+    }
+    public String[] getFechas() {
+        return fechas;
+    }
+
+    public void setFechas(String[] fechas) {
+        this.fechas = fechas;
+    }
+
+    public boolean cambiarContinuar() {
+        return continuar = true;
     }
 }

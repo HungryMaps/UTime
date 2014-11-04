@@ -32,6 +32,10 @@ import java.util.TimeZone;
 
 public class Calendario extends ActionBarActivity {
 
+    private String[] fechas = new String[300];
+    ConnectFecha task;
+    private int fechasActualizadas = 1;
+
     /*
     *  Método para crear el activity cuando lo llama menú.
     */
@@ -60,9 +64,14 @@ public class Calendario extends ActionBarActivity {
                 Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
             } while (calCursor.moveToNext());
         }
-        insertarFechasEnCalendario();
-//        Intent intent = new Intent(this, FechasImportantes.class);
-  //      startActivity(intent);
+
+        /*
+        * FALTA CONTROLAR MEJOR QUE SOLO SE INSERTE 1 VEZ ESTAS FECHAS
+         */
+        if(fechasActualizadas==1) {
+            insertarFecha();
+            fechasActualizadas--;
+        }
 
     }
 
@@ -134,14 +143,7 @@ public class Calendario extends ActionBarActivity {
         }*/
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    public void insertarFechasEnCalendario() {
-
-        //Consulta la base de datos
-
-        /*
-        Traer de la base de datos remota
-         */
-
+    public void insertarFechasEnCalendario(int dia, String titulo, int mes) {
         long calID = 1;
 
         Calendar beginTime = null;
@@ -150,12 +152,8 @@ public class Calendario extends ActionBarActivity {
         Time now = new Time();
         now.setToNow();
 
-        // Se verifica si el año y el semestre del curso corresponden al presente
-
-        //Este 2 viene de la base : mes
-        //Este 1 viene de la base: dia
-        beginTime = new GregorianCalendar(now.year, 2, 1);
-        endTime = new GregorianCalendar(now.year, 2, 1);
+        beginTime = new GregorianCalendar(now.year, mes, dia);
+        endTime = new GregorianCalendar(now.year, mes, dia);
 
         // Fecha del Evento a introducir en Calendario
         beginTime.set(Calendar.HOUR, 8);
@@ -167,26 +165,58 @@ public class Calendario extends ActionBarActivity {
         long startMillis = beginTime.getTimeInMillis();
         long endMillis = endTime.getTimeInMillis();
 
-        // Introduce datos a contenedor que se inserta como un evento en el calendario
         ContentResolver cr = getContentResolver();
+        // Introduce datos a contenedor que se inserta como un evento en el calendario
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Events.DTSTART, startMillis);
         values.put(CalendarContract.Events.DTEND, endMillis);
-        values.put(CalendarContract.Events.TITLE, "HOLA ENFERMERA");
+        values.put(CalendarContract.Events.TITLE, titulo);
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, tz.getID());
 
+
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+    }
 
+    public void insertarFecha() {
+        task = new ConnectFecha();
+        task.execute();
 
-        // las siguientes líneas sirven para borrar eventos del calendario, se deja aquí en caso de necesitarlo
+        int k=0;
+        while(k < fechas.length){
+            fechas[k] = "";
+            ++k;
+        }
 
-        /*for(int i=0; i<1000; i++) {
-            long eventID = i;
-            Uri deleteUri = null;
-            deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
-            int rows = getContentResolver().delete(deleteUri, null, null);
-        }*/
+        boolean continuar = false;
 
-    } //onCreate
+        while (!continuar) {
+            continuar = task.continuar;
+        }
+        if (continuar) {
+            this.fechas = task.getFechas();
+            int i = 0;
+            int dia;
+            String titulo;
+            int mes;
+            while (fechas[i] != "") {
+                if (fechas[i] == null) {
+                    dia = 1;
+                } else {
+                    dia = Integer.parseInt(fechas[i]);
+                }
+                ++i;
+                if(fechas[i] == null){
+                    mes = 1;
+                }
+                else {
+                    mes = Integer.parseInt(fechas[i]);
+                }
+                ++i;
+                titulo = fechas[i];
+                ++i;
+                insertarFechasEnCalendario(dia, titulo, mes);
+            }
+        }
+    }
 }
