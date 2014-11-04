@@ -170,9 +170,11 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         this.CalcularNota();
     }
 
-
+    /*
+    *METODO QUE CALCULA LA NOTA, BASADO EN EL PORCENTAGE DE LAS EVALUACIONES
+     */
     public void CalcularNota(){
-        double notaFinal = 0;  //se le va sumando
+        double notaFinal = 0;
         int j = 2;
         for(int i= 0; i < contador; i++){
             EditText currcell = (EditText) findViewById(j-1);
