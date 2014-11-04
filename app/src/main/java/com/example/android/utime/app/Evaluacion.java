@@ -1,5 +1,6 @@
 package com.example.android.utime.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Evaluacion extends ActionBarActivity implements android.view.View.OnClickListener{
+public class Evaluacion extends Activity implements android.view.View.OnClickListener{
 
     private int Curso_Id=0;
     private Button btnSave;
@@ -179,12 +180,14 @@ public class Evaluacion extends ActionBarActivity implements android.view.View.O
         for(int i= 0; i < contador; i++){
             EditText currcell = (EditText) findViewById(j-1);
             String datoPorcentaje = currcell.getText().toString();
-            double porcentaje = Double.parseDouble(datoPorcentaje);
-            currcell = (EditText) findViewById(j);
-            String datoNota = currcell.getText().toString();
-            double nota = Double.parseDouble(datoNota);
-            notaFinal += (nota*porcentaje)/100;
-            j+=3;
+            if(!(datoPorcentaje.equals(""))){
+                double porcentaje = Double.parseDouble(datoPorcentaje);
+                currcell = (EditText) findViewById(j);
+                String datoNota = currcell.getText().toString();
+                double nota = Double.parseDouble(datoNota);
+                notaFinal += (nota*porcentaje)/100;
+                j+=3;
+            }
         }
         TextView texto = (TextView) findViewById(R.id.Nota);
         texto.setText("NOTA: " + notaFinal);
