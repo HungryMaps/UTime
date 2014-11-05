@@ -11,7 +11,9 @@ import android.widget.TextView;
  * Se prueba el Activity
  */
 
-
+/*
+* Prueba para la activity de Evaluacion. Próposito: probar algunas funcionalidades (métodos) de la activity
+* */
 public class EvaluacionTest extends ActivityUnitTestCase<Evaluacion> {
     private Evaluacion mTestActivity;
     private TextView mTestText;
@@ -23,6 +25,8 @@ public class EvaluacionTest extends ActivityUnitTestCase<Evaluacion> {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+
+        // Se Inserta una evaluación de prueba con ID 0 ya que es el default que toma en la activity
 
         EvaluacionPorCurso evaluacion = new EvaluacionPorCurso();
         evaluacion.curso_ID = 0;
@@ -48,13 +52,13 @@ public class EvaluacionTest extends ActivityUnitTestCase<Evaluacion> {
             sql.insertEvaluacion(evaluacion);
         }
 
-        // Starts the MainActivity of the target application
+        // Se inicia la Activity
         startActivity(new Intent(getInstrumentation().getTargetContext(), Evaluacion.class), null, null);
 
-        // Getting a reference to the MainActivity of the target application
+        // Obtenemos la referencia para usar los métodos
         mTestActivity = (Evaluacion) getActivity();
 
-        // Getting a reference to the TextView of the MainActivity of the target application
+        // Refencia al TextView de Nota que se pone en la Activity
         mTestText = (TextView) mTestActivity.findViewById(R.id.Nota);
     }
 
@@ -64,17 +68,13 @@ public class EvaluacionTest extends ActivityUnitTestCase<Evaluacion> {
     }
 
     /*
-    *Prueba para un TextView del Activity de Evaluacion
+    *Prueba para un TextView del Activity de Evaluacion que muestra la nota obtenida según las evaluaciones
      */
     public void testNota() {
-        // The actual text displayed in the textview
         String actual = mTestText.getText().toString();
-
-        // The expected text to be displayed in the textview
-        String expected = "NOTA";
-
-        // Check whether both are equal, otherwise test fails
-        assertEquals(expected, actual.substring(0, 4));
+        // Se es espera un 30 con los datos insertados en el setUp
+        String expected = "NOTA: 30.0";
+        assertEquals(expected, actual);
     }
 
 
