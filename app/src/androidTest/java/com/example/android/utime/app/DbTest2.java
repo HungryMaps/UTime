@@ -24,6 +24,6 @@ public class DbTest2 extends AndroidTestCase {
         SQLControlador sql = new SQLControlador(mContext);
         int id = sql.insertEvaluacion(evaluacion);
         EvaluacionPorCurso evaluacion2 = sql.getEvaluacionByID(id);
-        assertEquals("Prueba acertada",evaluacion.name, evaluacion.name);
+        assertEquals("Prueba acertada",evaluacion.name, evaluacion2.name);
     }
 }

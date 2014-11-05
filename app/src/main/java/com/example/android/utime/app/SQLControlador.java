@@ -337,7 +337,7 @@ public class SQLControlador {
                 EvaluacionPorCurso.KEY_name +
                 " FROM " + EvaluacionPorCurso.TABLE
                 + " WHERE " +
-                EvaluacionPorCurso.KEY_Evaluacion + "=?";
+                EvaluacionPorCurso.KEY_ID + "=?";
 
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
         EvaluacionPorCurso evaluacion = null;

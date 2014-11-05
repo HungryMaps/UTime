@@ -1,6 +1,8 @@
 package com.example.android.utime.app;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.test.ActivityUnitTestCase;
 import android.widget.TextView;
 
@@ -21,6 +23,30 @@ public class EvaluacionTest extends ActivityUnitTestCase<Evaluacion> {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+
+        EvaluacionPorCurso evaluacion = new EvaluacionPorCurso();
+        evaluacion.curso_ID = 0;
+        evaluacion.name = "Prueba";
+        evaluacion.evaluacion = 30;
+        evaluacion.calificacion = 100;
+
+        DBhelper dbHelper = new DBhelper(getInstrumentation().getTargetContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                EvaluacionPorCurso.KEY_ID + "," +
+                EvaluacionPorCurso.KEY_ID_Curso + "," +
+                EvaluacionPorCurso.KEY_Evaluacion +  "," +
+                EvaluacionPorCurso.KEY_Calificacion + "," +
+                EvaluacionPorCurso.KEY_name +
+                " FROM " + EvaluacionPorCurso.TABLE
+                + " WHERE " +
+                EvaluacionPorCurso.KEY_ID_Curso + "=?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(0) } );
+        if(!cursor.moveToFirst()){
+            SQLControlador sql = new SQLControlador(getInstrumentation().getTargetContext());
+            sql.insertEvaluacion(evaluacion);
+        }
 
         // Starts the MainActivity of the target application
         startActivity(new Intent(getInstrumentation().getTargetContext(), Evaluacion.class), null, null);
