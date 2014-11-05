@@ -10,256 +10,254 @@
     android:background="@color/fondo">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-       <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:hint ="Curso"
-        android:id="@+id/editTextName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true">
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:hint ="Profesor"
-        android:id="@+id/editTextProfesor"
-        android:layout_below="@+id/editTextName" >
-    </EditText>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner00"
-        android:layout_below="@+id/editTextProfesor"/>
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner01"
-        android:layout_below="@+id/editTextProfesor"
-        android:layout_toRightOf="@+id/spinner00"/>
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner02"
-        android:layout_below="@+id/editTextProfesor"
-        android:layout_toRightOf="@+id/spinner01"/>
-
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner10"
-        android:layout_below="@+id/spinner00"/>
-
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner11"
-        android:layout_below="@+id/spinner01"
-        android:layout_toRightOf="@+id/spinner10"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner12"
-        android:layout_below="@+id/spinner02"
-        android:layout_toRightOf="@+id/spinner11"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner20"
-        android:layout_below="@+id/spinner10"/>
-
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner21"
-        android:layout_below="@+id/spinner11"
-        android:layout_toRightOf="@+id/spinner20"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner22"
-        android:layout_below="@+id/spinner12"
-        android:layout_toRightOf="@+id/spinner21"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner30"
-        android:layout_below="@+id/spinner20"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner31"
-        android:layout_below="@+id/spinner21"
-        android:layout_toRightOf="@+id/spinner30"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner32"
-        android:layout_below="@+id/spinner22"
-        android:layout_toRightOf="@+id/spinner31"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner40"
-        android:layout_below="@+id/spinner30"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner41"
-        android:layout_below="@+id/spinner31"
-        android:layout_toRightOf="@+id/spinner40"/>
-    <Spinner
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner42"
-        android:layout_below="@+id/spinner32"
-        android:layout_toRightOf="@+id/spinner41"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:hint ="ED 206 , IF 203, etc"
-        android:id="@+id/editTextAula0"
-        android:layout_below="@+id/editTextProfesor"
-        android:layout_toRightOf="@+id/spinner02">
-    </EditText>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:visibility="invisible"
-        android:hint ="ED 206 , IF 203, etc"
-        android:id="@+id/editTextAula1"
-        android:layout_below="@+id/editTextAula0"
-        android:layout_toRightOf="@+id/spinner12">
+           <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:hint ="Curso"
+            android:id="@+id/editTextName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
+            <requestFocus />
         </EditText>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:visibility="invisible"
-        android:hint ="ED 206 , IF 203, etc"
-        android:id="@+id/editTextAula2"
-        android:layout_below="@+id/editTextAula1"
-        android:layout_toRightOf="@+id/spinner22">
-    </EditText>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:visibility="invisible"
-        android:hint ="ED 206 , IF 203, etc"
-        android:id="@+id/editTextAula3"
-        android:layout_below="@+id/editTextAula2"
-        android:layout_toRightOf="@+id/spinner32">
-    </EditText>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="8"
-        android:visibility="invisible"
-        android:hint ="ED 206 , IF 203, etc"
-        android:id="@+id/editTextAula4"
-        android:layout_below="@+id/editTextAula3"
-        android:layout_toRightOf="@+id/spinner42">
-    </EditText>
-
-    <Button
-    style="?android:attr/buttonStyleSmall"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="+"
-    android:id="@+id/Mas"
-    android:onClick="Agregar"
-    android:layout_below="@+id/editTextProfesor"
-    android:layout_toRightOf="@+id/editTextAula0" />
-
-    <Button
-    style="?android:attr/buttonStyleSmall"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="-"
-    android:id="@+id/Menos"
-    android:onClick="Quitar"
-    android:layout_below="@+id/editTextProfesor"
-    android:layout_toRightOf="@+id/Mas" />
-
-        <Button
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:hint ="Profesor"
+            android:id="@+id/editTextProfesor"
+            android:layout_below="@+id/editTextName" >
+        </EditText>
+      
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  Eliminar  "
-            android:id="@+id/btnDelete"
-            android:background="@color/amarillo"
-            android:layout_below="@+id/spinner30"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/spinner00"
+            android:layout_below="@+id/editTextProfesor"/>
 
-        <Button
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  Guardar  "
-            android:id="@+id/btnSave"
-            android:background="@color/verde1"
-            android:layout_toEndOf="@+id/spinner42"
-            android:layout_alignTop="@+id/spinner42"
-            android:layout_toRightOf="@+id/spinner42" />
+            android:id="@+id/spinner01"
+            android:layout_below="@+id/editTextProfesor"
+            android:layout_toRightOf="@+id/spinner00"/>
 
-        <Button
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  Evaluación  "
-            android:id="@+id/btnEvaluacion"
-            android:background="@color/azul1"
-            android:layout_alignTop="@+id/spinner41"
-            android:layout_toLeftOf="@+id/btnSave"
-            android:layout_toStartOf="@+id/btnSave" />
+            android:id="@+id/spinner02"
+            android:layout_below="@+id/editTextProfesor"
+            android:layout_toRightOf="@+id/spinner01"/>
 
-    </RelativeLayout>
-    </HorizontalScrollView>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner10"
+            android:layout_below="@+id/spinner00"/>
+
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner11"
+            android:layout_below="@+id/spinner01"
+            android:layout_toRightOf="@+id/spinner10"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner12"
+            android:layout_below="@+id/spinner02"
+            android:layout_toRightOf="@+id/spinner11"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner20"
+            android:layout_below="@+id/spinner10"/>
+
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner21"
+            android:layout_below="@+id/spinner11"
+            android:layout_toRightOf="@+id/spinner20"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner22"
+            android:layout_below="@+id/spinner12"
+            android:layout_toRightOf="@+id/spinner21"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner30"
+            android:layout_below="@+id/spinner20"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner31"
+            android:layout_below="@+id/spinner21"
+            android:layout_toRightOf="@+id/spinner30"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner32"
+            android:layout_below="@+id/spinner22"
+            android:layout_toRightOf="@+id/spinner31"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner40"
+            android:layout_below="@+id/spinner30"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner41"
+            android:layout_below="@+id/spinner31"
+            android:layout_toRightOf="@+id/spinner40"/>
+        <Spinner
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner42"
+            android:layout_below="@+id/spinner32"
+            android:layout_toRightOf="@+id/spinner41"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:hint ="ED 206 , IF 203, etc"
+            android:id="@+id/editTextAula0"
+            android:layout_below="@+id/editTextProfesor"
+            android:layout_toRightOf="@+id/spinner02">
+        </EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:visibility="invisible"
+            android:hint ="ED 206 , IF 203, etc"
+            android:id="@+id/editTextAula1"
+            android:layout_below="@+id/editTextAula0"
+            android:layout_toRightOf="@+id/spinner12">
+            </EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:visibility="invisible"
+            android:hint ="ED 206 , IF 203, etc"
+            android:id="@+id/editTextAula2"
+            android:layout_below="@+id/editTextAula1"
+            android:layout_toRightOf="@+id/spinner22">
+        </EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:visibility="invisible"
+            android:hint ="ED 206 , IF 203, etc"
+            android:id="@+id/editTextAula3"
+            android:layout_below="@+id/editTextAula2"
+            android:layout_toRightOf="@+id/spinner32">
+        </EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="8"
+            android:visibility="invisible"
+            android:hint ="ED 206 , IF 203, etc"
+            android:id="@+id/editTextAula4"
+            android:layout_below="@+id/editTextAula3"
+            android:layout_toRightOf="@+id/spinner42">
+        </EditText>
+
+         <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/Mas"
+            android:onClick="Agregar"
+            android:layout_below="@+id/editTextProfesor"
+            android:layout_toRightOf="@+id/editTextAula0" />
+
+          <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/Menos"
+            android:onClick="Quitar"
+            android:layout_below="@+id/editTextProfesor"
+            android:layout_toRightOf="@+id/Mas" />
+
+          <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Eliminar  "
+                android:id="@+id/btnDelete"
+                android:background="@color/amarillo"
+                android:layout_below="@+id/spinner30"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+          <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Guardar  "
+                android:id="@+id/btnSave"
+                android:background="@color/verde1"
+                android:layout_toEndOf="@+id/spinner42"
+                android:layout_alignTop="@+id/spinner42"
+                android:layout_toRightOf="@+id/spinner42" />
+
+          <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Evaluación  "
+                android:id="@+id/btnEvaluacion"
+                android:background="@color/azul1"
+                android:layout_alignTop="@+id/spinner41"
+                android:layout_toLeftOf="@+id/btnSave"
+                android:layout_toStartOf="@+id/btnSave" />
+
+        </RelativeLayout>
+        </HorizontalScrollView>
     </ScrollView>
 </LinearLayout>
