@@ -10,6 +10,8 @@ package com.example.android.utime.app;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Button;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
@@ -30,6 +32,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     private GoogleMap mMap;                 // Referencia al mapa
     private CameraUpdate miposicion;
     private LocationClient miLocalizacion;
+    private Button buscar;
+
     private static final LocationRequest REQUEST = LocationRequest.create()
             .setInterval(5000)              // 5 segundos
             .setFastestInterval(16)         // Conversion 16ms = 60fps
