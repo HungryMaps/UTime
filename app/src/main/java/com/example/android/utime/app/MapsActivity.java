@@ -145,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         mMap.addMarker(new MarkerOptions().position(new LatLng(9.939667, -84.047341)).title("Marker")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                 .snippet("Universidad de Costa Rica"));
-        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341), 14);
+        miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341), 16);
         mMap.animateCamera(miposicion);
     }
 
@@ -168,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
      */
     private void verMiUbicacion(double lat, double lng) {
         cambiarCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng))
-                        .zoom(15.5f)
+                        .zoom(16)
                         .bearing(0)              //Establece la orientacion
                         .tilt(25)                // Baja el punto de vista de la camara 25 grados
                         .build()

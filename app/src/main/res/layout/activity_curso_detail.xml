@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,48 +9,29 @@
     tools:context="com.instinctcoder.sqlitedb.StudentDetail$PlaceholderFragment"
     android:background="@color/fondo">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint ="Horario y Aula"
-        android:id="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
+       <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:hint ="Curso"
         android:id="@+id/editTextName"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
         <requestFocus />
     </EditText>
 
@@ -61,58 +42,29 @@
         android:ems="8"
         android:hint ="Profesor"
         android:id="@+id/editTextProfesor"
-        android:layout_above="@+id/textView3"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_alignRight="@+id/editTextName"
-        android:layout_alignEnd="@+id/editTextName" >
+        android:layout_below="@+id/editTextName" >
     </EditText>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Eliminar  "
-        android:id="@+id/btnDelete"
-        android:background="@color/amarillo"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnDelete" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Guardar  "
-        android:id="@+id/btnSave"
-        android:background="@color/verde1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Evaluación  "
-        android:id="@+id/btnEvaluacion"
-        android:background="@color/azul1"
-        android:layout_alignTop="@+id/btnSave"
-        android:layout_toLeftOf="@+id/btnSave" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner00"
-        android:layout_below="@+id/textView3"/>
+        android:layout_below="@+id/editTextProfesor"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner01"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/editTextProfesor"
         android:layout_toRightOf="@+id/spinner00"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner02"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/editTextProfesor"
         android:layout_toRightOf="@+id/spinner01"/>
 
     <Spinner
@@ -205,7 +157,7 @@
         android:ems="8"
         android:hint ="ED 206 , IF 203, etc"
         android:id="@+id/editTextAula0"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/editTextProfesor"
         android:layout_toRightOf="@+id/spinner02">
     </EditText>
 
@@ -264,7 +216,7 @@
     android:text="+"
     android:id="@+id/Mas"
     android:onClick="Agregar"
-    android:layout_below="@+id/textView3"
+    android:layout_below="@+id/editTextProfesor"
     android:layout_toRightOf="@+id/editTextAula0" />
 
     <Button
@@ -274,8 +226,40 @@
     android:text="-"
     android:id="@+id/Menos"
     android:onClick="Quitar"
-    android:layout_below="@+id/textView3"
+    android:layout_below="@+id/editTextProfesor"
     android:layout_toRightOf="@+id/Mas" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Eliminar  "
+            android:id="@+id/btnDelete"
+            android:background="@color/amarillo"
+            android:layout_below="@+id/spinner30"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Guardar  "
+            android:id="@+id/btnSave"
+            android:background="@color/verde1"
+            android:layout_toEndOf="@+id/spinner42"
+            android:layout_alignTop="@+id/spinner42"
+            android:layout_toRightOf="@+id/spinner42" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Evaluación  "
+            android:id="@+id/btnEvaluacion"
+            android:background="@color/azul1"
+            android:layout_alignTop="@+id/spinner41"
+            android:layout_toLeftOf="@+id/btnSave"
+            android:layout_toStartOf="@+id/btnSave" />
+
+    </RelativeLayout>
+    </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>
