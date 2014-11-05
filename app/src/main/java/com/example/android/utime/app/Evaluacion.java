@@ -107,7 +107,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
                 editText = new EditText(this);
                 editText.setId(indice+2);
-                editText.setHint("9.5 , 9 , etc");
+                editText.setHint("90 , 75 , etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Calificacion)));
                 fila.addView(editText);
 
@@ -148,7 +148,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
             editText = new EditText(this);
             editText.setId(ind+2);
-            editText.setHint("9.5 , 9 , etc");
+            editText.setHint("90 , 75 , etc");
             fila.addView(editText);
 
             Button Mas = new Button(this);
@@ -180,14 +180,14 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
         for(int i= 0; i < contador; i++){
             EditText currcell = (EditText) findViewById(j-1);
             String datoPorcentaje = currcell.getText().toString();
-            if(!(datoPorcentaje.equals(""))){
+            if(!datoPorcentaje.equals("")){
                 double porcentaje = Double.parseDouble(datoPorcentaje);
                 currcell = (EditText) findViewById(j);
                 String datoNota = currcell.getText().toString();
                 double nota = Double.parseDouble(datoNota);
                 notaFinal += (nota*porcentaje)/100;
-                j+=3;
             }
+            j+=3;
         }
         TextView texto = (TextView) findViewById(R.id.Nota);
         texto.setText("NOTA: " + notaFinal);
@@ -312,7 +312,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
         editText = new EditText(this);
         editText.setId(contador*3+2);
-        editText.setHint("9.5 , 9 , etc");
+        editText.setHint("90 , 75 , etc");
         fila.addView(editText);
 
         tabla.addView(fila);
