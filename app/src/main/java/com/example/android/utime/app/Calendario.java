@@ -64,14 +64,6 @@ public class Calendario extends ActionBarActivity {
                 Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
             } while (calCursor.moveToNext());
         }
-
-        /*
-        * FALTA CONTROLAR MEJOR QUE SOLO SE INSERTE 1 VEZ ESTAS FECHAS
-        */
-        if (fechasActualizadas == 1) {
-            insertarFecha();
-            fechasActualizadas--;
-        }
     }
 
     /*
@@ -139,6 +131,17 @@ public class Calendario extends ActionBarActivity {
             } while (calCursor.moveToNext());
         }*/
 
+    public void llenarFechas(View view) {
+        /*
+        * FALTA CONTROLAR MEJOR QUE SOLO SE INSERTE 1 VEZ ESTAS FECHAS
+        */
+        if (fechasActualizadas == 1) {
+            insertarFecha();
+            fechasActualizadas--;
+            Toast.makeText(this,"Se agregaron fechas preestablecidas al calendario",Toast.LENGTH_LONG).show();
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void insertarFechasEnCalendario(int dia, String titulo, int mes) {
         long calID = 1;
@@ -205,7 +208,7 @@ public class Calendario extends ActionBarActivity {
                 if (fechas[i] == null) {
                     mes = 1;
                 } else {
-                    mes = Integer.parseInt(fechas[i]);
+                    mes = Integer.parseInt(fechas[i])-1;
                 }
                 ++i;
                 titulo = fechas[i];
