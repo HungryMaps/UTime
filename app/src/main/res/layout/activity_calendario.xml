@@ -47,7 +47,6 @@
         android:background="@color/verde2"
         android:textColor="#000000" />
 
-
 </LinearLayout>
 
 
@@ -62,6 +61,5 @@
         android:src="@drawable/logo_calendario"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal|top" />
-
 
 </FrameLayout>

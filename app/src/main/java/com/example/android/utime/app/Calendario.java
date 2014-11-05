@@ -131,10 +131,11 @@ public class Calendario extends ActionBarActivity {
             } while (calCursor.moveToNext());
         }*/
 
+    /*
+    * Método para llenar el calendario con los eventos de fechas preestablecidas.
+    */
+
     public void llenarFechas(View view) {
-        /*
-        * FALTA CONTROLAR MEJOR QUE SOLO SE INSERTE 1 VEZ ESTAS FECHAS
-        */
         if (fechasActualizadas == 1) {
             insertarFecha();
             fechasActualizadas--;
