@@ -1,8 +1,11 @@
 package com.example.android.utime.app;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
 import android.view.Menu;
@@ -35,8 +38,9 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
     private int _Curso_Id=0;
 
-    String sb;
+    String nombreUsuario;
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -278,8 +282,30 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         }else{
             contadorSpinners++;
         }
-        sb = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + "\n";
-        System.out.println("sb: " + sb);
+
+        // Para sacar el id del calendario
+        String[] projection =
+                new String[]{
+                        CalendarContract.Calendars._ID,
+                        CalendarContract.Calendars.NAME,
+                        CalendarContract.Calendars.ACCOUNT_NAME,
+                        CalendarContract.Calendars.ACCOUNT_TYPE};
+        Cursor calCursor =
+                getContentResolver().
+                        query(CalendarContract.Calendars.CONTENT_URI,
+                                projection,
+                                CalendarContract.Calendars.VISIBLE + " = 1",
+                                null,
+                                CalendarContract.Calendars._ID + " ASC");
+        if (calCursor.moveToFirst()) {
+            do {
+                long id = calCursor.getLong(0);
+                String displayName = calCursor.getString(2);
+                Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
+                nombreUsuario = displayName;
+            } while (calCursor.moveToNext());
+        }
+        System.out.println("nombreUsuario: " + nombreUsuario);
     }
 
     @Override
@@ -330,7 +356,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             curso.curso_ID=_Curso_Id;
 
             if (_Curso_Id==0) {
-                _Curso_Id = repo.insert(curso, sb);
+                _Curso_Id = repo.insert(curso, nombreUsuario);
 
                 Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
 
