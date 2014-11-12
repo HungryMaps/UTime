@@ -6,9 +6,12 @@
 
 package com.example.android.utime.app;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,8 +27,9 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     EditText editTextNameNota;
     EditText editTextComentarioNota;
     private int _Nota_Id = 0;
-    String sb;
+    String nombreUsuario;
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +55,29 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             editTextNameNota.setText(nota.nameNota);
             editTextComentarioNota.setText(nota.comentarioNota);
         }
-        sb = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + "\n";
-        System.out.println("sb: " + sb);
+
+        String[] projection =
+                new String[]{
+                        CalendarContract.Calendars._ID,
+                        CalendarContract.Calendars.NAME,
+                        CalendarContract.Calendars.ACCOUNT_NAME,
+                        CalendarContract.Calendars.ACCOUNT_TYPE};
+        Cursor calCursor =
+                getContentResolver().
+                        query(CalendarContract.Calendars.CONTENT_URI,
+                                projection,
+                                CalendarContract.Calendars.VISIBLE + " = 1",
+                                null,
+                                CalendarContract.Calendars._ID + " ASC");
+        if (calCursor.moveToFirst()) {
+            do {
+                long id = calCursor.getLong(0);
+                String displayName = calCursor.getString(2);
+                Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
+                nombreUsuario = displayName;
+            } while (calCursor.moveToNext());
+        }
+        System.out.println("nombreUsuario: " + nombreUsuario);
     }
 
     @Override
@@ -88,7 +113,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             nota.nota_ID = _Nota_Id;
 
             if (_Nota_Id == 0) {
-                _Nota_Id = repo.insertNota(nota, sb);
+                _Nota_Id = repo.insertNota(nota, nombreUsuario);
                 Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
             } else {
                 repo.updateNota(nota);
