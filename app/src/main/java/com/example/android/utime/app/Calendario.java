@@ -12,8 +12,11 @@ import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract;
@@ -131,15 +134,26 @@ public class Calendario extends ActionBarActivity {
             } while (calCursor.moveToNext());
         }*/
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     /*
     * Método para llenar el calendario con los eventos de fechas preestablecidas.
     */
-
     public void llenarFechas(View view) {
-        if (fechasActualizadas == 1) {
-            insertarFecha();
-            fechasActualizadas--;
-            Toast.makeText(this,"Se agregaron fechas preestablecidas al calendario",Toast.LENGTH_LONG).show();
+        if(this.isNetworkAvailable()) {
+            if (fechasActualizadas == 1) {
+                insertarFecha();
+                fechasActualizadas--;
+                Toast.makeText(this, "Se agregaron fechas preestablecidas al calendario", Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            Toast.makeText(this, "NO HAY CONEXION A INTERNET", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -179,43 +193,48 @@ public class Calendario extends ActionBarActivity {
     }
 
     public void insertarFecha() {
-        task = new ConnectFecha();
-        task.execute();
+        if (this.isNetworkAvailable()) {
+            task = new ConnectFecha();
+            task.execute();
 
-        int k = 0;
-        while (k < fechas.length) {
-            fechas[k] = "";
-            ++k;
-        }
-
-        boolean continuar = false;
-
-        while (!continuar) {
-            continuar = task.continuar;
-        }
-        if (continuar) {
-            this.fechas = task.getFechas();
-            int i = 0;
-            int dia;
-            String titulo;
-            int mes;
-            while (fechas[i] != "") {
-                if (fechas[i] == null) {
-                    dia = 1;
-                } else {
-                    dia = Integer.parseInt(fechas[i]);
-                }
-                ++i;
-                if (fechas[i] == null) {
-                    mes = 1;
-                } else {
-                    mes = Integer.parseInt(fechas[i])-1;
-                }
-                ++i;
-                titulo = fechas[i];
-                ++i;
-                insertarFechasEnCalendario(dia, titulo, mes);
+            int k = 0;
+            while (k < fechas.length) {
+                fechas[k] = "";
+                ++k;
             }
+
+            boolean continuar = false;
+
+            while (!continuar) {
+                continuar = task.continuar;
+            }
+            if (continuar) {
+                this.fechas = task.getFechas();
+                int i = 0;
+                int dia;
+                String titulo;
+                int mes;
+                while (fechas[i] != "") {
+                    if (fechas[i] == null) {
+                        dia = 1;
+                    } else {
+                        dia = Integer.parseInt(fechas[i]);
+                    }
+                    ++i;
+                    if (fechas[i] == null) {
+                        mes = 1;
+                    } else {
+                        mes = Integer.parseInt(fechas[i]) - 1;
+                    }
+                    ++i;
+                    titulo = fechas[i];
+                    ++i;
+                    insertarFechasEnCalendario(dia, titulo, mes);
+                }
+            }
+        }
+        else{
+            Toast.makeText(this, "NO HAY CONEXIÓN A INTERNET", Toast.LENGTH_LONG).show();
         }
     }
 }
