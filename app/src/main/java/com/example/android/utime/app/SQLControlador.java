@@ -139,7 +139,7 @@ public class SQLControlador {
      * Efectúa la modificacion de datos  existentes de la tabla curso
      * @param curso
      */
-    public void update(Curso curso) {
+    public void update(Curso curso, String nombreUsuario) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -154,13 +154,16 @@ public class SQLControlador {
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update(Curso.TABLE, values, Curso.KEY_ID + "= ?", new String[] { String.valueOf(curso.curso_ID) });
         db.close(); // Closing database connection
+
+        //Modificar base remota
+        ModificarCurso(curso, nombreUsuario);
     }
 
     /**
      * Efectúa la modificacion de datos  existentes de la tabla nota
      * @param nota
      */
-    public void updateNota(Nota nota) {
+    public void updateNota(Nota nota, String nombreUsuario) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Nota.KEY_comentario,nota.comentarioNota);
@@ -169,6 +172,9 @@ public class SQLControlador {
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update(Nota.TABLE, values, Nota.KEY_ID_NOTA + "= ?", new String[] { String.valueOf(nota.nota_ID) });
         db.close(); // Closing database connection
+
+        //Base de datos externa
+        ModificarNota(nota, nombreUsuario);
     }
 
     // Actualiza Tabla con los datos de la evaluacion entrante como parámetro
@@ -371,12 +377,34 @@ public class SQLControlador {
         task.execute();
     }
 
+    /**
+     * Para modificar una nota en la base de datos remota
+     * @param nota
+     * @param usuario
+     */
+
+    public void ModificarNota(Nota nota, String usuario) {
+        ModificarNota task = new ModificarNota(nota, usuario);
+        task.execute();
+    }
+
     /*
     * Método que llama a la conexión de la base
     */
 
     public void InsertarCurso(Curso curso, String usuario) {
         ConnectCurso task = new ConnectCurso(curso, usuario);
+        task.execute();
+    }
+
+    /**
+     * Para modificar un curso en la base de datos remota
+     * @param curso
+     * @param usuario
+     */
+
+    public void ModificarCurso(Curso curso, String usuario) {
+        ModificarCurso task = new ModificarCurso(curso, usuario);
         task.execute();
     }
 }

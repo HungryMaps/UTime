@@ -362,7 +362,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
             }
                 else{
-                repo.update(curso);
+                repo.update(curso, nombreUsuario);
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
                 }
 
