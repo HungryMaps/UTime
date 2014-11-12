@@ -283,7 +283,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             contadorSpinners++;
         }
 
-
+        // Para sacar el id del calendario
         String[] projection =
                 new String[]{
                         CalendarContract.Calendars._ID,
@@ -305,7 +305,6 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 nombreUsuario = displayName;
             } while (calCursor.moveToNext());
         }
-
         System.out.println("nombreUsuario: " + nombreUsuario);
     }
 

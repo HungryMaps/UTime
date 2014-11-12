@@ -56,6 +56,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             editTextComentarioNota.setText(nota.comentarioNota);
         }
 
+        //Para sacar el id del calendario
         String[] projection =
                 new String[]{
                         CalendarContract.Calendars._ID,
@@ -116,7 +117,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
                 _Nota_Id = repo.insertNota(nota, nombreUsuario);
                 Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
             } else {
-                repo.updateNota(nota);
+                repo.updateNota(nota, nombreUsuario);
                 Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
             }
             returnHome();// para que vuelva a la pagina de notas
