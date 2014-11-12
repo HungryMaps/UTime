@@ -134,16 +134,31 @@ public class Calendario extends ActionBarActivity {
             } while (calCursor.moveToNext());
         }*/
 
+    /**
+     * Método para revisar si hay conexión a internet
+     * @return boolean
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     /*
     * Método para llenar el calendario con los eventos de fechas preestablecidas.
     */
     public void llenarFechas(View view) {
+        if(this.isNetworkAvailable()) { //Si hay conexión, se va a la base remota
             if (fechasActualizadas == 1) {
                 insertarFecha();
                 fechasActualizadas--;
                 Toast.makeText(this, "Se agregaron fechas preestablecidas al calendario", Toast.LENGTH_LONG).show();
             }
-
+        }
+        else{ //Sino, entonces se le dice al usuario
+            Toast.makeText(this, "NO HAY CONEXION A INTERNET", Toast.LENGTH_LONG).show();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -182,6 +197,7 @@ public class Calendario extends ActionBarActivity {
     }
 
     public void insertarFecha() {
+        if (this.isNetworkAvailable()) {
             task = new ConnectFecha();
             task.execute();
 
@@ -220,5 +236,9 @@ public class Calendario extends ActionBarActivity {
                     insertarFechasEnCalendario(dia, titulo, mes);
                 }
             }
+        }
+        else{
+            Toast.makeText(this, "NO HAY CONEXIÓN A INTERNET", Toast.LENGTH_LONG).show();
+        }
     }
 }
