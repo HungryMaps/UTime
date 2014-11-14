@@ -122,7 +122,6 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
 
                 super.onDraw(canvas);
             }
-
         }
     }
 
