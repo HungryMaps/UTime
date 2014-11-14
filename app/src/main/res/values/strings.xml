@@ -39,5 +39,7 @@
     <string name="title_activity_notas">Notas</string>
     <string name="title_activity_evaluacion">Evaluacion</string>
     <string name="title_activity_maps">Map</string>
+    <string name="no_title">no_title</string>
+    <string name="title">title</string>
 
 </resources>

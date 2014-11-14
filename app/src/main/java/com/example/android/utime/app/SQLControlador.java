@@ -7,16 +7,13 @@
 
 package com.example.android.utime.app;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.CalendarContract;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class SQLControlador {
@@ -69,7 +66,7 @@ public class SQLControlador {
      */
     public int insertNota(Nota nota, String usuario) {
 
-        //Conneccion para escribir en la base
+        //Conexion para escribir en la base
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Nota.KEY_comentario, nota.comentarioNota);
