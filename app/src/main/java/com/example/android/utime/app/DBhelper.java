@@ -70,8 +70,13 @@ public class DBhelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-
+    /**
+     *
+     *Coloca el cursor en la posicion del cuerpo d ela nota
+     * @param rowId
+     * @return
+     * @throws SQLException
+     */
     public Cursor fetchNote(long rowId) throws SQLException {
 
         Cursor mCursor = mDb.query(true, DATABASE_NAME, new String[] {Nota.KEY_ID_NOTA,
@@ -83,8 +88,4 @@ public class DBhelper extends SQLiteOpenHelper {
         return mCursor;
 
     }
-
-
-
-
 }
