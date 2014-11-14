@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+
 public class NotaDetail extends ActionBarActivity implements android.view.View.OnClickListener {
 
     Button btnSave;
@@ -34,6 +36,16 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     EditText editTextComentarioNota;
     private int _Nota_Id = 0;
     String nombreUsuario;
+
+    private Cursor note;
+    private Nota NotesDbAdapter;
+    private DBhelper mDbHelper;
+    private EditText mTitleText;
+    public static String curText = "";
+    private EditText mBodyText;
+    private Long mRowId;
+
+
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -45,6 +57,7 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         btnDelete = (Button) findViewById(R.id.btnDelete);
 
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
+        editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
        // editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
 
        // btnSave.setOnClickListener(this);
@@ -181,5 +194,21 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
                 Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
+
+
+    private void populateFields() throws SQLException {
+
+        if (mRowId != null) {
+            note = mDbHelper.fetchNote(mRowId);
+            startManagingCursor(note);
+            mTitleText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            mBodyText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            curText = note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota));
+        }
+    }
+
 
 }

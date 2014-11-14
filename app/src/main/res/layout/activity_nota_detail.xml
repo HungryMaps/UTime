@@ -42,7 +42,23 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
-    </RelativeLayout>
+
+    <view
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/editTextComentarioNota"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toplayout"
+        class="com.example.android.utime.app.NotaDetail$LineEditText"
+        android:background="@android:color/transparent"
+        android:capitalize="sentences"
+        android:fadingEdge="vertical"
+        android:gravity="top"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:textSize="22sp" />
+
+</RelativeLayout>
 
 
 

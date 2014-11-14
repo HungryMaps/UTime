@@ -5,12 +5,16 @@
 
 package com.example.android.utime.app;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.SQLException;
+
 public class DBhelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 7; //Maneja la version de la base de datos
+    private SQLiteDatabase mDb;
+    private static final int DATABASE_VERSION = 8; //Maneja la version de la base de datos
     private static final String DATABASE_NAME = "crud.db"; // es el nombre de la base de datos
 
     public DBhelper(Context context ) {
@@ -65,4 +69,22 @@ public class DBhelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + EvaluacionPorCurso.TABLE);
         onCreate(db);
     }
+
+
+
+    public Cursor fetchNote(long rowId) throws SQLException {
+
+        Cursor mCursor = mDb.query(true, DATABASE_NAME, new String[] {Nota.KEY_ID_NOTA,
+                        Nota.KEY_name_nota, Nota.KEY_comentario},Nota.KEY_ID_NOTA + "=" + rowId, null,
+                null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+
+    }
+
+
+
+
 }
