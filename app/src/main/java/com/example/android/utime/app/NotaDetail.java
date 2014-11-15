@@ -7,7 +7,10 @@
 package com.example.android.utime.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Canvas;
@@ -17,7 +20,6 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +30,7 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 
-public class NotaDetail extends ActionBarActivity implements android.view.View.OnClickListener {
+public class NotaDetail extends Activity implements android.view.View.OnClickListener {
 
     Button btnSave;
     Button btnDelete;
@@ -40,6 +42,8 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     private Cursor note;
     private Nota NotesDbAdapter;
     private DBhelper mDbHelper;
+    private SQLControlador sqlControlador;
+
     private EditText mTitleText;
     public static String curText = "";
     private EditText mBodyText;
@@ -57,8 +61,8 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
        // editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
-       // btnSave.setOnClickListener(this);
-       // btnDelete.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
+        //btnDelete.setOnClickListener(this);
 
         _Nota_Id = 0;
         Intent intent = getIntent();
@@ -97,7 +101,13 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         System.out.println("nombreUsuario: " + nombreUsuario);
     }
 
+    /**
+     * Pequeña clase que dibuja las líneas para escribir tipo Notepad
+     */
     public static class LineEditText extends EditText{
+
+        private Rect mRect;
+        private Paint mPaint;
         // we need this constructor for LayoutInflater
         public LineEditText(Context context, AttributeSet attrs) {
             super(context, attrs);
@@ -106,9 +116,6 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
             mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
             mPaint.setColor(Color.BLUE);
         }
-
-        private Rect mRect;
-        private Paint mPaint;
 
         @Override
         protected void onDraw(Canvas canvas) {
@@ -136,26 +143,133 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveState();
+        outState.putSerializable(Nota.KEY_ID_NOTA, mRowId);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            populateFields();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nota_detail, menu);
         return true;
     }
 
+    /**
+     * Método que se encarga de darle funcionalidad a cada icon del MenuBar
+     * @param item
+     * @return
+     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            //Caso que el usuario escoge about del Menu: Muestra información de la app
+            case R.id.menu_about:
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(NotaDetail.this);
+                dialog.setTitle("About");
+                dialog.setMessage("Universidad de Costa Rica\n" +
+                                "Ingeniería del Software II\n\n" +
+                                "Students: \n"+
+                                "Ana Laura Berdasco, " +
+                                "Jennifer Ledezma, " +
+                                "Paula Lopez, " +
+                                "Joan Marchena, " +
+                                "David Ramirez\n\n" +
+
+                                "UTime\n\n"
+                                + "If there is any bug is found please freely e-mail us: " +
+                                "\n\tutime@gmail.com"
+                );
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+                return true;
+            //Usuario escoge el icon de: Papelera de Reciclaje en el MenuBar
+            case R.id.btnDelete:
+                if(note != null){
+                    note.close();
+                    note = null;
+                }
+                if(mRowId != null){
+                    sqlControlador.deleteNota(mRowId);
+                }
+                finish();
+
+                return true;
+            //Usuario escoge el icon de: Guardar en el MenuBar
+            case R.id.btnSave:
+                saveState();
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Metodo que se encarga de hacer la funcionalidad de Guardar los cambios de una nota
+     */
+    private void saveState() {
+        SQLControlador repo = new SQLControlador(this);
+        Nota nota = new Nota();
+
+        nota.comentarioNota = editTextComentarioNota.getText().toString();
+        nota.nameNota = editTextNameNota.getText().toString();
+        nota.nota_ID = _Nota_Id;
+
+        if(mRowId == null){
+            _Nota_Id = repo.insertNota(nota, nombreUsuario);
+            Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
+
+        }else{
+            repo.updateNota(nota, nombreUsuario);
+            Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Metodo que  guarda una nota que no tiene nombre
+     * con ayuda de excepciones guarda la nota con un id
+     * @throws SQLException
+     */
+    private void populateFields() throws SQLException {
+
+        if (mRowId != null) {
+            note = mDbHelper.fetchNote(mRowId);
+            startManagingCursor(note);
+            mTitleText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            mBodyText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            curText = note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota));
+        }
     }
 
     /**
      * Al hacer click en los botones me permite completar una accion
-     *
      * @param view
      */
     public void onClick(View view) {
@@ -184,12 +298,11 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     }
 
     /**
-     * Me permite volver a la página principal
+     * Metodo que permite volver a la página principal
      */
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(),
                 Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
-
 }

@@ -6,7 +6,9 @@
  */
 package com.example.android.utime.app;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,25 +26,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Notas extends ListActivity implements android.view.View.OnClickListener {
+    private static final int DELETE_ID = Menu.FIRST;
+    private int mNoteNumber = 1;
+
 
     Button btnAdd;
     TextView nota_Id;
 
     /**
-     *Evento al dar click en la vista
+     * Evento al dar click en la vista
+     *
      * @param view
      */
     @Override
     public void onClick(View view) {
-        if (view== findViewById(R.id.btnAdd)){
-            Intent intent = new Intent(this,NotaDetail.class);
-            intent.putExtra("nota_Id",0);
+        if (view == findViewById(R.id.btnAdd)) {
+            Intent intent = new Intent(this, NotaDetail.class);
+            intent.putExtra("nota_Id", 0);
             startActivity(intent);
         }
     }
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override
@@ -55,28 +60,29 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
 
         SQLControlador repo = new SQLControlador(this);
 
-        ArrayList<HashMap<String, String>> notaList =  repo.getNotaList();
-        if(notaList.size()!=0) {
+        ArrayList<HashMap<String, String>> notaList = repo.getNotaList();
+        if (notaList.size() != 0) {
             ListView lv = getListView();
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     nota_Id = (TextView) view.findViewById(R.id.nota_Id);
                     String notaId = nota_Id.getText().toString();
-                    Intent objIndent = new Intent(getApplicationContext(),NotaDetail.class);
-                    objIndent.putExtra("nota_Id", Integer.parseInt( notaId));
+                    Intent objIndent = new Intent(getApplicationContext(), NotaDetail.class);
+                    objIndent.putExtra("nota_Id", Integer.parseInt(notaId));
                     startActivity(objIndent);
                 }
             });
-            ListAdapter adapter = new SimpleAdapter( Notas.this,notaList, R.layout.view_nota_entry, new String[] { "idNota","nameNota"}, new int[] {R.id.nota_Id, R.id.nota_name});
+            ListAdapter adapter = new SimpleAdapter(Notas.this, notaList, R.layout.view_nota_entry, new String[]{"idNota", "nameNota"}, new int[]{R.id.nota_Id, R.id.nota_name});
             setListAdapter(adapter);
-        }else{
+        } else {
             Toast.makeText(this, "No existe la Nota!", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
-     *Evento para mostrar una actiividad
+     * Evento para mostrar una actiividad
+     *
      * @param menu
      * @return
      */
@@ -89,20 +95,42 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
     }
 
     /**
-     * Seleccionar un item de la lista
+     * Permite al usuario escoger algun item del MenuBar
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+        switch (item.getItemId()) {
+            case R.id.menu_about:
 
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Notas.this);
+                dialog.setTitle("About");
+                dialog.setMessage("Universidad de Costa Rica\n" +
+                                  "Ingeniería del Software II\n\n" +
+                                  "Students: \n"+
+                                  "Ana Laura Berdasco, " +
+                                  "Jennifer Ledezma, " +
+                                  "Paula Lopez, " +
+                                  "Joan Marchena, " +
+                                  "David Ramirez\n\n" +
+
+                                "UTime\n\n"
+                                + "If there is any bug is found please freely e-mail us: " +
+                                "\n\tutime@gmail.com"
+                );
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
