@@ -7,7 +7,10 @@
 package com.example.android.utime.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Canvas;
@@ -17,7 +20,6 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +30,7 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 
-public class NotaDetail extends ActionBarActivity implements android.view.View.OnClickListener {
+public class NotaDetail extends Activity implements android.view.View.OnClickListener {
 
     Button btnSave;
     Button btnDelete;
@@ -40,6 +42,8 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     private Cursor note;
     private Nota NotesDbAdapter;
     private DBhelper mDbHelper;
+    private SQLControlador sqlControlador;
+
     private EditText mTitleText;
     public static String curText = "";
     private EditText mBodyText;
@@ -57,8 +61,8 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
        // editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
-       // btnSave.setOnClickListener(this);
-       // btnDelete.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
+        //btnDelete.setOnClickListener(this);
 
         _Nota_Id = 0;
         Intent intent = getIntent();
@@ -136,21 +140,115 @@ public class NotaDetail extends ActionBarActivity implements android.view.View.O
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveState();
+        outState.putSerializable(Nota.KEY_ID_NOTA, mRowId);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            populateFields();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nota_detail, menu);
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+
+		    	/* Here is the introduce about myself */
+                AlertDialog.Builder dialog = new AlertDialog.Builder(NotaDetail.this);
+                dialog.setTitle("About");
+                dialog.setMessage("Universidad de Costa Rica\n" +
+                                "Ingeniería del Software II\n\n" +
+                                "Students: \n"+
+                                "Ana Laura Berdasco, " +
+                                "Jennifer Ledezma, " +
+                                "Paula Lopez, " +
+                                "Joan Marchena, " +
+                                "David Ramirez\n\n" +
+
+                                "UTime\n\n"
+                                + "If there is any bug is found please freely e-mail us: " +
+                                "\n\tutime@gmail.com"
+                );
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+
+                    }
+                });
+                dialog.show();
+                return true;
+            case R.id.btnDelete:
+                if(note != null){
+                    note.close();
+                    note = null;
+                }
+                if(mRowId != null){
+                    sqlControlador.deleteNota(mRowId);
+                }
+                finish();
+
+                return true;
+            case R.id.btnSave:
+                saveState();
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void saveState() {
+        SQLControlador repo = new SQLControlador(this);
+        Nota nota = new Nota();
+
+        nota.comentarioNota = editTextComentarioNota.getText().toString();
+        nota.nameNota = editTextNameNota.getText().toString();
+        nota.nota_ID = _Nota_Id;
+
+        if(mRowId == null){
+            _Nota_Id = repo.insertNota(nota, nombreUsuario);
+            Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
+
+        }else{
+            repo.updateNota(nota, nombreUsuario);
+            Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void populateFields() throws SQLException {
+
+        if (mRowId != null) {
+            note = mDbHelper.fetchNote(mRowId);
+            startManagingCursor(note);
+            mTitleText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            mBodyText.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
+            curText = note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota));
+        }
     }
 
     /**
