@@ -94,6 +94,11 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
         return true;
     }
 
+    /**
+     * Permite al usuario escoger algun item del MenuBar
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -119,7 +124,6 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-
                     }
                 });
                 dialog.show();

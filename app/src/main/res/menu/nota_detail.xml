@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item
         android:id="@+id/btnSave"
         android:showAsAction="ifRoom"
@@ -10,6 +11,11 @@
         android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/delete_menu_noteedit"
         android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_about"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/about"/>
 
 </menu>
 

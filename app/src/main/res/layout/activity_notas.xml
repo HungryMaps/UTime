@@ -13,8 +13,6 @@
         android:layout_alignParentTop="true"
         android:paddingBottom="35dp" />
 
-
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
@@ -44,5 +42,4 @@
             android:background="@drawable/create_note" />
 
     </LinearLayout>
-
 </RelativeLayout>

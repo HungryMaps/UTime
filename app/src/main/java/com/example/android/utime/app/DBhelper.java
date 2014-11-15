@@ -78,7 +78,6 @@ public class DBhelper extends SQLiteOpenHelper {
      * @throws SQLException
      */
     public Cursor fetchNote(long rowId) throws SQLException {
-
         Cursor mCursor = mDb.query(true, DATABASE_NAME, new String[] {Nota.KEY_ID_NOTA,
                         Nota.KEY_name_nota, Nota.KEY_comentario},Nota.KEY_ID_NOTA + "=" + rowId, null,
                 null, null, null, null);
@@ -86,6 +85,5 @@ public class DBhelper extends SQLiteOpenHelper {
             mCursor.moveToFirst();
         }
         return mCursor;
-
     }
 }

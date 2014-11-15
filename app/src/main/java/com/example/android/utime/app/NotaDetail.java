@@ -101,7 +101,13 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         System.out.println("nombreUsuario: " + nombreUsuario);
     }
 
+    /**
+     * Pequeña clase que dibuja las líneas para escribir tipo Notepad
+     */
     public static class LineEditText extends EditText{
+
+        private Rect mRect;
+        private Paint mPaint;
         // we need this constructor for LayoutInflater
         public LineEditText(Context context, AttributeSet attrs) {
             super(context, attrs);
@@ -110,9 +116,6 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
             mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
             mPaint.setColor(Color.BLUE);
         }
-
-        private Rect mRect;
-        private Paint mPaint;
 
         @Override
         protected void onDraw(Canvas canvas) {
@@ -168,13 +171,18 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         return true;
     }
 
+    /**
+     * Método que se encarga de darle funcionalidad a cada icon del MenuBar
+     * @param item
+     * @return
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //Caso que el usuario escoge about del Menu: Muestra información de la app
             case R.id.menu_about:
 
-		    	/* Here is the introduce about myself */
                 AlertDialog.Builder dialog = new AlertDialog.Builder(NotaDetail.this);
                 dialog.setTitle("About");
                 dialog.setMessage("Universidad de Costa Rica\n" +
@@ -195,11 +203,11 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-
                     }
                 });
                 dialog.show();
                 return true;
+            //Usuario escoge el icon de: Papelera de Reciclaje en el MenuBar
             case R.id.btnDelete:
                 if(note != null){
                     note.close();
@@ -211,6 +219,7 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
                 finish();
 
                 return true;
+            //Usuario escoge el icon de: Guardar en el MenuBar
             case R.id.btnSave:
                 saveState();
                 finish();
@@ -219,6 +228,9 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         }
     }
 
+    /**
+     * Metodo que se encarga de hacer la funcionalidad de Guardar los cambios de una nota
+     */
     private void saveState() {
         SQLControlador repo = new SQLControlador(this);
         Nota nota = new Nota();
@@ -237,6 +249,11 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         }
     }
 
+    /**
+     * Metodo que  guarda una nota que no tiene nombre
+     * con ayuda de excepciones guarda la nota con un id
+     * @throws SQLException
+     */
     private void populateFields() throws SQLException {
 
         if (mRowId != null) {
@@ -253,7 +270,6 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
 
     /**
      * Al hacer click en los botones me permite completar una accion
-     *
      * @param view
      */
     public void onClick(View view) {
@@ -282,12 +298,11 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
     }
 
     /**
-     * Me permite volver a la página principal
+     * Metodo que permite volver a la página principal
      */
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(),
                 Notas.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
-
 }

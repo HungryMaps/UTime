@@ -41,9 +41,7 @@
             android:layout_alignParentRight="true"
             android:paddingRight="10sp"
             android:textSize="18sp" />
-
     </RelativeLayout>
-
 
     <view
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,8 +57,6 @@
         android:padding="5dp"
         android:scrollbars="vertical"
         android:textSize="22sp" />
-
-
 
 </RelativeLayout>
 
