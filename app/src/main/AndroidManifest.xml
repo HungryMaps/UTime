@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.utime.app" >
 
-     <uses-feature
-         android:glEsVersion= "0x00020000"
-         android:required="true"/>
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -60,50 +61,53 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--Se establece la KEY para usar los mapas de Google generada en console developers-->
+        <!-- Se establece la KEY para usar los mapas de Google generada en console developers -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA9H1eGNOOGF-kSt3ll1kuXJkzm9hMnrJM" />
 
+        <activity
+            android:name=".Archivos"
+            android:label="@string/title_activity_archivos" >
+        </activity>
     </application>
 
-        <!-- Se piden permisos para poder usar google maps -->
-        <permission
-         android:name="org.example.ejemplogooglemaps.permission.MAPS_RECEIVE"
-         android:protectionLevel="signature"/>
+    <!-- Se piden permisos para poder usar google maps -->
+    <permission
+        android:name="org.example.ejemplogooglemaps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
 
-        <!-- Permmiso para recibir informacion-->
-        <uses-permission
-         android:name="org.example.ejemplogooglemaps.permission.MAPS_RECEIVE"/>
+    <!-- Permmiso para recibir informacion -->
+    <uses-permission android:name="org.example.ejemplogooglemaps.permission.MAPS_RECEIVE" />
 
-        <!-- permiso para leer informacion -->
-        <uses-permission
-         android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <!-- permiso para leer informacion -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
-        <!-- Permisos de coneccion -->
-        <uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Permisos de coneccion -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-        <!-- Se piden permisos para poder escribir en el calendario -->
-        <uses-permission android:name="android.permission.READ_CALENDAR" >
-        </uses-permission>
-        <uses-permission android:name="android.permission.WRITE_CALENDAR" >
-        </uses-permission>
+    <!-- Se piden permisos para poder escribir en el calendario -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" >
+    </uses-permission>
 
-        <!-- Se agrega el permiso para que la aplicación tenga acceso a Internet -->
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!-- Se agrega el permiso para que la aplicación tenga acceso a Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
-        <!--
+    <!--
              The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
              Google Maps Android API v2, but are recommended.
-        -->
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
