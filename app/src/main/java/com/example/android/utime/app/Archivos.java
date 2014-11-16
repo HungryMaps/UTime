@@ -14,8 +14,13 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+// Activity para hacer el manejo de archivos
+
 public class Archivos extends ActionBarActivity {
 
+    /*
+    * Se obtienen los archivos del almacenamiento externo y se filtran
+    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +43,6 @@ public class Archivos extends ActionBarActivity {
         for(int i=0; i<lista.length; i++){
             Toast.makeText(this, lista[i].getName(), Toast.LENGTH_LONG).show();
         }
-
     }
 
 
