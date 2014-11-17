@@ -70,6 +70,10 @@
             android:name=".Archivos"
             android:label="@string/title_activity_archivos" >
         </activity>
+        <activity
+            android:name=".PDF"
+            android:label="@string/title_activity_pdf" >
+        </activity>
     </application>
 
     <!-- Se piden permisos para poder usar google maps -->
