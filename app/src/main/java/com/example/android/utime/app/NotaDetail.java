@@ -30,8 +30,8 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 
-public class NotaDetail extends Activity implements android.view.View.OnClickListener {
-
+public class NotaDetail extends Activity {
+//implements android.view.View.OnClickListener
     Button btnSave;
     Button btnDelete;
     EditText editTextNameNota;
@@ -55,8 +55,6 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nota_detail);
 
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
 
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
@@ -158,11 +156,11 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        try {
+        /*try {
             populateFields();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -213,8 +211,8 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
                     note.close();
                     note = null;
                 }
-                if(mRowId != null){
-                    sqlControlador.deleteNota(mRowId);
+                if(_Nota_Id != 0){
+                    sqlControlador.deleteNota(_Nota_Id);
                 }
                 finish();
 
@@ -239,7 +237,7 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
         nota.nameNota = editTextNameNota.getText().toString();
         nota.nota_ID = _Nota_Id;
 
-        if(mRowId == null){
+        if(_Nota_Id == 0){
             _Nota_Id = repo.insertNota(nota, nombreUsuario);
             Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
 
@@ -247,6 +245,8 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
             repo.updateNota(nota, nombreUsuario);
             Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
         }
+
+        returnHome();
     }
 
     /**
@@ -256,8 +256,8 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
      */
     private void populateFields() throws SQLException {
 
-        if (mRowId != null) {
-            note = mDbHelper.fetchNote(mRowId);
+        if (_Nota_Id != 0) {
+            note = mDbHelper.fetchNote(_Nota_Id);
             startManagingCursor(note);
             mTitleText.setText(note.getString(
                     note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
@@ -271,7 +271,7 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
     /**
      * Al hacer click en los botones me permite completar una accion
      * @param view
-     */
+
     public void onClick(View view) {
         if (view == findViewById(R.id.btnSave)) {
             SQLControlador repo = new SQLControlador(this);
@@ -296,7 +296,7 @@ public class NotaDetail extends Activity implements android.view.View.OnClickLis
             returnHome(); // para que vuelva a la pagina de notas
         }
     }
-
+*/
     /**
      * Metodo que permite volver a la página principal
      */
