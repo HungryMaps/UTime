@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/*
+* Clase que extiende de la librería incluida para presentar los PDF
+* */
 public class PDF extends net.sf.andpdf.pdfviewer.PdfViewerActivity {
 
     @Override
@@ -11,7 +14,6 @@ public class PDF extends net.sf.andpdf.pdfviewer.PdfViewerActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_pdf);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,6 +33,10 @@ public class PDF extends net.sf.andpdf.pdfviewer.PdfViewerActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*
+    * Métodos empleados para complementar el uso de la librería PDFViewer incluida
+    * */
 
     public int getPreviousPageImageResource() {
         return R.drawable.left_arrow;
