@@ -1,7 +1,8 @@
 /*
  * Autores: Jennifer Ledezma
  *          Ana Laura Berdasco
- * Clase NotaDetail: Mantiene la conexión entre las funciones propias de sql y la interfaz
+ * Clase NotaDetail: Mantiene la conexión entre las funciones propias de sql y el interfaz para
+ *                   Agregar, Borrar o AActualizar una nota
  */
 
 package com.example.android.utime.app;
@@ -40,7 +41,6 @@ public class NotaDetail extends Activity {
     private DBhelper mDbHelper;
     private SQLControlador sqlControlador;
     public static String curText = "";
-
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -162,7 +162,6 @@ public class NotaDetail extends Activity {
      * @param item
      * @return
      */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -179,7 +178,6 @@ public class NotaDetail extends Activity {
                                 "Paula Lopez, " +
                                 "Joan Marchena, " +
                                 "David Ramirez\n\n" +
-
                                 "UTime\n\n"
                                 + "If there is any bug is found please freely e-mail us: " +
                                 "\n\tutime@gmail.com"
@@ -229,7 +227,9 @@ public class NotaDetail extends Activity {
         }
         returnHome();  //Actualiza la informacion
     }
-
+    /**
+     * Metodo auxiliar que se encarga de hacer la funcionalidad de Borrar una nota
+     */
     private void deleteState() {
         SQLControlador erase = new SQLControlador(this);
         erase.deleteNota(_Nota_Id);
