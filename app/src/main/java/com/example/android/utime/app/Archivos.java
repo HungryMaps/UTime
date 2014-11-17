@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +20,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// Activity para hacer el manejo de archivos
+/*
+ * Autor: David Ramírez
+ * Activity para hacer el manejo de archivos
+ */
 
 public class Archivos extends ListActivity {
 
@@ -68,7 +70,9 @@ public class Archivos extends ListActivity {
         openPdfIntent(path);
     }
 
-
+    /*
+    * Inicia el Intent para que se presenten los PDF
+    * */
     private void openPdfIntent(String path)
     {
         try
@@ -126,6 +130,5 @@ public class Archivos extends ListActivity {
         public boolean hasStableIds() {
             return true;
         }
-
     }
 }
