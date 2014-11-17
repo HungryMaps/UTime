@@ -249,6 +249,20 @@ public class NotaDetail extends Activity {
         returnHome();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * Metodo que  guarda una nota que no tiene nombre
      * con ayuda de excepciones guarda la nota con un id
