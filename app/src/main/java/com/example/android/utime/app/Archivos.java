@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import net.sf.andpdf.pdfviewer.PdfViewerActivity;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -21,9 +23,10 @@ import java.util.List;
 
 // Activity para hacer el manejo de archivos
 
-public class Archivos extends ListActivity implements android.view.View.OnClickListener {
+public class Archivos extends ListActivity {
 
     TextView archivo_id;
+    File[] lista;
     /*
     * Se obtienen los archivos del almacenamiento externo y se filtran
     * */
@@ -35,7 +38,7 @@ public class Archivos extends ListActivity implements android.view.View.OnClickL
         FileFilter filtro = new FileFilter() {
             @Override
             public boolean accept(File file) {
-                if (file.getName().endsWith(".txt")) {
+                if (file.getName().endsWith(".pdf")) {
                     return true;
                 }
                 return false;
@@ -46,7 +49,7 @@ public class Archivos extends ListActivity implements android.view.View.OnClickL
         File sdDir = Environment.getExternalStorageDirectory();
         String path = sdDir.getPath()+"/Download";
         File descargasDir = new File(path);
-        File[] lista = descargasDir.listFiles(filtro);
+        lista = descargasDir.listFiles(filtro);
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < lista.length; ++i) {
@@ -55,21 +58,32 @@ public class Archivos extends ListActivity implements android.view.View.OnClickL
 
         final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-            }
-        });
     }
-
 
     @Override
-    public void onClick(View view) {
+    protected void onListItemClick(ListView l, View v, int position, long id)
+    {
+        super.onListItemClick(l, v, position, id);
+        String path = lista[(int)id].getAbsolutePath();
+        openPdfIntent(path);
     }
 
-        @Override
+
+    private void openPdfIntent(String path)
+    {
+        try
+        {
+            final Intent intent = new Intent(Archivos.this, PDF.class);
+            intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, path);
+            startActivity(intent);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.archivos, menu);
