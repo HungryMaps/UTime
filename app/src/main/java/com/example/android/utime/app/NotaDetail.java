@@ -31,9 +31,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 public class NotaDetail extends Activity {
-//implements android.view.View.OnClickListener
-    Button btnSave;
-    Button btnDelete;
+
     EditText editTextNameNota;
     EditText editTextComentarioNota;
     private int _Nota_Id = 0;
@@ -55,13 +53,8 @@ public class NotaDetail extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nota_detail);
 
-
         editTextNameNota = (EditText) findViewById(R.id.editTextNameNota);
         editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
-       // editTextComentarioNota = (EditText) findViewById(R.id.editTextComentarioNota);
-        //btnSave.setOnClickListener(this);
-        //btnDelete.setOnClickListener(this);
-
         _Nota_Id = 0;
         Intent intent = getIntent();
         _Nota_Id = intent.getIntExtra("nota_Id", 0);
@@ -245,24 +238,9 @@ public class NotaDetail extends Activity {
             repo.updateNota(nota, nombreUsuario);
             Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
         }
-
-        returnHome();
+        returnHome();  //Actualiza la informacion
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     /**
      * Metodo que  guarda una nota que no tiene nombre
      * con ayuda de excepciones guarda la nota con un id
@@ -282,35 +260,6 @@ public class NotaDetail extends Activity {
         }
     }
 
-    /**
-     * Al hacer click en los botones me permite completar una accion
-     * @param view
-
-    public void onClick(View view) {
-        if (view == findViewById(R.id.btnSave)) {
-            SQLControlador repo = new SQLControlador(this);
-            Nota nota = new Nota();
-
-            nota.comentarioNota = editTextComentarioNota.getText().toString();
-            nota.nameNota = editTextNameNota.getText().toString();
-            nota.nota_ID = _Nota_Id;
-
-            if (_Nota_Id == 0) {
-                _Nota_Id = repo.insertNota(nota, nombreUsuario);
-                Toast.makeText(this, "Has agregado una nota", Toast.LENGTH_SHORT).show();
-            } else {
-                repo.updateNota(nota, nombreUsuario);
-                Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
-            }
-            returnHome();// para que vuelva a la pagina de notas
-        } else if (view == findViewById(R.id.btnDelete)) {
-            SQLControlador erase = new SQLControlador(this);
-            erase.deleteNota(_Nota_Id);
-            Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
-            returnHome(); // para que vuelva a la pagina de notas
-        }
-    }
-*/
     /**
      * Metodo que permite volver a la página principal
      */
