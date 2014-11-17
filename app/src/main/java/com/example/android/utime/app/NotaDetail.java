@@ -27,8 +27,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.SQLException;
-
 public class NotaDetail extends Activity {
 
     private EditText editTextNameNota;
@@ -233,27 +231,8 @@ public class NotaDetail extends Activity {
     private void deleteState() {
         SQLControlador erase = new SQLControlador(this);
         erase.deleteNota(_Nota_Id);
-        Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT).show();
         returnHome(); // para que vuelva a la pagina de notas*/
-    }
-
-    /**
-     * Metodo que  guarda una nota que no tiene nombre
-     * con ayuda de excepciones guarda la nota con un id
-     * @throws SQLException
-     */
-    private void populateFields() throws SQLException {
-
-        if (_Nota_Id != 0) {
-            note = mDbHelper.fetchNote(_Nota_Id);
-            startManagingCursor(note);
-            editTextNameNota.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
-            editTextComentarioNota.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
-            curText = note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota));
-        }
     }
 
     /**
