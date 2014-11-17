@@ -1,7 +1,8 @@
 /*
  * Autores: Jennifer Ledezma
  *          Ana Laura Berdasco
- * Clase NotaDetail: Mantiene la conexión entre las funciones propias de sql y la interfaz
+ * Clase NotaDetail: Mantiene la conexión entre las funciones propias de sql y el interfaz para
+ *                   Agregar, Borrar o AActualizar una nota
  */
 
 package com.example.android.utime.app;
@@ -23,17 +24,13 @@ import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.SQLException;
-
 public class NotaDetail extends Activity {
 
-    EditText editTextNameNota;
-    EditText editTextComentarioNota;
+    private EditText editTextNameNota;
+    private EditText editTextComentarioNota;
     private int _Nota_Id = 0;
     String nombreUsuario;
 
@@ -41,11 +38,7 @@ public class NotaDetail extends Activity {
     private Nota NotesDbAdapter;
     private DBhelper mDbHelper;
     private SQLControlador sqlControlador;
-
-    private EditText mTitleText;
     public static String curText = "";
-    private EditText mBodyText;
-    private Long mRowId;
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -137,7 +130,7 @@ public class NotaDetail extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         saveState();
-        outState.putSerializable(Nota.KEY_ID_NOTA, mRowId);
+        outState.putSerializable(Nota.KEY_ID_NOTA, _Nota_Id);
     }
 
     @Override
@@ -167,7 +160,6 @@ public class NotaDetail extends Activity {
      * @param item
      * @return
      */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -184,7 +176,6 @@ public class NotaDetail extends Activity {
                                 "Paula Lopez, " +
                                 "Joan Marchena, " +
                                 "David Ramirez\n\n" +
-
                                 "UTime\n\n"
                                 + "If there is any bug is found please freely e-mail us: " +
                                 "\n\tutime@gmail.com"
@@ -200,13 +191,7 @@ public class NotaDetail extends Activity {
                 return true;
             //Usuario escoge el icon de: Papelera de Reciclaje en el MenuBar
             case R.id.btnDelete:
-                if(note != null){
-                    note.close();
-                    note = null;
-                }
-                if(_Nota_Id != 0){
-                    sqlControlador.deleteNota(_Nota_Id);
-                }
+                deleteState();
                 finish();
 
                 return true;
@@ -236,28 +221,18 @@ public class NotaDetail extends Activity {
 
         }else{
             repo.updateNota(nota, nombreUsuario);
-            Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lista Actualizada", Toast.LENGTH_SHORT).show();
         }
         returnHome();  //Actualiza la informacion
     }
-
     /**
-     * Metodo que  guarda una nota que no tiene nombre
-     * con ayuda de excepciones guarda la nota con un id
-     * @throws SQLException
+     * Metodo auxiliar que se encarga de hacer la funcionalidad de Borrar una nota
      */
-    private void populateFields() throws SQLException {
-
-        if (_Nota_Id != 0) {
-            note = mDbHelper.fetchNote(_Nota_Id);
-            startManagingCursor(note);
-            mTitleText.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
-            mBodyText.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota)));
-            curText = note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_name_nota));
-        }
+    private void deleteState() {
+        SQLControlador erase = new SQLControlador(this);
+        erase.deleteNota(_Nota_Id);
+        Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT).show();
+        returnHome(); // para que vuelva a la pagina de notas*/
     }
 
     /**

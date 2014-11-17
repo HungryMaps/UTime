@@ -25,7 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Notas extends ListActivity implements android.view.View.OnClickListener {
+public class Notas extends ListActivity {
     private static final int DELETE_ID = Menu.FIRST;
     private int mNoteNumber = 1;
 
@@ -34,29 +34,12 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
     TextView nota_Id;
 
     /**
-     * Evento al dar click en la vista
-     *
-     * @param view
-     */
-    @Override
-    public void onClick(View view) {
-        if (view == findViewById(R.id.btnAdd)) {
-            Intent intent = new Intent(this, NotaDetail.class);
-            intent.putExtra("nota_Id", 0);
-            startActivity(intent);
-        }
-    }
-
-    /**
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas);
-
-        btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(this);
 
         SQLControlador repo = new SQLControlador(this);
 
@@ -114,7 +97,6 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
                                   "Paula Lopez, " +
                                   "Joan Marchena, " +
                                   "David Ramirez\n\n" +
-
                                 "UTime\n\n"
                                 + "If there is any bug is found please freely e-mail us: " +
                                 "\n\tutime@gmail.com"
@@ -129,8 +111,25 @@ public class Notas extends ListActivity implements android.view.View.OnClickList
                 dialog.show();
                 return true;
 
+            //Usuario escoge el icon Agregar una nota nueva
+            case R.id.btnAdd:
+                addState();
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /**
+     * Método auxiliar que se encarga de hacer ir al activity con los campos del
+     * requeridos para poder agregar una nota
+     */
+    private void addState() {
+        Intent intent = new Intent(this, NotaDetail.class);
+        intent.putExtra("nota_Id", 0);
+        startActivity(intent);
+    }
+
 }
