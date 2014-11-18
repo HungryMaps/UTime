@@ -281,8 +281,6 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
             currcell = (EditText) findViewById(i+2);
             dato[2] = currcell.getText().toString();
 
-            //Toast.makeText(this, dato[0]+" "+dato[1]+" "+dato[2], Toast.LENGTH_LONG).show();
-
             if(k < evaluaciones.size()){
                 if(!dato[0].equals("")){
                     SQLControlador repo = new SQLControlador(this);

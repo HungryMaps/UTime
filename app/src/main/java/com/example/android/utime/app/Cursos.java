@@ -21,27 +21,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-public class Cursos extends ListActivity implements android.view.View.OnClickListener {
+public class Cursos extends ListActivity {
 
     TextView curso_Id;
-
-    /**
-     *Evento al dar click en la vista
-     * @param view
-     */
-    @Override
-    public void onClick(View view) {
-        if (view== findViewById(R.id.btnAdd)){
-            Intent intent = new Intent(this,CursoDetail.class);
-            intent.putExtra("curso_Id",0);
-            startActivity(intent);
-        }
-    }
 
     /**
      *
@@ -96,7 +81,6 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_about:
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Cursos.this);
                 dialog.setTitle("About");
                 dialog.setMessage("Universidad de Costa Rica\n" +
