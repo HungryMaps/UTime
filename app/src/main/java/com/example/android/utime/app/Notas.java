@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -27,10 +26,7 @@ import java.util.HashMap;
 
 public class Notas extends ListActivity {
     private static final int DELETE_ID = Menu.FIRST;
-    private int mNoteNumber = 1;
 
-
-    Button btnAdd;
     TextView nota_Id;
 
     /**
