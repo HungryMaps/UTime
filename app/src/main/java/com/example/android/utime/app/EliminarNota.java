@@ -11,6 +11,10 @@ import java.sql.Statement;
 /**
  * Created by Pau on 20/11/2014.
  */
+
+/**
+ * Clase que se encarga de eliminar una nota de la base remota
+ */
 public class EliminarNota extends AsyncTask<String, Void, String> {
 
     long id_nota;
