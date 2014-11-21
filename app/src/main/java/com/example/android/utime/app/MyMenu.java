@@ -11,10 +11,14 @@
 
 package com.example.android.utime.app;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -23,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MyMenu extends ActionBarActivity {
 
@@ -152,7 +157,6 @@ public class MyMenu extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.menu_about:
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MyMenu.this);
                 dialog.setTitle("About");
                 dialog.setMessage("Universidad de Costa Rica\n" +
@@ -175,6 +179,51 @@ public class MyMenu extends ActionBarActivity {
                     }
                 });
                 dialog.show();
+                return true;
+
+            case R.id.menu_sincronizar:
+                //En el caso que la persona haga click en la opción de Sincronizar
+                AlertDialog.Builder dialogS = new AlertDialog.Builder(MyMenu.this);
+                dialogS.setTitle("Sincronizar");
+                dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
+                                "encuentran en la base de datos externa?\n" +
+                                "Tome en cuenta que los datos que no insertó teniendo conexión " +
+                                "a Internet, no se van a sincronizar."
+                );
+                dialogS.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cuando haga click en OK se van a sincronizar los datos
+                        String nombreUsuario="";
+                        // Para sacar el id del calendario
+                        String[] projection =
+                                new String[]{
+                                        CalendarContract.Calendars._ID,
+                                        CalendarContract.Calendars.NAME,
+                                        CalendarContract.Calendars.ACCOUNT_NAME,
+                                        CalendarContract.Calendars.ACCOUNT_TYPE};
+                        Cursor calCursor =
+                                getContentResolver().
+                                        query(CalendarContract.Calendars.CONTENT_URI,
+                                                projection,
+                                                CalendarContract.Calendars.VISIBLE + " = 1",
+                                                null,
+                                                CalendarContract.Calendars._ID + " ASC");
+                        if (calCursor.moveToFirst()) {
+                            do {
+                                long id = calCursor.getLong(0);
+                                String displayName = calCursor.getString(2);
+                                nombreUsuario = displayName;
+                            } while (calCursor.moveToNext());
+                        }
+                        System.out.println("nombreUsuario: " + nombreUsuario);
+                        SincronizarNotas(nombreUsuario);
+                        dialog.cancel();
+                    }
+                });
+                dialogS.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -199,6 +248,11 @@ public class MyMenu extends ActionBarActivity {
 
     public void insertarFecha() {
         ConnectFecha task = new ConnectFecha();
+        task.execute();
+    }
+
+    public void SincronizarNotas(String usuario) {
+        SincronizarNotas task = new SincronizarNotas(usuario);
         task.execute();
     }
 }
