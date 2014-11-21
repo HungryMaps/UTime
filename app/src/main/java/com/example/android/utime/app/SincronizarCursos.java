@@ -10,14 +10,19 @@ import java.sql.Statement;
 /**
  * Created by Pau on 20/11/2014.
  */
-public class SincronizarNotas extends AsyncTask<String, Void, String> {
+
+/**
+ * Clase que se encarga de conectarse con la base de datos externa y de traer los datos de los cursos del
+ * usuario específico
+ */
+public class SincronizarCursos extends AsyncTask<String, Void, String> {
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
     public String user = "Paula";
     public String pass = "Lopez123#";
     private Connection con;
     private String usuario;
 
-    public SincronizarNotas(String usuario) {
+    public SincronizarCursos(String usuario) {
         this.usuario = usuario;
     }
 
@@ -40,7 +45,7 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
             String result = "";
             try {
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from Nota WHERE idUsuario = '" + usuario + "' ;");
+                ResultSet rs = st.executeQuery("select * from Curso WHERE idUsuario = '" + usuario + "' ;");
                 ResultSetMetaData rsmd = rs.getMetaData();
 
                 while (rs.next()) {
