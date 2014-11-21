@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MyMenu extends ActionBarActivity {
 
@@ -187,7 +186,7 @@ public class MyMenu extends ActionBarActivity {
                 dialogS.setTitle("Sincronizar");
                 dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
                                 "encuentran en la base de datos externa?\n" +
-                                "Tome en cuenta que los datos que no insertó teniendo conexión " +
+                                "Tome en cuenta que los datos que insertó sin tener conexión " +
                                 "a Internet, no se van a sincronizar."
                 );
                 dialogS.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -219,6 +218,7 @@ public class MyMenu extends ActionBarActivity {
                             } while (calCursor.moveToNext());
                         }
                         System.out.println("nombreUsuario: " + nombreUsuario);
+                        SincronizarCursos(nombreUsuario);
                         SincronizarNotas(nombreUsuario);
                         dialog.cancel();
                     }
@@ -248,6 +248,11 @@ public class MyMenu extends ActionBarActivity {
 
     public void insertarFecha() {
         ConnectFecha task = new ConnectFecha();
+        task.execute();
+    }
+
+    public void SincronizarCursos(String usuario) {
+        SincronizarCursos task = new SincronizarCursos(usuario);
         task.execute();
     }
 
