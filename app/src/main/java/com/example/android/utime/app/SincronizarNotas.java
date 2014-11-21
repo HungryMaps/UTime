@@ -1,7 +1,5 @@
 package com.example.android.utime.app;
-
 import android.os.AsyncTask;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -27,7 +25,6 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
     * Método que se encarga de abrir una conexión con la base de datos remota
     * y de traer los datos de la base remota
     */
-
     @Override
     protected String doInBackground(String... strings) {
         try {
@@ -45,7 +42,6 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select * from Curso WHERE idUsuario = '" + usuario + "' ;");
                 ResultSetMetaData rsmd = rs.getMetaData();
-
                 int indice = 0;
 
                 while (rs.next()) {
@@ -55,7 +51,6 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                     result += rsmd.getColumnName(4) + ": " + rs.getString(4) + " \n ";
                     // hay que insertar estos datos en el calendario como eventos
                 }
-
                 System.out.println("Resultado: \n" + result);
 
             } catch (SQLException ex) {
