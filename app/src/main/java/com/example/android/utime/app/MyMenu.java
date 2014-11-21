@@ -251,11 +251,21 @@ public class MyMenu extends ActionBarActivity {
         task.execute();
     }
 
+    /**
+     * Se encarga de llamar al métdo que abre la conexión con la base de datos y de traer los
+     * datos de los cursos
+     * @param usuario
+     */
     public void SincronizarCursos(String usuario) {
         SincronizarCursos task = new SincronizarCursos(usuario);
         task.execute();
     }
 
+    /**
+     * Se encarga de llamar al método que abre la conexión con la base de datos y de traer los
+     * datos de las notas
+     * @param usuario
+     */
     public void SincronizarNotas(String usuario) {
         SincronizarNotas task = new SincronizarNotas(usuario);
         task.execute();

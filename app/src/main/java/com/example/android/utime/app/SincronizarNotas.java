@@ -1,7 +1,5 @@
 package com.example.android.utime.app;
-
 import android.os.AsyncTask;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
