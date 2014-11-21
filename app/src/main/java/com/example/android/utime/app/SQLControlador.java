@@ -107,22 +107,28 @@ public class SQLControlador {
      * @param curso_Id
      */
 
-    public void delete(long curso_Id) {
+    public void delete(long curso_Id, String nombreUsuario) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(Curso.TABLE, Curso.KEY_ID + "="
                 + curso_Id, null);
         db.close();
+
+        //Borrar de la base remota
+        EliminarCurso(curso_Id, nombreUsuario);
     }
 
     /**
      * Se encarga de eliminar una nota de la base de datos de manera temporal
      * @param nota_Id
      */
-    public void deleteNota(long nota_Id) {
+    public void deleteNota(long nota_Id, String usuario) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(Nota.TABLE, Nota.KEY_ID_NOTA + "="
                 + nota_Id, null);
         db.close();
+
+        //Borrar de la base remota
+        EliminarNota(nota_Id, usuario);
     }
 
     public void deleteEvaluacion (long id) {
@@ -370,18 +376,23 @@ public class SQLControlador {
     */
 
     public void InsertarNota(Nota nota, int nota_Id, String usuario) {
-        ConnectNotas task = new ConnectNotas(nota, nota_Id, usuario);
-        task.execute();
-    }
+            ConnectNotas task = new ConnectNotas(nota, nota_Id, usuario);
+            task.execute();
+        }
 
-    /**
-     * Para modificar una nota en la base de datos remota
-     * @param nota
-     * @param usuario
-     */
+        /**
+         * Para modificar una nota en la base de datos remota
+         * @param nota
+         * @param usuario
+         */
 
     public void ModificarNota(Nota nota, String usuario) {
         ModificarNota task = new ModificarNota(nota, usuario);
+        task.execute();
+    }
+
+    public void EliminarNota(long nota, String usuario){
+        EliminarNota task = new EliminarNota(nota, usuario);
         task.execute();
     }
 
@@ -402,6 +413,11 @@ public class SQLControlador {
 
     public void ModificarCurso(Curso curso, String usuario) {
         ModificarCurso task = new ModificarCurso(curso, usuario);
+        task.execute();
+    }
+
+    public void EliminarCurso(long id_curso, String usuario) {
+        EliminarCurso task = new EliminarCurso(id_curso, usuario);
         task.execute();
     }
 }
