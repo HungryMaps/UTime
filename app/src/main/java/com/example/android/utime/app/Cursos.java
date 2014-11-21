@@ -7,41 +7,26 @@
 
 package com.example.android.utime.app;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+public class Cursos extends ListActivity {
 
-public class Cursos extends ListActivity implements android.view.View.OnClickListener {
-
-    Button btnAdd,btnGetAll;
     TextView curso_Id;
-
-    /**
-     *Evento al dar click en la vista
-     * @param view
-     */
-    @Override
-    public void onClick(View view) {
-        if (view== findViewById(R.id.btnAdd)){
-            Intent intent = new Intent(this,CursoDetail.class);
-            intent.putExtra("curso_Id",0);
-            startActivity(intent);
-        }
-    }
 
     /**
      *
@@ -51,9 +36,6 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos);
-
-        btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(this);
 
         SQLControlador repo = new SQLControlador(this);
 
@@ -91,30 +73,57 @@ public class Cursos extends ListActivity implements android.view.View.OnClickLis
     }
 
     /**
-     * Seleccionar un item de la lista
+     * Permite al usuario escoger algun item del MenuBar
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Cursos.this);
+                dialog.setTitle("About");
+                dialog.setMessage("Universidad de Costa Rica\n" +
+                                "Ingeniería del Software II\n\n" +
+                                "Students: \n"+
+                                "Ana Laura Berdasco, " +
+                                "Jennifer Ledezma, " +
+                                "Paula Lopez, " +
+                                "Joan Marchena, " +
+                                "David Ramirez\n\n" +
+                                "UTime\n\n"
+                                + "If there is any bug is found please freely e-mail us: " +
+                                "\n\tutime@gmail.com"
+                );
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+                return true;
+
+            //Usuario escoge el icon Agregar una nota nueva
+            case R.id.btnAdd:
+                addState();
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    public void returnHome() {
-
-        Intent home_intent = new Intent(getApplicationContext(),
-                Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        startActivity(home_intent);
-
+    /**
+     * Método auxiliar que se encarga de hacer ir al activity con los campos del
+     * requeridos para poder agregar una nota
+     */
+    private void addState() {
+        Intent intent = new Intent(this, CursoDetail.class);
+        intent.putExtra("curso_Id", 0);
+        startActivity(intent);
     }
-
 
 } //termina clase Cursos
