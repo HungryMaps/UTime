@@ -182,6 +182,7 @@ public class MyMenu extends ActionBarActivity {
                 return true;
 
             case R.id.menu_sincronizar:
+                //En el caso que la persona haga click en la opción de Sincronizar
                 AlertDialog.Builder dialogS = new AlertDialog.Builder(MyMenu.this);
                 dialogS.setTitle("Sincronizar");
                 dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
@@ -194,6 +195,7 @@ public class MyMenu extends ActionBarActivity {
                     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //Cuando haga click en OK se van a sincronizar los datos
                         String nombreUsuario="";
                         // Para sacar el id del calendario
                         String[] projection =
