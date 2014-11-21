@@ -372,7 +372,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         // Para que se use el botón de borrar
         else if (view== findViewById(R.id.btnDelete)){
             SQLControlador erase = new SQLControlador(this);
-            erase.delete(_Curso_Id);
+            erase.delete(_Curso_Id, nombreUsuario);
             Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
             returnHome(); // para que vuelva a la pagina de cursos
         }

@@ -78,7 +78,6 @@ public class NotaDetail extends Activity {
             do {
                 long id = calCursor.getLong(0);
                 String displayName = calCursor.getString(2);
-                Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
                 nombreUsuario = displayName;
             } while (calCursor.moveToNext());
         }
@@ -230,7 +229,7 @@ public class NotaDetail extends Activity {
      */
     private void deleteState() {
         SQLControlador erase = new SQLControlador(this);
-        erase.deleteNota(_Nota_Id);
+        erase.deleteNota(_Nota_Id, nombreUsuario);
         Toast.makeText(this, "Nota Eliminada", Toast.LENGTH_SHORT).show();
         returnHome(); // para que vuelva a la pagina de notas*/
     }
