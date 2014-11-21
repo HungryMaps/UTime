@@ -10,6 +10,11 @@ import java.sql.Statement;
 /**
  * Created by Pau on 20/11/2014.
  */
+
+/**
+ * Clase que se encarga de conectarse con la base de datos externa y de traer los datos de los cursos del
+ * usuario específico
+ */
 public class SincronizarCursos extends AsyncTask<String, Void, String> {
     private static String databaseBaseURL = "jdbc:mysql://Paula.db.4676399.hostedresource.com:3306/Paula";
     public String user = "Paula";
