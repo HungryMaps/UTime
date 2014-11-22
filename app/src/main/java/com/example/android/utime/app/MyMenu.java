@@ -47,8 +47,6 @@ public class MyMenu extends ActionBarActivity {
         Button botonCalendario = (Button)findViewById(R.id.caledario);
         Button botonArchivos = (Button)findViewById(R.id.archivos);
 
-        Activity activity;
-
         /**
          *Método que captura el boton al que se le ha dado click
          */
@@ -226,6 +224,8 @@ public class MyMenu extends ActionBarActivity {
                         }
                         System.out.println("nombreUsuario: " + nombreUsuario);
                         String exito = "";
+
+                        //Revisar si hay usuario y si hay conexión a internet
                         if(!nombreUsuario.equals("") && isNetworkAvailable()){
                             SincronizarCursos(nombreUsuario);
                             SincronizarNotas(nombreUsuario);
@@ -233,10 +233,12 @@ public class MyMenu extends ActionBarActivity {
                             exito = "Sincronización exitosa!";
                         }
                         else{
+                            //Si no hay internet no se hace nada
                             if(!isNetworkAvailable()){
                                 exito = "NO HAY CONEXIÓN A INTERNET.";
                                 dialog.cancel();
                             }
+                            //Si no hay usuario, no se hace nada
                             if(nombreUsuario.equals("")) {
                                 dialog.cancel();
                                 exito = "Debe de ingresar un usuario para poder sincronizar.";

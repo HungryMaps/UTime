@@ -53,7 +53,6 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                 result += "\n";
                 System.out.println("Resultado Notas: \n" + result);
             } catch (SQLException ex) {
-                // handle any errors
                 ex.printStackTrace();
                 System.out.println("SQLException: " + ex.getMessage());
                 System.out.println("SQLState: " + ex.getSQLState());
