@@ -1,12 +1,14 @@
 package com.example.android.utime.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,17 +20,24 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-
-public class CursoDetail extends ActionBarActivity implements android.view.View.OnClickListener {
-
-    // Variable Global para ver cuantos spinners hay visibles
-    private int contadorSpinners = 0;
+public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
 
     private Button btnSave ,  btnDelete, btnEvaluacion;
     private EditText editTextName;
     private EditText editTextProfesor;
     private EditText [] editTextAula = new EditText[5];
+    private int _Curso_Id=0;
+    String nombreUsuario;
+    View vista;
 
+    private Cursor course;
+    private Curso CursoDbAdapter;
+    private DBhelper mDbHelper;
+    private SQLControlador sqlControlador;
+    public static String curText = "";
+
+    // Variable Global para ver cuantos spinners hay visibles
+    private int contadorSpinners = 0;
     // Variables para guardar los combobox que contienen los posibles días y horas
     // Así como los posibles valores
     private Spinner[][] spinners = new Spinner[5][3];
@@ -36,9 +45,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     private String horasi_spinner[];
     private String horasf_spinner[];
 
-    private int _Curso_Id=0;
 
-    String nombreUsuario;
+
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -46,37 +54,39 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_detail);
 
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
+        // btnSave = (Button) findViewById(R.id.btnSave);
+        // btnDelete = (Button) findViewById(R.id.btnDelete);
         btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
+        _Curso_Id = 0;
 
-        for(int k=0; k<5; k++){
-            for(int i=0; i<3; i++){
-                String spinner = "spinner"+Integer.toString(k)+Integer.toString(i);
+        Intent intent = getIntent();
+        _Curso_Id = intent.getIntExtra("curso_Id", 0);
+        SQLControlador repo = new SQLControlador(this);
+        Curso curso = new Curso();
+        curso = repo.getCursoById(_Curso_Id);
+
+
+
+        for (int k = 0; k < 5; k++) {
+            for (int i = 0; i < 3; i++) {
+                String spinner = "spinner" + Integer.toString(k) + Integer.toString(i);
                 int id = getResources().getIdentifier(spinner, "id", getPackageName());
                 spinners[k][i] = (Spinner) findViewById(id);
             }
         }
 
-        for(int k=0; k<5; k++){
-                String campo = "editTextAula"+Integer.toString(k);
-                int id = getResources().getIdentifier(campo, "id", getPackageName());
-                editTextAula[k] = (EditText) findViewById(id);
+        for (int k = 0; k < 5; k++) {
+            String campo = "editTextAula" + Integer.toString(k);
+            int id = getResources().getIdentifier(campo, "id", getPackageName());
+            editTextAula[k] = (EditText) findViewById(id);
         }
 
-        btnSave.setOnClickListener(this);
-        btnDelete.setOnClickListener(this);
-        btnEvaluacion.setOnClickListener(this);
-
-        _Curso_Id =0;
-        Intent intent = getIntent();
-        _Curso_Id =intent.getIntExtra("curso_Id", 0);
-        SQLControlador repo = new SQLControlador(this);
-        Curso curso = new Curso();
-        curso = repo.getCursoById(_Curso_Id);
+        // btnSave.setOnClickListener(this);
+        //btnDelete.setOnClickListener(this);
+        //   btnEvaluacion.setOnClickListener(this);
 
         array_spinner=new String[6];
         array_spinner[0]="Lunes";
@@ -309,6 +319,19 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveState();
+        outState.putSerializable(Curso.KEY_ID, _Curso_Id);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveState();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.curso_detail, menu);
         return true;
@@ -319,11 +342,109 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            //Caso que el usuario escoge about del Menu: Muestra información de la app
+            case R.id.menu_about:
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(CursoDetail.this);
+                dialog.setTitle("About");
+                dialog.setMessage("Universidad de Costa Rica\n" +
+                                "Ingeniería del Software II\n\n" +
+                                "Students: \n"+
+                                "Ana Laura Berdasco, " +
+                                "Jennifer Ledezma, " +
+                                "Paula Lopez, " +
+                                "Joan Marchena, " +
+                                "David Ramirez\n\n" +
+                                "UTime\n\n"
+                                + "If there is any bug is found please freely e-mail us: " +
+                                "\n\tutime@gmail.com"
+                );
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+                return true;
+            //Usuario escoge el icon de: Papelera de Reciclaje en el MenuBar
+            case R.id.btnDelete:
+                deleteState();
+                finish();
+
+                return true;
+            //Usuario escoge el icon de: Guardar en el MenuBar
+            case R.id.btnSave:
+                saveState();
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Metodo que se encarga de hacer la funcionalidad de Guardar los cambios de una nota
+     */
+    private void saveState() {
+        SQLControlador repo = new SQLControlador(this);
+        Curso curso = new Curso();
+        curso.dias = "";
+        curso.horas = "";
+        curso.aula = "";
+        for(int i=0; i<contadorSpinners; i++){
+            curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
+            curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
+            curso.aula += editTextAula[i].getText().toString() + ",";
+        }
+
+        Time now = new Time();
+        now.setToNow();
+        curso.anno = Integer.toString(now.year);
+        if(now.month < 7){
+            curso.semestre = "I";
+        }else{
+            curso.semestre = "II";
+        }
+        curso.profesor=editTextProfesor.getText().toString();
+        curso.name=editTextName.getText().toString();
+        curso.curso_ID=_Curso_Id;
+
+        if (_Curso_Id==0) {
+            _Curso_Id = repo.insert(curso, nombreUsuario);
+
+            Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+            repo.update(curso, nombreUsuario);
+            Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
+        }
+
+        if (vista== findViewById(R.id.btnEvaluacion)){
+            _Curso_Id =0;
+            Intent intent = getIntent();
+            _Curso_Id =intent.getIntExtra("curso_Id", 0);
+            curso = repo.getCursoById(_Curso_Id);
+
+            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+            Intent in = new Intent(CursoDetail.this, Evaluacion.class);
+            // Envía parámetro de id del curso
+            in.putExtra("curso_ID",curso.curso_ID);
+            startActivity(in);
+        }
+
+        returnHome();
+
+
+    }
+
+    private void deleteState() {
+        SQLControlador erase = new SQLControlador(this);
+        erase.delete(_Curso_Id, nombreUsuario);
+        Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT).show();
+        returnHome(); // para que vuelva a la pagina de notas*/
     }
 
     /**
@@ -331,6 +452,8 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
      * @param view
      */
     public void onClick(View view) {
+
+        view = vista;
         if (view == findViewById(R.id.btnSave)){
             SQLControlador repo = new SQLControlador(this);
             Curso curso = new Curso();
@@ -338,9 +461,9 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
             curso.horas = "";
             curso.aula = "";
             for(int i=0; i<contadorSpinners; i++){
-                    curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
-                    curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
-                    curso.aula += editTextAula[i].getText().toString() + ",";
+                curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
+                curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
+                curso.aula += editTextAula[i].getText().toString() + ",";
             }
 
             Time now = new Time();
@@ -361,10 +484,10 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
                 Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
 
             }
-                else{
+            else{
                 repo.update(curso, nombreUsuario);
                 Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
-                }
+            }
 
             returnHome();// para que vuelva a la pagina de cursos
         }
@@ -379,18 +502,18 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
 
         // para que se use el botón de evaluación
         else if (view== findViewById(R.id.btnEvaluacion)){
-                _Curso_Id =0;
-                Intent intent = getIntent();
-                _Curso_Id =intent.getIntExtra("curso_Id", 0);
-                SQLControlador repo = new SQLControlador(this);
-                Curso curso = new Curso();
-                curso = repo.getCursoById(_Curso_Id);
+            _Curso_Id =0;
+            Intent intent = getIntent();
+            _Curso_Id =intent.getIntExtra("curso_Id", 0);
+            SQLControlador repo = new SQLControlador(this);
+            Curso curso = new Curso();
+            curso = repo.getCursoById(_Curso_Id);
 
-                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-                Intent in = new Intent(CursoDetail.this, Evaluacion.class);
-                // Envía parámetro de id del curso
-                in.putExtra("curso_ID",curso.curso_ID);
-                startActivity(in);
+            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+            Intent in = new Intent(CursoDetail.this, Evaluacion.class);
+            // Envía parámetro de id del curso
+            in.putExtra("curso_ID",curso.curso_ID);
+            startActivity(in);
         }
     }
 
@@ -399,7 +522,7 @@ public class CursoDetail extends ActionBarActivity implements android.view.View.
      */
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(),
-         Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Cursos.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
 
