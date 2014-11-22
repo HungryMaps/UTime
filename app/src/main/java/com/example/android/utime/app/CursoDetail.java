@@ -385,7 +385,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
     }
 
     /**
-     * Metodo que se encarga de hacer la funcionalidad de Guardar los cambios de una nota
+     * Metodo que se encarga de hacer la funcionalidad de Guardar los cambios de una curso
      */
     private void saveState() {
         SQLControlador repo = new SQLControlador(this);
@@ -437,14 +437,13 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
 
         returnHome();
 
-
     }
 
     private void deleteState() {
         SQLControlador erase = new SQLControlador(this);
         erase.delete(_Curso_Id, nombreUsuario);
         Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT).show();
-        returnHome(); // para que vuelva a la pagina de notas*/
+        returnHome(); // para que vuelva a la pagina de cursos*/
     }
 
     /**
@@ -556,7 +555,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
      * Ubica las posibles combobox y vuelve invisible una más
      * @param view
      */
-
     public void Quitar(View view){
         if(contadorSpinners > 1) {
             for(int i=0;i<3;i++) {
