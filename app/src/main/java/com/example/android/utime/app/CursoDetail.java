@@ -1,31 +1,32 @@
 package com.example.android.utime.app;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.text.format.Time;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+        import android.annotation.TargetApi;
+        import android.app.Activity;
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.database.Cursor;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.provider.CalendarContract;
+        import android.text.format.Time;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.Spinner;
+        import android.widget.Toast;
 
 
 public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
 
-    private Button btnSave ,  btnDelete, btnEvaluacion;
+    private Button btnEvaluacion;
     private EditText editTextName;
     private EditText editTextProfesor;
     private EditText [] editTextAula = new EditText[5];
+
     private int _Curso_Id=0;
     String nombreUsuario;
     View vista;
@@ -45,9 +46,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
     private String horasi_spinner[];
     private String horasf_spinner[];
 
-
-
-
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +58,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
-        _Curso_Id = 0;
-
-        Intent intent = getIntent();
-        _Curso_Id = intent.getIntExtra("curso_Id", 0);
-        SQLControlador repo = new SQLControlador(this);
-        Curso curso = new Curso();
-        curso = repo.getCursoById(_Curso_Id);
-
 
 
         for (int k = 0; k < 5; k++) {
@@ -84,9 +74,17 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             editTextAula[k] = (EditText) findViewById(id);
         }
 
-        // btnSave.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
         //btnDelete.setOnClickListener(this);
-        //   btnEvaluacion.setOnClickListener(this);
+        btnEvaluacion.setOnClickListener(this);
+
+
+        _Curso_Id =0;
+        Intent intent = getIntent();
+        _Curso_Id =intent.getIntExtra("curso_Id", 0);
+        SQLControlador repo = new SQLControlador(this);
+        Curso curso = new Curso();
+        curso = repo.getCursoById(_Curso_Id);
 
         array_spinner=new String[6];
         array_spinner[0]="Lunes";
@@ -96,6 +94,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         array_spinner[4]="Viernes";
         array_spinner[5]="Sabado";
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, array_spinner);
+
         for(int i=0; i<5; i++){
             spinners[i][0].setAdapter(adapter);
         }
@@ -319,19 +318,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        saveState();
-        outState.putSerializable(Curso.KEY_ID, _Curso_Id);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        saveState();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.curso_detail, menu);
         return true;
@@ -434,7 +420,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             in.putExtra("curso_ID",curso.curso_ID);
             startActivity(in);
         }
-
         returnHome();
 
     }
@@ -450,57 +435,10 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
      * Al hacer click en los botones me permite completar una accion
      * @param view
      */
+    @Override
     public void onClick(View view) {
 
-        view = vista;
-        if (view == findViewById(R.id.btnSave)){
-            SQLControlador repo = new SQLControlador(this);
-            Curso curso = new Curso();
-            curso.dias = "";
-            curso.horas = "";
-            curso.aula = "";
-            for(int i=0; i<contadorSpinners; i++){
-                curso.dias += spinners[i][0].getSelectedItem().toString() + ",";
-                curso.horas +=  spinners[i][1].getSelectedItem().toString() + "," + spinners[i][2].getSelectedItem().toString() + ",";
-                curso.aula += editTextAula[i].getText().toString() + ",";
-            }
-
-            Time now = new Time();
-            now.setToNow();
-            curso.anno = Integer.toString(now.year);
-            if(now.month < 7){
-                curso.semestre = "I";
-            }else{
-                curso.semestre = "II";
-            }
-            curso.profesor=editTextProfesor.getText().toString();
-            curso.name=editTextName.getText().toString();
-            curso.curso_ID=_Curso_Id;
-
-            if (_Curso_Id==0) {
-                _Curso_Id = repo.insert(curso, nombreUsuario);
-
-                Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
-
-            }
-            else{
-                repo.update(curso, nombreUsuario);
-                Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
-            }
-
-            returnHome();// para que vuelva a la pagina de cursos
-        }
-
-        // Para que se use el botón de borrar
-        else if (view== findViewById(R.id.btnDelete)){
-            SQLControlador erase = new SQLControlador(this);
-            erase.delete(_Curso_Id, nombreUsuario);
-            Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT);
-            returnHome(); // para que vuelva a la pagina de cursos
-        }
-
-        // para que se use el botón de evaluación
-        else if (view== findViewById(R.id.btnEvaluacion)){
+        if (view== findViewById(R.id.btnEvaluacion)){
             _Curso_Id =0;
             Intent intent = getIntent();
             _Curso_Id =intent.getIntExtra("curso_Id", 0);
@@ -511,7 +449,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
             Intent in = new Intent(CursoDetail.this, Evaluacion.class);
             // Envía parámetro de id del curso
-            in.putExtra("curso_ID",curso.curso_ID);
+            in.putExtra("curso_ID", curso.curso_ID);
             startActivity(in);
         }
     }
