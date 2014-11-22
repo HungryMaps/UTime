@@ -1,3 +1,10 @@
+/*
+ * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco
+ * Clase CursoDetail: Mantiene la conexión entre las funciones propias de sql y el interfaz para
+ *                   Agregar, Borrar o AActualizar un curso
+ */
+
 package com.example.android.utime.app;
 
         import android.annotation.TargetApi;
@@ -18,7 +25,6 @@ package com.example.android.utime.app;
         import android.widget.EditText;
         import android.widget.Spinner;
         import android.widget.Toast;
-
 
 public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
 
@@ -52,13 +58,10 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_detail);
 
-        // btnSave = (Button) findViewById(R.id.btnSave);
-        // btnDelete = (Button) findViewById(R.id.btnDelete);
         btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
-
 
         for (int k = 0; k < 5; k++) {
             for (int i = 0; i < 3; i++) {
@@ -74,10 +77,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             editTextAula[k] = (EditText) findViewById(id);
         }
 
-        //btnSave.setOnClickListener(this);
-        //btnDelete.setOnClickListener(this);
         btnEvaluacion.setOnClickListener(this);
-
 
         _Curso_Id =0;
         Intent intent = getIntent();
