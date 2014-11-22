@@ -49,12 +49,17 @@ public class SincronizarCursos extends AsyncTask<String, Void, String> {
                 ResultSetMetaData rsmd = rs.getMetaData();
 
                 while (rs.next()) {
-                    result += rsmd.getColumnName(1) + ": " + rs.getString(1) + " | ";
-                    result += rsmd.getColumnName(2) + ": " + rs.getInt(2) + " | ";
-                    result += rsmd.getColumnName(3) + ": " + rs.getString(3) + " | ";
-                    result += rsmd.getColumnName(4) + ": " + rs.getString(4) + " \n ";
+                    result += rsmd.getColumnName(1) + ": " + rs.getString(1) + "|";
+                    result += rsmd.getColumnName(2) + ": " + rs.getInt(2) + "|";
+                    result += rsmd.getColumnName(3) + ": " + rs.getString(3) + "|";
+                    result += rsmd.getColumnName(4) + ": " + rs.getString(4) + "|";
+                    result += rsmd.getColumnName(5) + ": " + rs.getString(5) + "|";
+                    result += rsmd.getColumnName(6) + ": " + rs.getString(6) + "|";
+                    result += rsmd.getColumnName(7) + ": " + rs.getString(7) + "|";
+                    result += "\n";
                 }
-                System.out.println("Resultado: \n" + result);
+                result += "\n";
+                System.out.println("Resultado Cursos: \n" + result);
             } catch (SQLException ex) {
                 // handle any errors
                 ex.printStackTrace();
