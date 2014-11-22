@@ -24,7 +24,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Cursos extends ListActivity {
+
+    private static final int DELETE_ID = Menu.FIRST;
 
     TextView curso_Id;
 
@@ -118,7 +121,7 @@ public class Cursos extends ListActivity {
 
     /**
      * Método auxiliar que se encarga de hacer ir al activity con los campos del
-     * requeridos para poder agregar una nota
+     * requeridos para poder agregar un curso
      */
     private void addState() {
         Intent intent = new Intent(this, CursoDetail.class);
