@@ -49,5 +49,6 @@
     <string name="menu_nuevo"></string>
     <string name="title_activity_archivos">Archivos</string>
     <string name="title_activity_pdf">PDF</string>
+    <string name="menu_evaluacion">Evaluación</string>
 
 </resources>

@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/Time.iml" filepath="$PROJECT_DIR$/Time.iml" />
+=======
+>>>>>>> 0d19ccd15b8e50a6395d9952ddda650e0e66b878
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/uTime.iml" filepath="$PROJECT_DIR$/uTime.iml" />
     </modules>
