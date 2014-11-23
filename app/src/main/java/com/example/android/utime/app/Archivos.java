@@ -29,6 +29,7 @@ public class Archivos extends ListActivity {
 
     TextView archivo_id;
     File[] lista;
+    String Curso_Name;
     /*
     * Se obtienen los archivos del almacenamiento externo y se filtran
     * */
@@ -36,6 +37,11 @@ public class Archivos extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archivos);
+
+        Intent intent = getIntent();
+        Curso_Name = intent.getStringExtra("curso_name");
+
+
 
         FileFilter filtro = new FileFilter() {
             @Override
@@ -62,7 +68,7 @@ public class Archivos extends ListActivity {
         listView.setAdapter(adapter);
     }
 
-    @Override
+   @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
         super.onListItemClick(l, v, position, id);

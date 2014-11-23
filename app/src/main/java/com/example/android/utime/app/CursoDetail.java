@@ -15,6 +15,7 @@ package com.example.android.utime.app;
         import android.database.Cursor;
         import android.os.Build;
         import android.os.Bundle;
+        import android.os.Environment;
         import android.provider.CalendarContract;
         import android.text.format.Time;
         import android.view.Menu;
@@ -25,6 +26,8 @@ package com.example.android.utime.app;
         import android.widget.EditText;
         import android.widget.Spinner;
         import android.widget.Toast;
+
+        import java.io.File;
 
 public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
 
@@ -398,7 +401,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
 
         if (_Curso_Id==0) {
             _Curso_Id = repo.insert(curso, nombreUsuario);
-
+            crearCarpeta(curso.name);
             Toast.makeText(this,"Se agrego un nuevo Curso",Toast.LENGTH_SHORT).show();
 
         }
@@ -424,11 +427,45 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
     }
 
     private void deleteState() {
+        borrarCarpeta();
         SQLControlador erase = new SQLControlador(this);
         erase.delete(_Curso_Id, nombreUsuario);
         Toast.makeText(this, "Curso Eliminado", Toast.LENGTH_SHORT).show();
         returnHome(); // para que vuelva a la pagina de cursos*/
     }
+
+
+    private void borrarCarpeta(){
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("curso_Id", 0);
+        SQLControlador repo = new SQLControlador(this);
+        Curso cur = repo.getCursoById(id);
+        if(isExternalStorageWritable()){
+            File sdDir = Environment.getExternalStorageDirectory();
+            String path = sdDir.getPath()+"/UTimeFiles/"+cur.name;
+            File file = new File(path);
+            file.delete();
+        }
+    }
+
+    private void crearCarpeta(String nombre){
+        if(isExternalStorageWritable()){
+            File sdDir = Environment.getExternalStorageDirectory();
+            String path = sdDir.getPath()+"/UTimeFiles/"+nombre;
+            File file = new File(path);
+            file.mkdir();
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Al hacer click en los botones me permite completar una accion
@@ -436,7 +473,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
      */
     @Override
     public void onClick(View view) {
-
         if (view== findViewById(R.id.btnEvaluacion)){
             _Curso_Id =0;
             Intent intent = getIntent();
@@ -449,6 +485,21 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             Intent in = new Intent(CursoDetail.this, Evaluacion.class);
             // Envía parámetro de id del curso
             in.putExtra("curso_ID", curso.curso_ID);
+            startActivity(in);
+        }
+
+        if (view== findViewById(R.id.btnArchivos)){
+            _Curso_Id =0;
+            Intent intent = getIntent();
+            _Curso_Id =intent.getIntExtra("curso_Id", 0);
+            SQLControlador repo = new SQLControlador(this);
+            Curso curso = new Curso();
+            curso = repo.getCursoById(_Curso_Id);
+
+            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+            Intent in = new Intent(CursoDetail.this, Archivos.class);
+            // Envía parámetro de id del curso
+            in.putExtra("curso_name", curso.name);
             startActivity(in);
         }
     }
