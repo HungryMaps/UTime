@@ -14,9 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.sf.andpdf.pdfviewer.PdfViewerActivity;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -27,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+/* Clase para Ver la carpeta de Download dentro de la SD externa y seleccionar los archivos */
 public class VisualizadorSD extends ListActivity {
 
     TextView archivo_id;
@@ -63,7 +62,6 @@ public class VisualizadorSD extends ListActivity {
 
         final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
-
     }
 
     @Override
@@ -154,6 +152,8 @@ public class VisualizadorSD extends ListActivity {
         }
     }
 
+
+    /* Método para copiar el archivos a la carpeta destino (es decir la del curso anterior) */
     private static void copiarArchivo(File source, File dest) throws IOException {
         FileChannel sourceChannel = null;
         FileChannel destChannel = null;
@@ -162,7 +162,7 @@ public class VisualizadorSD extends ListActivity {
             destChannel = new FileOutputStream(dest).getChannel();
             destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
         }catch(IOException e){
-
+            e.printStackTrace();
         }finally{
             sourceChannel.close();
             destChannel.close();

@@ -28,6 +28,8 @@ import java.util.List;
  * Activity para hacer el manejo de archivos
  */
 
+/* Clase para observar los archivos de la carpeta relacionada al curso seleccionado */
+
 public class Archivos extends ListActivity {
 
     TextView archivo_id;
@@ -178,6 +180,7 @@ public class Archivos extends ListActivity {
         }
     }
 
+    /* Método para borrar todos los archivos presentes en la carpeta */
     private void limpiarCarpeta(){
         for (int i = 0; i < lista.length; ++i) {
             lista[i].delete();
