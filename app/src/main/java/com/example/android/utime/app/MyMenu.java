@@ -151,6 +151,7 @@ public class MyMenu extends ActionBarActivity {
         crearCarpetaArchivos();
     }
 
+    /* Crea la carpeta que aloja todas las subcarpetas de cada curso en el almacenamiento externo */
     private void crearCarpetaArchivos(){
         if(isExternalStorageWritable()){
             File sdDir = Environment.getExternalStorageDirectory();
@@ -162,7 +163,7 @@ public class MyMenu extends ActionBarActivity {
         }
     }
 
-    /* Checks if external storage is available for read and write */
+    /* Revisa que el almacenamiento externo esté disponible */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {

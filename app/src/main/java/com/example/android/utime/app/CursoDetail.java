@@ -426,6 +426,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
 
     }
 
+    /* Método que se encarga de borrar el curso de la base de datos */
     private void deleteState() {
         borrarCarpeta();
         SQLControlador erase = new SQLControlador(this);
@@ -434,7 +435,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         returnHome(); // para que vuelva a la pagina de cursos*/
     }
 
-
+    /* Método que se encarga de borrar la carpeta relacionada al curso */
     private void borrarCarpeta(){
         Intent intent = getIntent();
         int id = intent.getIntExtra("curso_Id", 0);
@@ -448,6 +449,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         }
     }
 
+    /* Crea la carpeta para este curso dentro del directorio UTime */
     private void crearCarpeta(String nombre){
         if(isExternalStorageWritable()){
             File sdDir = Environment.getExternalStorageDirectory();
@@ -457,7 +459,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         }
     }
 
-    /* Checks if external storage is available for read and write */
+    /* Revisa que el almacenamiento externo esté disponible */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -465,7 +467,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         }
         return false;
     }
-
 
     /**
      * Al hacer click en los botones me permite completar una accion

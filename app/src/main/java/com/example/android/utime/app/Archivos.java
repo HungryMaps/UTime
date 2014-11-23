@@ -41,8 +41,6 @@ public class Archivos extends ListActivity {
         Intent intent = getIntent();
         Curso_Name = intent.getStringExtra("curso_name");
 
-
-
         FileFilter filtro = new FileFilter() {
             @Override
             public boolean accept(File file) {
