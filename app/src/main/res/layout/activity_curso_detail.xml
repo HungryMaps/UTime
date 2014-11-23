@@ -233,9 +233,17 @@
                 android:text="  Evaluación  "
                 android:id="@+id/btnEvaluacion"
                 android:background="@color/azul1"
+                android:layout_alignTop="@+id/spinner41" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Archivos  "
+                android:layout_marginLeft="10dp"
+                android:id="@+id/btnArchivos"
+                android:background="@color/verde1"
                 android:layout_alignTop="@+id/spinner41"
-                android:layout_toLeftOf="@+id/btnSave"
-                android:layout_toStartOf="@+id/btnSave" />
+                android:layout_toRightOf="@+id/btnEvaluacion"/>
 
         </RelativeLayout>
         </HorizontalScrollView>

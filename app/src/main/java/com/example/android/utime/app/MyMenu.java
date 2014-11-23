@@ -22,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +33,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class MyMenu extends ActionBarActivity {
 
@@ -148,6 +151,28 @@ public class MyMenu extends ActionBarActivity {
         }
 
         insertarFecha();
+        crearCarpetaArchivos();
+    }
+
+    /* Crea la carpeta que aloja todas las subcarpetas de cada curso en el almacenamiento externo */
+    private void crearCarpetaArchivos(){
+        if(isExternalStorageWritable()){
+            File sdDir = Environment.getExternalStorageDirectory();
+            String path = sdDir.getPath()+"/UTimeFiles";
+            File file = new File(path);
+            if(!file.exists()){
+                file.mkdir();
+            }
+        }
+    }
+
+    /* Revisa que el almacenamiento externo esté disponible */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
