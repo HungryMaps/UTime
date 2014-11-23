@@ -7,31 +7,32 @@
 
 package com.example.android.utime.app;
 
-        import android.annotation.TargetApi;
-        import android.app.Activity;
-        import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.database.Cursor;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.os.Environment;
-        import android.provider.CalendarContract;
-        import android.text.format.Time;
-        import android.view.Menu;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.Spinner;
-        import android.widget.Toast;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.CalendarContract;
+import android.text.format.Time;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-        import java.io.File;
+import java.io.File;
 
 public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
 
     private Button btnEvaluacion;
+    private Button btnArchivos;
     private EditText editTextName;
     private EditText editTextProfesor;
     private EditText [] editTextAula = new EditText[5];
@@ -62,6 +63,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         setContentView(R.layout.activity_curso_detail);
 
         btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
+        btnArchivos = (Button) findViewById(R.id.btnArchivos);
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
@@ -81,6 +83,7 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         }
 
         btnEvaluacion.setOnClickListener(this);
+        btnArchivos.setOnClickListener(this);
 
         _Curso_Id =0;
         Intent intent = getIntent();

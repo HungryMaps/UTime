@@ -74,6 +74,10 @@
             android:name=".PDF"
             android:label="@string/title_activity_pdf" >
         </activity>
+        <activity
+            android:name=".VisualizadorSD"
+            android:label="@string/title_activity_visualizador_sd" >
+        </activity>
     </application>
 
     <!-- Se piden permisos para poder usar google maps -->
