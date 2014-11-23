@@ -48,7 +48,6 @@ public class Notas extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas);
-
             SQLControlador repo = new SQLControlador(this);
             notaList = repo.getNotaList();
             if (notaList.size() != 0) {
@@ -95,6 +94,9 @@ public class Notas extends ListActivity {
         switch (item.getItemId()) {
             case R.id.menu_about:
 
+                /**
+                 * Botón en el menú que sale de los "tres puntitos", con el About de nosotros
+                 */
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Notas.this);
                 dialog.setTitle("About");
                 dialog.setMessage("Universidad de Costa Rica\n" +
@@ -120,6 +122,9 @@ public class Notas extends ListActivity {
                 return true;
 
 
+            /**
+             * Botón para sincronizar las notas
+             */
             case R.id.menu_sincronizar:
                 //En el caso que la persona haga click en la opción de Sincronizar
                 AlertDialog.Builder dialogS = new AlertDialog.Builder(Notas.this);

@@ -37,6 +37,7 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         try {
+            //Revisar si hay usuario
             if (usuario.equals("")) {
                 sinc = false;
             } else {
@@ -56,15 +57,11 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select * from Nota WHERE idUsuario = '" + usuario + "' ;");
 
-                int index = 0;
+                //Hacer la lista nueva
                 while (rs.next()) {
                     notaSinc.put("idNota", rs.getString(2));
                     notaSinc.put("nameNota", rs.getString(3));
-
                     notaListSinc.add(notaSinc);
-
-                    ++index;
-
                     result += rs.getString(3) + "|";
                     result += rs.getString(4) + "|";
                     result += "\n";
