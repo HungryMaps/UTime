@@ -18,6 +18,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -188,6 +190,7 @@ public class NotaDetail extends Activity {
                 });
                 dialog.show();
                 return true;
+
             //Usuario escoge el icon de: Papelera de Reciclaje en el MenuBar
             case R.id.btnDelete:
                 deleteState();

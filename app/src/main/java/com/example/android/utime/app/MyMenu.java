@@ -47,6 +47,9 @@ public class MyMenu extends ActionBarActivity {
         Button botonCalendario = (Button)findViewById(R.id.caledario);
         Button botonArchivos = (Button)findViewById(R.id.archivos);
 
+        boolean sincNotas =false;
+        boolean sinCursos = false;
+
         /**
          *Método que captura el boton al que se le ha dado click
          */
@@ -228,6 +231,7 @@ public class MyMenu extends ActionBarActivity {
                         //Revisar si hay usuario y si hay conexión a internet
                         if(!nombreUsuario.equals("") && isNetworkAvailable()){
                             SincronizarCursos(nombreUsuario);
+
                             SincronizarNotas(nombreUsuario);
                             dialog.cancel();
                             exito = "Sincronización exitosa!";
