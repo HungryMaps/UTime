@@ -310,7 +310,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             do {
                 long id = calCursor.getLong(0);
                 String displayName = calCursor.getString(2);
-                Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
                 nombreUsuario = displayName;
             } while (calCursor.moveToNext());
         }

@@ -12,10 +12,14 @@
 package com.example.android.utime.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -27,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MyMenu extends ActionBarActivity {
 
@@ -218,9 +223,28 @@ public class MyMenu extends ActionBarActivity {
                             } while (calCursor.moveToNext());
                         }
                         System.out.println("nombreUsuario: " + nombreUsuario);
-                        SincronizarCursos(nombreUsuario);
-                        SincronizarNotas(nombreUsuario);
-                        dialog.cancel();
+                        String exito = "";
+
+                        //Revisar si hay usuario y si hay conexión a internet
+                        if(!nombreUsuario.equals("") && isNetworkAvailable()){
+                            SincronizarCursos(nombreUsuario);
+                            SincronizarNotas(nombreUsuario);
+                            dialog.cancel();
+                            exito = "Sincronización exitosa!";
+                        }
+                        else{
+                            //Si no hay internet no se hace nada
+                            if(!isNetworkAvailable()){
+                                exito = "NO HAY CONEXIÓN A INTERNET.";
+                                dialog.cancel();
+                            }
+                            //Si no hay usuario, no se hace nada
+                            if(nombreUsuario.equals("")) {
+                                dialog.cancel();
+                                exito = "Debe de ingresar un usuario para poder sincronizar.";
+                            }
+                        }
+                        Toast.makeText(MyMenu.this, exito, Toast.LENGTH_LONG).show();
                     }
                 });
                 dialogS.show();
@@ -269,5 +293,16 @@ public class MyMenu extends ActionBarActivity {
     public void SincronizarNotas(String usuario) {
         SincronizarNotas task = new SincronizarNotas(usuario);
         task.execute();
+    }
+
+    /**
+     * Método para revisar si hay conexión a internet
+     * @return boolean
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

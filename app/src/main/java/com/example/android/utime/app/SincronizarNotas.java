@@ -47,11 +47,12 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                     result += rsmd.getColumnName(1) + ": " + rs.getString(1) + " | ";
                     result += rsmd.getColumnName(2) + ": " + rs.getInt(2) + " | ";
                     result += rsmd.getColumnName(3) + ": " + rs.getString(3) + " | ";
-                    result += rsmd.getColumnName(4) + ": " + rs.getString(4) + " \n ";
+                    result += rsmd.getColumnName(4) + ": " + rs.getString(4) + "|";
+                    result += "\n";
                 }
-                System.out.println("Resultado: \n" + result);
+                result += "\n";
+                System.out.println("Resultado Notas: \n" + result);
             } catch (SQLException ex) {
-                // handle any errors
                 ex.printStackTrace();
                 System.out.println("SQLException: " + ex.getMessage());
                 System.out.println("SQLState: " + ex.getSQLState());
