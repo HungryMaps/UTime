@@ -25,7 +25,6 @@ import java.util.List;
 public class Evaluacion extends Activity implements android.view.View.OnClickListener{
 
     private int Curso_Id=0;
-    private Button btnSave;
     private int contador = 1;
     private List<Integer> evaluaciones = new ArrayList<Integer>();
 
@@ -34,8 +33,12 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluacion);
 
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(this);
+        Button button = (Button) findViewById(R.id.btnSave);
+        button.setOnClickListener(this);
+        button = (Button) findViewById(R.id.Mas);
+        button.setOnClickListener(this);
+        button = (Button) findViewById(R.id.Menos);
+        button.setOnClickListener(this);
 
         Intent intent = getIntent();
         Curso_Id = intent.getIntExtra("curso_ID", 0);
@@ -45,14 +48,14 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
         DBhelper dbhelper = new DBhelper(getApplicationContext());
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String [] columnas =  {
-            EvaluacionPorCurso.KEY_ID,
-            EvaluacionPorCurso.KEY_Calificacion,
-            EvaluacionPorCurso.KEY_Evaluacion,
-            EvaluacionPorCurso.KEY_name,
-            EvaluacionPorCurso.KEY_ID_Curso
+                EvaluacionPorCurso.KEY_ID,
+                EvaluacionPorCurso.KEY_Calificacion,
+                EvaluacionPorCurso.KEY_Evaluacion,
+                EvaluacionPorCurso.KEY_name,
+                EvaluacionPorCurso.KEY_ID_Curso
         };
         String [] parametros = {
-            ""+Curso_Id
+                ""+Curso_Id
         };
         Cursor cursor = db.query(EvaluacionPorCurso.TABLE, columnas, EvaluacionPorCurso.KEY_ID_Curso+" = ?", parametros, null, null, null);
         TableLayout tabla = (TableLayout) findViewById(R.id.tablaEvaluacion);
@@ -88,7 +91,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
             int indice = 0;
             contador = 0;
 
-              // Se presentan las evaluaciones en el layout
+            // Se presentan las evaluaciones en el layout
             do {
 
                 evaluaciones.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_ID))));
@@ -96,36 +99,21 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
                 EditText editText = new EditText(this);
                 editText.setId(indice);
-                editText.setHint("Examen, Quiz, Tarea, etc");
+                editText.setHint("Examen,Quiz,etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_name)));
                 fila.addView(editText);
 
                 editText = new EditText(this);
                 editText.setId(indice+1);
-                editText.setHint("30 , 25 , etc");
+                editText.setHint("30,25,etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Evaluacion)));
                 fila.addView(editText);
 
                 editText = new EditText(this);
                 editText.setId(indice+2);
-                editText.setHint("90 , 75 , etc");
+                editText.setHint("90,75,etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_Calificacion)));
                 fila.addView(editText);
-
-                if(contador==0){
-                    Button Mas = new Button(this);
-                    Mas.setId(R.id.Mas);
-                    Mas.setOnClickListener(this);
-                    Mas.setText("+");
-
-                    Button Menos = new Button(this);
-                    Menos.setId(R.id.Menos);
-                    Menos.setOnClickListener(this);
-                    Menos.setText("-");
-
-                    fila.addView(Mas);
-                    fila.addView(Menos);
-                }
 
                 tabla.addView(fila);
 
@@ -139,31 +127,18 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
             EditText editText = new EditText(this);
             editText.setId(ind);
-            editText.setHint("Examen, Quiz, Tarea, etc");
+            editText.setHint("Examen,Quiz,etc");
             fila.addView(editText);
 
             editText = new EditText(this);
             editText.setId(ind+1);
-            editText.setHint("30 , 25 , etc");
+            editText.setHint("30,25,etc");
             fila.addView(editText);
 
             editText = new EditText(this);
             editText.setId(ind+2);
-            editText.setHint("90 , 75 , etc");
+            editText.setHint("90,75,etc");
             fila.addView(editText);
-
-            Button Mas = new Button(this);
-            Mas.setId(R.id.Mas);
-            Mas.setOnClickListener(this);
-            Mas.setText("+");
-
-            Button Menos = new Button(this);
-            Menos.setId(R.id.Menos);
-            Menos.setOnClickListener(this);
-            Menos.setText("-");
-
-            fila.addView(Mas);
-            fila.addView(Menos);
 
             tabla.addView(fila);
 
@@ -325,17 +300,17 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
         EditText editText = new EditText(this);
         editText.setId(contador*3);
-        editText.setHint("Examen, Quiz, Tarea, etc");
+        editText.setHint("Examen,Quiz,etc");
         fila.addView(editText);
 
         editText = new EditText(this);
         editText.setId(contador*3+1);
-        editText.setHint("30 , 25 , etc");
+        editText.setHint("30,25,etc");
         fila.addView(editText);
 
         editText = new EditText(this);
         editText.setId(contador*3+2);
-        editText.setHint("90 , 75 , etc");
+        editText.setHint("90,75,etc");
         fila.addView(editText);
 
         tabla.addView(fila);

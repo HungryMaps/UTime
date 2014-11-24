@@ -15,20 +15,37 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TableLayout
-                android:id="@+id/tablaEvaluacion"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            </TableLayout>
-        </LinearLayout>
+                <TableRow android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:id="@+id/Mas"/>
+
+                    <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:id="@+id/Menos"/>
+                </TableRow>
+
+                <TableLayout
+                    android:id="@+id/tablaEvaluacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TableLayout>
+            </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
 
@@ -49,5 +66,5 @@
         android:layout_above="@id/btnSave"
         android:text="NOTA"
         android:textColor="@color/azul1"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 </RelativeLayout>
