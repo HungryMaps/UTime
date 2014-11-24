@@ -125,7 +125,6 @@ public class MapsActivity extends FragmentActivity {
 
                 googleMap.addMarker(markerOptions);
 
-                
                 if(i==0)
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             }
