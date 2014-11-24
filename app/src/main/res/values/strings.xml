@@ -51,5 +51,7 @@
     <string name="title_activity_pdf">PDF</string>
     <string name="menu_evaluacion">Evaluación</string>
     <string name="title_activity_visualizador_sd">VisualizadorSD</string>
+    <string name="location">Localización</string>
+    <string name="btn_find">Buscar</string>
 
 </resources>
