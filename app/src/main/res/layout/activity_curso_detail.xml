@@ -233,7 +233,7 @@
                 android:text="  Evaluación  "
                 android:id="@+id/btnEvaluacion"
                 android:background="@color/azul1"
-                android:layout_alignTop="@+id/spinner41" />
+                android:layout_below="@+id/editTextAula4" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/btnArchivos"
                 android:background="@color/verde1"
-                android:layout_alignTop="@+id/spinner41"
+                android:layout_below="@+id/editTextAula4"
                 android:layout_toRightOf="@+id/btnEvaluacion"/>
 
         </RelativeLayout>
