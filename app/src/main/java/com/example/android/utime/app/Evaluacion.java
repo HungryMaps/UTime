@@ -55,7 +55,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
                 EvaluacionPorCurso.KEY_ID_Curso
         };
         String [] parametros = {
-                ""+Curso_Id
+            ""+Curso_Id
         };
         Cursor cursor = db.query(EvaluacionPorCurso.TABLE, columnas, EvaluacionPorCurso.KEY_ID_Curso+" = ?", parametros, null, null, null);
         TableLayout tabla = (TableLayout) findViewById(R.id.tablaEvaluacion);

@@ -88,7 +88,6 @@
                             android:hint ="ED 206, etc"
                             android:id="@+id/editTextAula0">
                         </EditText>
-
                     </TableRow>
 
                     <TableRow>
