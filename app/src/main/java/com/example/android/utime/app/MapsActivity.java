@@ -19,13 +19,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -49,14 +47,14 @@ public class MapsActivity extends FragmentActivity {
         // Obtiene la referencia del boton de buscar
         Button btn_find = (Button) findViewById(R.id.btn_find);
 
-        // Defining button click event listener for the find button
+        // Define el evento que se debe mostrar al dar click a buscar
         OnClickListener findClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Getting reference to EditText to get the user input location
+                // Obtiene referencia del edit text para escribir la ubicacion a buscar
                 EditText etLocation = (EditText) findViewById(R.id.et_location);
 
-                // Getting user input location
+                // Obtiene el string a buscar ingresado por el usuario
                 String location = etLocation.getText().toString();
 
                 if(location!=null && !location.equals("")){
@@ -65,7 +63,7 @@ public class MapsActivity extends FragmentActivity {
             }
         };
 
-        // Setting button click event listener for the find button
+        // establece el onclick
         btn_find.setOnClickListener(findClickListener);
 
 
@@ -78,7 +76,12 @@ public class MapsActivity extends FragmentActivity {
         return true;
     }
 
-
+    /**
+     * Clase privada que permite acceder al Servicio Web GeoCoding mediante AsyncTask
+     *
+     * Autores: Ana Laura Berdasco
+     *          Jennifer Ledezma
+     */
     private class GeocoderTask extends AsyncTask<String, Void, List<Address>>{
 
         @Override
@@ -95,7 +98,10 @@ public class MapsActivity extends FragmentActivity {
             return addresses;
         }
 
-
+        /**
+         * Metodo que se encarga de limpiar y actualizar el marker en la ubicacion encontrada
+         * @param addresses
+         */
         @Override
         protected void onPostExecute(List<Address> addresses) {
 
