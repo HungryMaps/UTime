@@ -50,5 +50,8 @@
     <string name="title_activity_archivos">Archivos</string>
     <string name="title_activity_pdf">PDF</string>
     <string name="menu_evaluacion">Evaluación</string>
+    <string name="hnt_et_location">Localidad</string>
+    <string name="str_btn_find">Buscar</string>
+    <string name="menu_settings">menu_settings</string>
 
 </resources>
