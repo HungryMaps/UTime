@@ -80,11 +80,17 @@ public class Calendario extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /*
+    * Guarda en el almacenamiento del teléfono la pareja de llave valor Calendario - Número de ID
+    * */
     private void setearSharedPreferences(Long id){
         SharedPreferences shared = getPreferences(MODE_PRIVATE);
         shared.edit().putLong("Calendario", id).commit();
     }
 
+    /*
+    * Muestra el PopUp para escoger el calendario que se quiere utilizar
+    * */
     public void preferencias(View view){
         AlertDialog.Builder dialog = new AlertDialog.Builder(Calendario.this);
         dialog.setTitle("Escoger Calendario");
@@ -144,7 +150,9 @@ public class Calendario extends ActionBarActivity {
         startActivity(intent);
     }
 
-
+    /*
+    * Obtiene todos los nombres de los calendarios en el dispositivo
+    * */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private ArrayList<String> obtenerCalendarios(){
         ArrayList<String> lista = new ArrayList<String>();
@@ -167,6 +175,9 @@ public class Calendario extends ActionBarActivity {
         return lista;
     }
 
+    /*
+    * Obtiene todos los IDs de los calendarios en el dispositivo
+    * */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private ArrayList<Long> obtenerCalendariosID(){
         ArrayList<Long> lista = new ArrayList<Long>();
