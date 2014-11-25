@@ -329,6 +329,8 @@ public class Horario extends ActionBarActivity {
                 });
                 dialog.show();
                 return true;
+
+            // Llama a método para llenar calendario con horario cuando esto se escoga
             case R.id.btnAdd:
                 insertarHorarioEnCalendario();
                 return true;

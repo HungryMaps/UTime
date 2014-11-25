@@ -205,6 +205,8 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
                 });
                 dialog.show();
                 return true;
+
+            // Llama al método de guardar si se apreta el botón
             case R.id.btnGuardar:
                 Guardar();
                 return true;

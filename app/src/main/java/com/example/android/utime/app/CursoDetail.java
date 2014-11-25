@@ -326,6 +326,7 @@ public class CursoDetail extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
 
+            //Usuario escoge abrir Evaluacion relacionada con el curso, entonces inicia la activity de esto
             case R.id.btnEvaluar:
                 _Curso_Id =0;
                 Intent intent = getIntent();
@@ -341,6 +342,7 @@ public class CursoDetail extends Activity {
                 startActivity(in);
                 return true;
 
+            //Usuario escoge abrir archivos relacionados con el curso, entonces inicia la activity de esto
             case R.id.btnArchivo:
                 _Curso_Id =0;
                 Intent intent2 = getIntent();
