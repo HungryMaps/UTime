@@ -33,9 +33,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluacion);
 
-        Button button = (Button) findViewById(R.id.btnSave);
-        button.setOnClickListener(this);
-        button = (Button) findViewById(R.id.Mas);
+        Button button = (Button) findViewById(R.id.Mas);
         button.setOnClickListener(this);
         button = (Button) findViewById(R.id.Menos);
         button.setOnClickListener(this);
@@ -207,6 +205,9 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
                 });
                 dialog.show();
                 return true;
+            case R.id.btnGuardar:
+                Guardar();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -217,10 +218,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
     @Override
     public void onClick(View view) {
 
-        if(view == findViewById(R.id.btnSave)){
-            Guardar();
-        }
-        else if(view ==  findViewById(R.id.Mas)){
+        if(view ==  findViewById(R.id.Mas)){
             Agregar();
         }
 

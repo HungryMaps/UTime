@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/btnArchivo"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Archivos"/>
+
+    <item
+        android:id="@+id/btnEvaluar"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/checkbox_on_background"
+        android:title="Evaluar"/>
+
+    <item
         android:id="@+id/btnSave"
         android:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_save"
@@ -10,7 +22,7 @@
     <item android:id="@+id/btnDelete"
         android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/delete_menu_noteedit"
-        android:showAsAction="ifRoom|withText" />
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/menu_about"
         android:orderInCategory="100"
