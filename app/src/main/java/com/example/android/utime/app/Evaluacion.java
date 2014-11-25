@@ -99,7 +99,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
                 EditText editText = new EditText(this);
                 editText.setId(indice);
-                editText.setHint("Examen,Quiz,etc");
+                editText.setHint("Examen,etc");
                 editText.setText(cursor.getString(cursor.getColumnIndex(EvaluacionPorCurso.KEY_name)));
                 fila.addView(editText);
 
@@ -127,7 +127,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
             EditText editText = new EditText(this);
             editText.setId(ind);
-            editText.setHint("Examen,Quiz,etc");
+            editText.setHint("Examen,etc");
             fila.addView(editText);
 
             editText = new EditText(this);
@@ -300,7 +300,7 @@ public class Evaluacion extends Activity implements android.view.View.OnClickLis
 
         EditText editText = new EditText(this);
         editText.setId(contador*3);
-        editText.setHint("Examen,Quiz,etc");
+        editText.setHint("Examen,etc");
         fila.addView(editText);
 
         editText = new EditText(this);
