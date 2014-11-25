@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -193,7 +194,8 @@ public class Horario extends ActionBarActivity {
                 curso.semestre = cursor.getString(cursor.getColumnIndex(Curso.KEY_semestre));
                 curso.anno = cursor.getString(cursor.getColumnIndex(Curso.KEY_anno));
 
-                long calID = 1;
+                SharedPreferences pref = getPreferences(MODE_PRIVATE);
+                long calID = pref.getLong("Calendario", 1);
 
                 Calendar beginTime = null;
                 Calendar endTime = null;
