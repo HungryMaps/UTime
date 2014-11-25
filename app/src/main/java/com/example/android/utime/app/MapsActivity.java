@@ -1,5 +1,6 @@
 /*
  * Autores: Jennifer Ledezma
+ *          Ana Laura Berdasco
  *
  * Clase MapsActivity: Se encarga de las funcionalidades referentes a las ubicaciones más importantes
  *                     de la Universidad de Costa Rica
@@ -50,8 +51,6 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        //setUpMap();
-
         SupportMapFragment supportMapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map);
         //Obtiene referencia del mapa
@@ -78,8 +77,6 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
         //Establece el evento al que debe redirigir el dar click
         btn_find.setOnClickListener(findClickListener);
-
-
     }
 
     /**
@@ -94,12 +91,17 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         return true;
     }
 
-
+    /**
+     * Para pedir la localizacion
+     */
     private static final LocationRequest REQUEST = LocationRequest.create()
             .setInterval(5000)              // 5 segundos
             .setFastestInterval(16)         // Conversion 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+    /**
+     *  Se llama cuando la actividad va a comenzar a interactuar con el usuario.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -107,6 +109,9 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         miLocalizacion.connect();
     }
 
+    /**
+     * Indica que la actividad está a punto de ser lanzada a segundo plano
+     */
     @Override
     public void onPause(){
         super.onPause();
@@ -116,16 +121,36 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     }
 
     /**
+     * Metodo que debe se debe sobreescribir pero no es usado
+     * @param connectionResult
+     */
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    /**
      * Medodo que establece mi localización como conectada
      * @param bundle
      */
+    @Override
+    public void onConnected(Bundle bundle) {
+        miLocalizacion.requestLocationUpdates( REQUEST, this);
+    }
+
+    /**
+     * Metodo que debe se debe sobreescribir pero no es usado
+     */
+    @Override
+    public void onDisconnected() {
+
+    }
 
     /**
      * Se encarga la llamar a ver mi ubicación esto para cada vez que se cambia nuestra ubicación
      * @param location Localización del objeto con toda la información acerca de la ubicación
      */
-
-    public void onLocationChanged(Location location) {
+     public void onLocationChanged(Location location) {
         verMiUbicacion(location.getLatitude(), location.getLongitude());
     }
 
@@ -169,31 +194,12 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         googleMap.moveCamera(update);
     }
 
-    /**
-     * Metodo que debe se debe sobreescribir pero no es usado
-     * @param connectionResult
-     */
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
 
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        miLocalizacion.requestLocationUpdates( REQUEST, this);
-    }
-
-    @Override
-    public void onDisconnected() {
-
-    }
-
-
-    /**
+      /************************************************************************
      * Clase privada que por medio de AsyncTask accesa el Geocoding Web Service
      * para las funcionalidades de Buscar, tranforma el string en coordenadas
      * para ubicar el marker en el mapa
-     */
+     ****************************************************************************/
     private class GeocoderTask extends AsyncTask<String, Void, List<Address>>{
 
         @Override
@@ -254,5 +260,4 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
             }
         }
     }
-
 }
