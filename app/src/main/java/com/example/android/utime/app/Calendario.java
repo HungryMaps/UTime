@@ -47,26 +47,6 @@ public class Calendario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
-        String[] projection =
-                new String[]{
-                        Calendars._ID,
-                        Calendars.NAME,
-                        Calendars.ACCOUNT_NAME,
-                        Calendars.ACCOUNT_TYPE};
-        Cursor calCursor =
-                getContentResolver().
-                        query(Calendars.CONTENT_URI,
-                                projection,
-                                Calendars.VISIBLE + " = 1",
-                                null,
-                                Calendars._ID + " ASC");
-        if (calCursor.moveToFirst()) {
-            do {
-                long id = calCursor.getLong(0);
-                String displayName = calCursor.getString(1);
-                Toast.makeText(this, "Calendar " + displayName + " " + id, Toast.LENGTH_SHORT).show();
-            } while (calCursor.moveToNext());
-        }
     }
 
     /*

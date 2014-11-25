@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,242 +10,214 @@
     android:background="@color/fondo">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scrollView">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-           <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:hint ="Curso"
-            android:id="@+id/editTextName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true">
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:hint ="Profesor"
-            android:id="@+id/editTextProfesor"
-            android:layout_below="@+id/editTextName" >
-        </EditText>
-      
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner00"
-            android:layout_below="@+id/editTextProfesor"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner01"
-            android:layout_below="@+id/editTextProfesor"
-            android:layout_toRightOf="@+id/spinner00"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner02"
-            android:layout_below="@+id/editTextProfesor"
-            android:layout_toRightOf="@+id/spinner01"/>
-
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner10"
-            android:layout_below="@+id/spinner00"/>
-
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner11"
-            android:layout_below="@+id/spinner01"
-            android:layout_toRightOf="@+id/spinner10"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner12"
-            android:layout_below="@+id/spinner02"
-            android:layout_toRightOf="@+id/spinner11"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner20"
-            android:layout_below="@+id/spinner10"/>
-
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner21"
-            android:layout_below="@+id/spinner11"
-            android:layout_toRightOf="@+id/spinner20"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner22"
-            android:layout_below="@+id/spinner12"
-            android:layout_toRightOf="@+id/spinner21"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner30"
-            android:layout_below="@+id/spinner20"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner31"
-            android:layout_below="@+id/spinner21"
-            android:layout_toRightOf="@+id/spinner30"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner32"
-            android:layout_below="@+id/spinner22"
-            android:layout_toRightOf="@+id/spinner31"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner40"
-            android:layout_below="@+id/spinner30"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner41"
-            android:layout_below="@+id/spinner31"
-            android:layout_toRightOf="@+id/spinner40"/>
-        <Spinner
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner42"
-            android:layout_below="@+id/spinner32"
-            android:layout_toRightOf="@+id/spinner41"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:hint ="ED 206 , IF 203, etc"
-            android:id="@+id/editTextAula0"
-            android:layout_below="@+id/editTextProfesor"
-            android:layout_toRightOf="@+id/spinner02">
-        </EditText>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:visibility="invisible"
-            android:hint ="ED 206 , IF 203, etc"
-            android:id="@+id/editTextAula1"
-            android:layout_below="@+id/editTextAula0"
-            android:layout_toRightOf="@+id/spinner12">
-            </EditText>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:visibility="invisible"
-            android:hint ="ED 206 , IF 203, etc"
-            android:id="@+id/editTextAula2"
-            android:layout_below="@+id/editTextAula1"
-            android:layout_toRightOf="@+id/spinner22">
-        </EditText>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:visibility="invisible"
-            android:hint ="ED 206 , IF 203, etc"
-            android:id="@+id/editTextAula3"
-            android:layout_below="@+id/editTextAula2"
-            android:layout_toRightOf="@+id/spinner32">
-        </EditText>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="8"
-            android:visibility="invisible"
-            android:hint ="ED 206 , IF 203, etc"
-            android:id="@+id/editTextAula4"
-            android:layout_below="@+id/editTextAula3"
-            android:layout_toRightOf="@+id/spinner42">
-        </EditText>
-
-         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:id="@+id/Mas"
-            android:onClick="Agregar"
-            android:layout_below="@+id/editTextProfesor"
-            android:layout_toRightOf="@+id/editTextAula0" />
-
-          <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:id="@+id/Menos"
-            android:onClick="Quitar"
-            android:layout_below="@+id/editTextProfesor"
-            android:layout_toRightOf="@+id/Mas" />
-
-           <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  Evaluación  "
-                android:id="@+id/btnEvaluacion"
-                android:background="@color/azul1"
-                android:layout_below="@+id/editTextAula4" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  Archivos  "
-                android:layout_marginLeft="10dp"
-                android:id="@+id/btnArchivos"
-                android:background="@color/verde1"
-                android:layout_below="@+id/editTextAula4"
-                android:layout_toRightOf="@+id/btnEvaluacion"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:hint="Curso"
+                    android:id="@+id/editTextName">
+                </EditText>
 
-        </RelativeLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="8"
+                    android:hint ="Profesor"
+                    android:id="@+id/editTextProfesor">
+                </EditText>
+
+                <TableRow android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:id="@+id/Mas"
+                        android:onClick="Agregar"/>
+
+                    <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:id="@+id/Menos"
+                        android:onClick="Quitar"/>
+                </TableRow>
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TableRow>
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner00"/>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner01"/>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner02"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="8"
+                            android:hint ="ED 206, etc"
+                            android:id="@+id/editTextAula0">
+                        </EditText>
+                    </TableRow>
+
+                    <TableRow>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner10"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner11"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner12"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="8"
+                            android:visibility="invisible"
+                            android:hint ="ED 206, etc"
+                            android:id="@+id/editTextAula1">
+                        </EditText>
+                    </TableRow>
+
+                    <TableRow>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner20"/>
+
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner21"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner22"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="8"
+                            android:visibility="invisible"
+                            android:hint ="ED 206, etc"
+                            android:id="@+id/editTextAula2">
+                        </EditText>
+                    </TableRow>
+
+                    <TableRow>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner30"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner31"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner32"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="8"
+                            android:visibility="invisible"
+                            android:hint ="ED 206, etc"
+                            android:id="@+id/editTextAula3">
+                        </EditText>
+                    </TableRow>
+
+                    <TableRow>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner40"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner41"/>
+                        <Spinner
+                            android:visibility="invisible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinner42"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="8"
+                            android:visibility="invisible"
+                            android:hint ="ED 206, etc"
+                            android:id="@+id/editTextAula4">
+                        </EditText>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
-</LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Evaluación  "
+        android:id="@+id/btnEvaluacion"
+        android:background="@color/azul1"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Archivos  "
+        android:layout_marginLeft="10dp"
+        android:id="@+id/btnArchivos"
+        android:background="@color/verde1"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnEvaluacion"/>
+</RelativeLayout>
