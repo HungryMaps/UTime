@@ -9,6 +9,7 @@ package com.example.android.utime.app;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,24 +19,38 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
+                                                              GooglePlayServicesClient.OnConnectionFailedListener,
+                                                              com.google.android.gms.location.LocationListener{
 
     GoogleMap googleMap;
     MarkerOptions markerOptions;
     LatLng latLng;
+    private CameraUpdate miposicion;
+    private LocationClient miLocalizacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        //setUpMap();
 
         SupportMapFragment supportMapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map);
@@ -77,6 +92,100 @@ public class MapsActivity extends FragmentActivity {
 
         getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
+    }
+
+
+    private static final LocationRequest REQUEST = LocationRequest.create()
+            .setInterval(5000)              // 5 segundos
+            .setFastestInterval(16)         // Conversion 16ms = 60fps
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        levantarLocalizacion();
+        miLocalizacion.connect();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(miLocalizacion != null){
+            miLocalizacion.disconnect();
+        }
+    }
+
+    /**
+     * Medodo que establece mi localización como conectada
+     * @param bundle
+     */
+
+    /**
+     * Se encarga la llamar a ver mi ubicación esto para cada vez que se cambia nuestra ubicación
+     * @param location Localización del objeto con toda la información acerca de la ubicación
+     */
+
+    public void onLocationChanged(Location location) {
+        verMiUbicacion(location.getLatitude(), location.getLongitude());
+    }
+
+    /**
+     * Cuando hay un dispotivo en la app crea un objeto de localizacion
+     * del cliente si no hay ninguno
+     */
+    private void levantarLocalizacion() {
+        if(miLocalizacion == null){
+            //El primer this indica llamado a la conexión
+            //Segundo this indica que el llamado a la conexión falló
+            miLocalizacion = new LocationClient(getApplicationContext(), this, this);
+        }
+    }
+
+    /**
+     * Metodo que permite poner mi ubicacion en el mapa
+     * @param lat Referente a la latitud
+     * @param lng Referente a la longitus
+     */
+    private void verMiUbicacion(double lat, double lng) {
+        cambiarCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng))
+                        .zoom(16)
+                        .bearing(0)              //Establece la orientacion
+                        .tilt(25)                // Baja el punto de vista de la camara 25 grados
+                        .build()
+        ), new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                // Your code here to do something after the Map is rendered
+            }
+
+            @Override
+            public void onCancel() {
+                // Your code here to do something after the Map rendering is cancelled
+            }
+        });
+    }
+
+    private void cambiarCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
+        googleMap.moveCamera(update);
+    }
+
+    /**
+     * Metodo que debe se debe sobreescribir pero no es usado
+     * @param connectionResult
+     */
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        miLocalizacion.requestLocationUpdates( REQUEST, this);
+    }
+
+    @Override
+    public void onDisconnected() {
+
     }
 
 
@@ -138,7 +247,12 @@ public class MapsActivity extends FragmentActivity {
                 //Muestra la primer ubicacion encontrada
                 if(i==0)
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                if(i!=0){
+                    miposicion = CameraUpdateFactory.newLatLngZoom(new LatLng(9.939667, -84.047341), 16);
+                    googleMap.animateCamera(miposicion);
+                }
             }
         }
     }
+
 }
