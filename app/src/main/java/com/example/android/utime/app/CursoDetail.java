@@ -378,7 +378,7 @@ public class CursoDetail extends Activity {
                 dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });

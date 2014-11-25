@@ -9,11 +9,14 @@ package com.example.android.utime.app;
 
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,10 +29,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 
 
@@ -73,6 +80,59 @@ public class Calendario extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /*
+    * Guarda en el almacenamiento del teléfono la pareja de llave valor Calendario - Número de ID
+    * */
+    private void setearSharedPreferences(Long id){
+        SharedPreferences shared = getPreferences(MODE_PRIVATE);
+        shared.edit().putLong("Calendario", id).commit();
+    }
+
+    /*
+    * Muestra el PopUp para escoger el calendario que se quiere utilizar
+    * */
+    public void preferencias(View view){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Calendario.this);
+        dialog.setTitle("Escoger Calendario");
+        final ArrayList<String> lista = obtenerCalendarios();
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, lista);
+        dialog.setAdapter(adapter, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ArrayList<Long> list = obtenerCalendariosID();
+                setearSharedPreferences(list.get(which));
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    // Adapter usado para agregar a la lista, hereda de Array Adapter
+
+    private class StableArrayAdapter extends ArrayAdapter<String> {
+
+        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+        public StableArrayAdapter(Context context, int textViewResourceId,
+                                  List<String> objects) {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        @Override
+        public long getItemId(int position) {
+            String item = getItem(position);
+            return mIdMap.get(item);
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+    }
 
     /*
     * Método para ver el estado del dia de hoy en el calendario
@@ -90,15 +150,16 @@ public class Calendario extends ActionBarActivity {
         startActivity(intent);
     }
 
-    // Las siguientes líneas son para Consultar el ID y nombre del calendario (cuenta asociada)
-    // Se deja aquí en caso de necesitarlo para alguna verificación en el futuro
-
-    /*String[] projection =
+    /*
+    * Obtiene todos los nombres de los calendarios en el dispositivo
+    * */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private ArrayList<String> obtenerCalendarios(){
+        ArrayList<String> lista = new ArrayList<String>();
+        String[] projection =
                 new String[]{
-                        Calendars._ID,
-                        Calendars.NAME,
-                        Calendars.ACCOUNT_NAME,
-                        Calendars.ACCOUNT_TYPE};
+                        Calendars.NAME
+                };
         Cursor calCursor =
                 getContentResolver().
                         query(Calendars.CONTENT_URI,
@@ -108,11 +169,36 @@ public class Calendario extends ActionBarActivity {
                                 Calendars._ID + " ASC");
         if (calCursor.moveToFirst()) {
             do {
-                long id = calCursor.getLong(0);
-                String displayName = calCursor.getString(1);
-                Toast.makeText(this, "Calendar " + displayName + " " +id, Toast.LENGTH_SHORT).show();
+                lista.add(calCursor.getString(0));
             } while (calCursor.moveToNext());
-        }*/
+        }
+        return lista;
+    }
+
+    /*
+    * Obtiene todos los IDs de los calendarios en el dispositivo
+    * */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private ArrayList<Long> obtenerCalendariosID(){
+        ArrayList<Long> lista = new ArrayList<Long>();
+        String[] projection =
+                new String[]{
+                        Calendars._ID
+                };
+        Cursor calCursor =
+                getContentResolver().
+                        query(Calendars.CONTENT_URI,
+                                projection,
+                                Calendars.VISIBLE + " = 1",
+                                null,
+                                Calendars._ID + " ASC");
+        if (calCursor.moveToFirst()) {
+            do {
+                lista.add(calCursor.getLong(0));
+            } while (calCursor.moveToNext());
+        }
+        return lista;
+    }
 
     /**
      * Método para revisar si hay conexión a internet
@@ -143,7 +229,8 @@ public class Calendario extends ActionBarActivity {
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void insertarFechasEnCalendario(int dia, String titulo, int mes) {
-        long calID = 1;
+        SharedPreferences pref = getPreferences(MODE_PRIVATE);
+        long calID = pref.getLong("Calendario", 1);
 
         Calendar beginTime = null;
         Calendar endTime = null;
