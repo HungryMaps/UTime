@@ -195,72 +195,6 @@ public class MyMenu extends ActionBarActivity {
                 });
                 dialog.show();
                 return true;
-
-            case R.id.menu_sincronizar:
-                //En el caso que la persona haga click en la opción de Sincronizar
-                AlertDialog.Builder dialogS = new AlertDialog.Builder(MyMenu.this);
-                dialogS.setTitle("Sincronizar");
-                dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
-                                "encuentran en la base de datos externa?\n" +
-                                "Tome en cuenta que los datos que insertó sin tener conexión " +
-                                "a Internet, no se van a sincronizar."
-                );
-                dialogS.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Cuando haga click en OK se van a sincronizar los datos
-                        String nombreUsuario="";
-                        // Para sacar el id del calendario
-                        String[] projection =
-                                new String[]{
-                                        CalendarContract.Calendars._ID,
-                                        CalendarContract.Calendars.NAME,
-                                        CalendarContract.Calendars.ACCOUNT_NAME,
-                                        CalendarContract.Calendars.ACCOUNT_TYPE};
-                        Cursor calCursor =
-                                getContentResolver().
-                                        query(CalendarContract.Calendars.CONTENT_URI,
-                                                projection,
-                                                CalendarContract.Calendars.VISIBLE + " = 1",
-                                                null,
-                                                CalendarContract.Calendars._ID + " ASC");
-                        if (calCursor.moveToFirst()) {
-                            do {
-                                long id = calCursor.getLong(0);
-                                String displayName = calCursor.getString(2);
-                                nombreUsuario = displayName;
-                            } while (calCursor.moveToNext());
-                        }
-                        System.out.println("nombreUsuario: " + nombreUsuario);
-                        String exito = "";
-
-                        //Revisar si hay usuario y si hay conexión a internet
-                        if(!nombreUsuario.equals("") && isNetworkAvailable()){
-                            SincronizarCursos(nombreUsuario);
-
-                            SincronizarNotas(nombreUsuario);
-                            dialog.cancel();
-                            exito = "Sincronización exitosa!";
-                        }
-                        else{
-                            //Si no hay internet no se hace nada
-                            if(!isNetworkAvailable()){
-                                exito = "NO HAY CONEXIÓN A INTERNET.";
-                                dialog.cancel();
-                            }
-                            //Si no hay usuario, no se hace nada
-                            if(nombreUsuario.equals("")) {
-                                dialog.cancel();
-                                exito = "Debe de ingresar un usuario para poder sincronizar.";
-                            }
-                        }
-                        Toast.makeText(MyMenu.this, exito, Toast.LENGTH_LONG).show();
-                    }
-                });
-                dialogS.show();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -284,26 +218,6 @@ public class MyMenu extends ActionBarActivity {
 
     public void insertarFecha() {
         ConnectFecha task = new ConnectFecha();
-        task.execute();
-    }
-
-    /**
-     * Se encarga de llamar al métdo que abre la conexión con la base de datos y de traer los
-     * datos de los cursos
-     * @param usuario
-     */
-    public void SincronizarCursos(String usuario) {
-        SincronizarCursos task = new SincronizarCursos(usuario);
-        task.execute();
-    }
-
-    /**
-     * Se encarga de llamar al método que abre la conexión con la base de datos y de traer los
-     * datos de las notas
-     * @param usuario
-     */
-    public void SincronizarNotas(String usuario) {
-        SincronizarNotas task = new SincronizarNotas(usuario);
         task.execute();
     }
 

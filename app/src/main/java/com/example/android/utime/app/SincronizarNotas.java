@@ -1,5 +1,8 @@
 package com.example.android.utime.app;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -23,11 +26,18 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
     private String usuario;
     public String sincronizacionNotas = "";
     public Boolean sinc;
-    HashMap<String, String> notaSinc = new HashMap<String, String>();
+    HashMap<String, String> notaSinc;
     ArrayList<HashMap<String, String>> notaListSinc = new ArrayList<HashMap<String, String>>();
+    String id = "";
+    String name = "";
+    String comentarioNota="";
+    private DBhelper dbHelper;
+    public Boolean sincronizando;
+    private Context contexto;
 
-    public SincronizarNotas(String usuario) {
+    public SincronizarNotas(String usuario, Context context) {
         this.usuario = usuario;
+        this.contexto = context;
     }
 
     /*
@@ -57,14 +67,47 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select * from Nota WHERE idUsuario = '" + usuario + "' ;");
 
+                int i = 0;
                 //Hacer la lista nueva
+                dbHelper = new DBhelper(contexto);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.execSQL("DELETE FROM NOTA");
+
                 while (rs.next()) {
-                    notaSinc.put("idNota", rs.getString(2));
-                    notaSinc.put("nameNota", rs.getString(3));
-                    notaListSinc.add(notaSinc);
+                    notaSinc = new HashMap<String, String>();
+                    id = rs.getString(2);
+                    name = rs.getString(3);
+                    comentarioNota = rs.getString(4);
+                    //notaSinc.put("idNota", rs.getString(2));
+                    //notaSinc.put("nameNota", rs.getString(3));
+                    notaSinc.put("idNota", id);
+                    notaSinc.put("nameNota", name);
+                    if (notaListSinc.isEmpty()) {
+                        notaListSinc.add(notaSinc);
+                    } else {
+                        if(!notaListSinc.contains(notaSinc)) {
+                            notaListSinc.add(notaSinc);
+                        }
+                    }
                     result += rs.getString(3) + "|";
                     result += rs.getString(4) + "|";
                     result += "\n";
+                    ++i;
+
+                    dbHelper = new DBhelper(contexto);
+                    db = dbHelper.getWritableDatabase();
+
+                    ContentValues values = new ContentValues();
+                    values.put("comentarioNota", comentarioNota);
+                    values.put("nameNota", name);
+                    //values.put("idNota", id);
+
+                    db.insert("Nota", id, values);
+
+                    // Insertando filas
+                    //int nota_Id = (int) db.insert(Nota.TABLE, null, values);
+                    db.close(); // Cerrando la connecion de la base de datos
+
                 }
                 result += "\n";
                 System.out.println("Resultado Notas: \n" + result);
