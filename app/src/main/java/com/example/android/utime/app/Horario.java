@@ -164,7 +164,7 @@ public class Horario extends ActionBarActivity {
         en el calendario, según la hora y días especificados
     */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    public void insertarHorarioEnCalendario(View view) {
+    public void insertarHorarioEnCalendario() {
 
         //Consulta la base de datos
         DBhelper dbhelper = new DBhelper(getApplicationContext());
@@ -328,6 +328,11 @@ public class Horario extends ActionBarActivity {
                     }
                 });
                 dialog.show();
+                return true;
+
+            // Llama a método para llenar calendario con horario cuando esto se escoga
+            case R.id.btnAdd:
+                insertarHorarioEnCalendario();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

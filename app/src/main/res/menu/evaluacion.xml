@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.utime.app.Evaluacion" >
+
+    <item android:id="@+id/btnGuardar"
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_guardar"/>
+
     <item android:id="@+id/menu_about"
         android:orderInCategory="100"
         android:showAsAction="never"

@@ -29,17 +29,14 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class CursoDetail extends Activity implements android.view.View.OnClickListener  {
+public class CursoDetail extends Activity {
 
-    private Button btnEvaluacion;
-    private Button btnArchivos;
     private EditText editTextName;
     private EditText editTextProfesor;
     private EditText [] editTextAula = new EditText[5];
 
     private int _Curso_Id=0;
     String nombreUsuario;
-    View vista;
 
     private Cursor course;
     private Curso CursoDbAdapter;
@@ -62,9 +59,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_detail);
 
-        btnEvaluacion = (Button) findViewById(R.id.btnEvaluacion);
-        btnArchivos = (Button) findViewById(R.id.btnArchivos);
-
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextProfesor = (EditText) findViewById(R.id.editTextProfesor);
 
@@ -81,9 +75,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             int id = getResources().getIdentifier(campo, "id", getPackageName());
             editTextAula[k] = (EditText) findViewById(id);
         }
-
-        btnEvaluacion.setOnClickListener(this);
-        btnArchivos.setOnClickListener(this);
 
         _Curso_Id =0;
         Intent intent = getIntent();
@@ -334,6 +325,39 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
+
+            //Usuario escoge abrir Evaluacion relacionada con el curso, entonces inicia la activity de esto
+            case R.id.btnEvaluar:
+                _Curso_Id =0;
+                Intent intent = getIntent();
+                _Curso_Id =intent.getIntExtra("curso_Id", 0);
+                SQLControlador repo = new SQLControlador(this);
+                Curso curso = new Curso();
+                curso = repo.getCursoById(_Curso_Id);
+
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(CursoDetail.this, Evaluacion.class);
+                // Envía parámetro de id del curso
+                in.putExtra("curso_ID", curso.curso_ID);
+                startActivity(in);
+                return true;
+
+            //Usuario escoge abrir archivos relacionados con el curso, entonces inicia la activity de esto
+            case R.id.btnArchivo:
+                _Curso_Id =0;
+                Intent intent2 = getIntent();
+                _Curso_Id =intent2.getIntExtra("curso_Id", 0);
+                SQLControlador repo2 = new SQLControlador(this);
+                Curso curso2 = new Curso();
+                curso = repo2.getCursoById(_Curso_Id);
+
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in2 = new Intent(CursoDetail.this, Archivos.class);
+                // Envía parámetro de id del curso
+                in2.putExtra("curso_name", curso.name);
+                startActivity(in2);
+                return true;
+
             //Caso que el usuario escoge about del Menu: Muestra información de la app
             case R.id.menu_about:
 
@@ -364,7 +388,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             case R.id.btnDelete:
                 deleteState();
                 finish();
-
                 return true;
             //Usuario escoge el icon de: Guardar en el MenuBar
             case R.id.btnSave:
@@ -413,18 +436,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             Toast.makeText(this,"Curso Actualizado",Toast.LENGTH_SHORT).show();
         }
 
-        if (vista== findViewById(R.id.btnEvaluacion)){
-            _Curso_Id =0;
-            Intent intent = getIntent();
-            _Curso_Id =intent.getIntExtra("curso_Id", 0);
-            curso = repo.getCursoById(_Curso_Id);
-
-            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-            Intent in = new Intent(CursoDetail.this, Evaluacion.class);
-            // Envía parámetro de id del curso
-            in.putExtra("curso_ID",curso.curso_ID);
-            startActivity(in);
-        }
         returnHome();
 
     }
@@ -469,43 +480,6 @@ public class CursoDetail extends Activity implements android.view.View.OnClickLi
             return true;
         }
         return false;
-    }
-
-    /**
-     * Al hacer click en los botones me permite completar una accion
-     * @param view
-     */
-    @Override
-    public void onClick(View view) {
-        if (view== findViewById(R.id.btnEvaluacion)){
-            _Curso_Id =0;
-            Intent intent = getIntent();
-            _Curso_Id =intent.getIntExtra("curso_Id", 0);
-            SQLControlador repo = new SQLControlador(this);
-            Curso curso = new Curso();
-            curso = repo.getCursoById(_Curso_Id);
-
-            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-            Intent in = new Intent(CursoDetail.this, Evaluacion.class);
-            // Envía parámetro de id del curso
-            in.putExtra("curso_ID", curso.curso_ID);
-            startActivity(in);
-        }
-
-        if (view== findViewById(R.id.btnArchivos)){
-            _Curso_Id =0;
-            Intent intent = getIntent();
-            _Curso_Id =intent.getIntExtra("curso_Id", 0);
-            SQLControlador repo = new SQLControlador(this);
-            Curso curso = new Curso();
-            curso = repo.getCursoById(_Curso_Id);
-
-            //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
-            Intent in = new Intent(CursoDetail.this, Archivos.class);
-            // Envía parámetro de id del curso
-            in.putExtra("curso_name", curso.name);
-            startActivity(in);
-        }
     }
 
     /**

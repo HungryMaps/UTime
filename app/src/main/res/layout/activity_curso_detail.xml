@@ -202,22 +202,4 @@
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Evaluación  "
-        android:id="@+id/btnEvaluacion"
-        android:background="@color/azul1"
-        android:layout_alignParentBottom="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  Archivos  "
-        android:layout_marginLeft="10dp"
-        android:id="@+id/btnArchivos"
-        android:background="@color/verde1"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnEvaluacion"/>
 </RelativeLayout>
