@@ -2,109 +2,89 @@
 amarillo, verde y azul (con sus variantes), como colores que se van a utilizar en toda la
 aplicación para mantener la coherencia a traves de toda ella-->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyMenu"
-    tools:ignore="MergeRootFrame"
-    android:background="@color/fondo">
+    android:background="@drawable/imagen_fondo">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="520dp"
-        android:layout_gravity="center|bottom"
-        android:weightSum="1">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_above="@+id/centro">
 
-        <!--
-        *View de la imagen en el menú inical
-        *Centrada
-        *Ajuste al contenido
-        -->
-        <ImageView
-            android:layout_width="216dp"
-            android:layout_height="216dp"
-            android:src="@drawable/logofin"
-            android:id="@+id/imageView"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_calendar_icon"
+            android:id="@+id/caledario"
+            android:background="#00000000"
             android:layout_gravity="center_horizontal|top" />
 
-        <Button
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:text="CALENDARIO"
-            android:id="@+id/caledario"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textAlignment="gravity"
-            android:background="@color/amarillo"
-            android:textColor="#000000"
-            />
-
-
-        <Button
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:text="CURSOS"
-            android:id="@+id/cursos"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textAlignment="gravity"
-            android:background="@color/verde1"
-            android:textColor="#000000" />
-        <Button
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:text="HORARIO"
-            android:id="@+id/horario"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textAlignment="gravity"
-            android:background="@color/verde2"
-            android:textColor="#000000" />
-        <Button
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:text="UBICACIONES"
-            android:id="@+id/ubicaciones"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textAlignment="gravity"
-            android:background="@color/azul2"
-            android:textColor="#000000" />
-
-        <Button
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:text="NOTAS GENERALES"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_note_icon"
             android:id="@+id/notas"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textAlignment="gravity"
-            android:background="@color/azul1"
-            android:textColor="#000000" />
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal|top" />
+    </TableRow>
 
-</LinearLayout>
+    <TableRow
+        android:id="@+id/centro"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_maps_icon"
+            android:id="@+id/ubicaciones"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal|top" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logofin"
+            android:id="@+id/imageView" />
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_horario_icon"
+            android:id="@+id/horario"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal|top" />
+
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/centro"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_info_icon"
+            android:id="@+id/links"
+            android:layout_marginRight="10dp"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal|top" />
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_curse_icon"
+            android:id="@+id/cursos"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal|top" />
+    </TableRow>
+
+</RelativeLayout>

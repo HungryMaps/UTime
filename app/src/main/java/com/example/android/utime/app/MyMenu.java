@@ -32,6 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,11 +44,11 @@ public class MyMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_menu);
 
-        Button botonCursos = (Button)findViewById(R.id.cursos);
-        Button botonNotas = (Button)findViewById(R.id.notas);
-        Button botonUbicacion = (Button)findViewById(R.id.ubicaciones);
-        Button botonHorario = (Button)findViewById(R.id.horario);
-        Button botonCalendario = (Button)findViewById(R.id.caledario);
+        ImageButton botonCursos = (ImageButton)findViewById(R.id.cursos);
+        ImageButton botonNotas = (ImageButton)findViewById(R.id.notas);
+        ImageButton botonUbicacion = (ImageButton)findViewById(R.id.ubicaciones);
+        ImageButton botonHorario = (ImageButton)findViewById(R.id.horario);
+        ImageButton botonCalendario = (ImageButton)findViewById(R.id.caledario);
 
         boolean sincNotas =false;
         boolean sinCursos = false;

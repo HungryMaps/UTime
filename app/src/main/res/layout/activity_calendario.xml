@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="Crear Evento"
+                android:text="  Crear Evento  "
                 android:background="@color/amarillo"
                 android:textColor="#000000"
                 android:layout_marginRight="10dp" />
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="queryCalendar"
-                android:text="Ver Calendario"
+                android:text="  Ver Calendario  "
                 android:background="@color/verde1"
                 android:layout_marginBottom="10dp"
                 android:textColor="#000000"/>
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="llenarFechas"
-                android:text="Fechas"
+                android:text="  Fechas  "
                 android:background="@color/verde2"
                 android:layout_marginRight="10dp"
                 android:textColor="#000000" />
@@ -66,8 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="preferencias"
-                android:text="Preferencias"
+                android:text="  Preferencias  "
                 android:background="@color/azul1"
+                style=""
                 android:textColor="#000000" />
 
         </TableRow>

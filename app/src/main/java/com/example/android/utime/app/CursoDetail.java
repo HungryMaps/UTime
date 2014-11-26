@@ -147,8 +147,10 @@ public class CursoDetail extends Activity {
             String[] editAula = curso.aula.split(",");
 
             for (int i = 0; i < dias.length; i++) {
-
-                editTextAula[i].setText(editAula[i]);
+                if(editAula.length > 0){
+                    editTextAula[i].setText(editAula[i]);
+                }
+                //editTextAula[i].setText(editAula[i]);
                 editTextAula[i].setVisibility(View.VISIBLE);
 
                 int posicion = 0;

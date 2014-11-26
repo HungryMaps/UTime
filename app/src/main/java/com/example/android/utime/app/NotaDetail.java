@@ -195,12 +195,13 @@ public class NotaDetail extends Activity {
             case R.id.btnDelete:
                 deleteState();
                 finish();
-
                 return true;
+
             //Usuario escoge el icon de: Guardar en el MenuBar
             case R.id.btnSave:
                 saveState();
                 finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
