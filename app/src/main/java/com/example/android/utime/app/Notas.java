@@ -213,7 +213,6 @@ public class Notas extends ListActivity {
         startActivity(intent);
     }
 
-
     /**
      * Se encarga de llamar al método que abre la conexión con la base de datos y de traer los
      * datos de las notas
@@ -251,6 +250,7 @@ public class Notas extends ListActivity {
                 setListAdapter(adapter);
             }
         }
+        returnHome();
     }
 
     /**
@@ -263,5 +263,15 @@ public class Notas extends ListActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    /**
+     * Metodo que permite volver a la página principal
+     */
+    public boolean returnHome() {
+        Intent home_intent = new Intent(getApplicationContext(),
+                MyMenu.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home_intent);
+        return true;
     }
 }

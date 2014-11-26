@@ -1,11 +1,19 @@
 package com.example.android.utime.app;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.text.format.Time;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Pau on 20/11/2014.
@@ -21,9 +29,23 @@ public class SincronizarCursos extends AsyncTask<String, Void, String> {
     public String pass = "Lopez123#";
     private Connection con;
     private String usuario;
+    private Context contexto;
+    public String sincronizacionNotas = "";
+    ArrayList<HashMap<String, String>> cursoListSinc = new ArrayList<HashMap<String, String>>();
+    private DBhelper dbHelper;
+    HashMap<String, String> cursoSinc;
+    String id = "";
+    String name = "";
+    String profesor = "";
+    String aula = "";
+    String dias = "";
+    String horas = "";
+    String semestre="";
+    String anno = "";
 
-    public SincronizarCursos(String usuario) {
+    public SincronizarCursos(String usuario, Context context) {
         this.usuario = usuario;
+        this.contexto = context;
     }
 
     /*
@@ -46,20 +68,72 @@ public class SincronizarCursos extends AsyncTask<String, Void, String> {
             try {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select * from Curso WHERE idUsuario = '" + usuario + "' ;");
-                ResultSetMetaData rsmd = rs.getMetaData();
+
+                int i = 0;
+                //Hacer la lista nueva
+                dbHelper = new DBhelper(contexto);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.execSQL("DELETE FROM CURSO");
 
                 while (rs.next()) {
-                    result += rsmd.getColumnName(1) + ": " + rs.getString(1) + "|";
-                    result += rsmd.getColumnName(2) + ": " + rs.getInt(2) + "|";
-                    result += rsmd.getColumnName(3) + ": " + rs.getString(3) + "|";
-                    result += rsmd.getColumnName(4) + ": " + rs.getString(4) + "|";
-                    result += rsmd.getColumnName(5) + ": " + rs.getString(5) + "|";
-                    result += rsmd.getColumnName(6) + ": " + rs.getString(6) + "|";
-                    result += rsmd.getColumnName(7) + ": " + rs.getString(7) + "|";
+                    cursoSinc = new HashMap<String, String>();
+                    id = rs.getString(2);
+                    name = rs.getString(3);
+                    profesor = rs.getString(4);
+                    aula = rs.getString(5);
+                    dias = rs.getString(6);
+                    horas = rs.getString(7);
+
+                    cursoSinc.put("id", id);
+                    cursoSinc.put("name", name);
+
+                    if (cursoListSinc.isEmpty()) {
+                        cursoListSinc.add(cursoSinc);
+                    } else {
+                        if (!cursoListSinc.contains(cursoSinc)) {
+                            cursoListSinc.add(cursoSinc);
+                        }
+                    }
+                    result += rs.getString(1) + "|";
+                    result += rs.getInt(2) + "|";
+                    result += rs.getString(3) + "|";
+                    result += rs.getString(4) + "|";
+                    result += rs.getString(5) + "|";
+                    result += rs.getString(6) + "|";
+                    result += rs.getString(7) + "|";
                     result += "\n";
+                    ++i;
+
+                    Time now = new Time();
+                    now.setToNow();
+                    anno = Integer.toString(now.year);
+                    if(now.month < 7){
+                        semestre =  "I";
+                    }else{
+                        semestre = "II";
+                    }
+
+                    dbHelper = new DBhelper(contexto);
+                    db = dbHelper.getWritableDatabase();
+
+                    ContentValues values = new ContentValues();
+                    values.put("horas", horas);
+                    values.put("dias", dias);
+                    values.put("aula", aula);
+                    values.put("profesor", profesor);
+                    values.put("name", name);
+                    values.put("semestre", semestre);
+                    values.put("anno", anno);
+
+                    //db.insert("Curso", id, values);
+                    long curso_Id = db.insert(Curso.TABLE, null, values);
+
+                    // Insertando filas
+                    db.close(); // Cerrando la connecion de la base de datos
                 }
                 result += "\n";
                 System.out.println("Resultado Cursos: \n" + result);
+                this.sincronizacionNotas = result;
             } catch (SQLException ex) {
                 // handle any errors
                 ex.printStackTrace();
@@ -68,6 +142,6 @@ public class SincronizarCursos extends AsyncTask<String, Void, String> {
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
         }
-        return "";
+        return "Fin";
     }
 }
