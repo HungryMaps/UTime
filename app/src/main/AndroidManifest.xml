@@ -78,6 +78,10 @@
             android:name=".VisualizadorSD"
             android:label="@string/title_activity_visualizador_sd" >
         </activity>
+        <activity
+            android:name=".Links"
+            android:label="@string/title_activity_links" >
+        </activity>
     </application>
 
     <!-- Se piden permisos para poder usar google maps -->
