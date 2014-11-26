@@ -34,14 +34,7 @@ public class SincronizarCursos extends AsyncTask<String, Void, String> {
     ArrayList<HashMap<String, String>> cursoListSinc = new ArrayList<HashMap<String, String>>();
     private DBhelper dbHelper;
     HashMap<String, String> cursoSinc;
-    String id = "";
-    String name = "";
-    String profesor = "";
-    String aula = "";
-    String dias = "";
-    String horas = "";
-    String semestre="";
-    String anno = "";
+    String id, name, profesor, aula, dias, horas, semestre, anno = "";
 
     public SincronizarCursos(String usuario, Context context) {
         this.usuario = usuario;

@@ -28,8 +28,7 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
     public Boolean sinc;
     HashMap<String, String> notaSinc;
     ArrayList<HashMap<String, String>> notaListSinc = new ArrayList<HashMap<String, String>>();
-    String id = "";
-    String name = "";
+    String id, name = "";
     String comentarioNota="";
     private DBhelper dbHelper;
     public Boolean sincronizando;
