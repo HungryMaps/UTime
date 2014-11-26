@@ -40,6 +40,8 @@ public class Notas extends ListActivity {
     String sincronizacion = "";
     Boolean sincronizar;
     ArrayList<HashMap<String, String>> notaList;
+    SQLControlador repo;
+    Context cont;
 
     /**
      * @param savedInstanceState
@@ -48,7 +50,7 @@ public class Notas extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas);
-            SQLControlador repo = new SQLControlador(this);
+            repo = new SQLControlador(this);
             notaList = repo.getNotaList();
             if (notaList.size() != 0) {
                 ListView lv = getListView();
@@ -67,6 +69,7 @@ public class Notas extends ListActivity {
             } else {
                 Toast.makeText(this, "No existe la Nota!", Toast.LENGTH_SHORT).show();
             }
+        cont = this;
     }
 
     /**
@@ -132,7 +135,8 @@ public class Notas extends ListActivity {
                 dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
                                 "encuentran en la base de datos externa?\n" +
                                 "Tome en cuenta que los datos que insertó sin tener conexión " +
-                                "a Internet, no se van a sincronizar."
+                                "a Internet, no se van a sincronizar.\n" +
+                                "Esto puede tardar varios segundos..."
                 );
                 dialogS.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
@@ -166,7 +170,7 @@ public class Notas extends ListActivity {
 
                         //Revisar si hay usuario y si hay conexión a internet
                         if (!nombreUsuario.equals("") && isNetworkAvailable()) {
-                            SincronizarNotas(nombreUsuario);
+                            SincronizarNotas(nombreUsuario, cont);
                             dialog.cancel();
                             exito = "Sincronizado!";
                         } else {
@@ -216,9 +220,9 @@ public class Notas extends ListActivity {
      *
      * @param usuario
      */
-    public void SincronizarNotas(String usuario) {
+    public void SincronizarNotas(String usuario, Context context) {
         SincronizarNotas taskNotas;
-        taskNotas = new SincronizarNotas(usuario);
+        taskNotas = new SincronizarNotas(usuario, context);
         taskNotas.execute();
         while (taskNotas.sincronizacionNotas.equals("")) {
             //No haga nada
@@ -235,11 +239,12 @@ public class Notas extends ListActivity {
             if(notaList.size() == 0){
                 int k = taskNotas.notaListSinc.size();
                 HashMap<String, String> nota = new HashMap<String, String>();
+                int p=k-1;
                 while(indice < k){
-                    nota.put("idNota", "");
-                    nota.put("nameNota", "");
+                    nota.put("idNota", k+"");
+                    nota.put("nameNota", k+"");
+                    ++indice;
                     notaList.add(nota);
-                    indice++;
                 }
                 Collections.copy(notaList, taskNotas.notaListSinc);
                 ListAdapter adapter = new SimpleAdapter(Notas.this, notaList, R.layout.view_nota_entry, new String[]{"idNota", "nameNota"}, new int[]{R.id.nota_Id, R.id.nota_name});
