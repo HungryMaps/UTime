@@ -170,10 +170,12 @@ public class Archivos extends ListActivity {
                 intent.putExtra("direccion", direccion);
                 startActivity(intent);
                 finish();
+                return true;
 
             case R.id.btnDelete:
                 limpiarCarpeta();
                 finish();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
