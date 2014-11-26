@@ -78,8 +78,6 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                     id = rs.getString(2);
                     name = rs.getString(3);
                     comentarioNota = rs.getString(4);
-                    //notaSinc.put("idNota", rs.getString(2));
-                    //notaSinc.put("nameNota", rs.getString(3));
                     notaSinc.put("idNota", id);
                     notaSinc.put("nameNota", name);
                     if (notaListSinc.isEmpty()) {
@@ -100,14 +98,11 @@ public class SincronizarNotas extends AsyncTask<String, Void, String> {
                     ContentValues values = new ContentValues();
                     values.put("comentarioNota", comentarioNota);
                     values.put("nameNota", name);
-                    //values.put("idNota", id);
 
                     db.insert("Nota", id, values);
 
                     // Insertando filas
-                    //int nota_Id = (int) db.insert(Nota.TABLE, null, values);
                     db.close(); // Cerrando la connecion de la base de datos
-
                 }
                 result += "\n";
                 System.out.println("Resultado Notas: \n" + result);

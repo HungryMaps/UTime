@@ -135,7 +135,8 @@ public class Notas extends ListActivity {
                 dialogS.setMessage("¿Desea sincronizar sus datos con los datos que se" +
                                 "encuentran en la base de datos externa?\n" +
                                 "Tome en cuenta que los datos que insertó sin tener conexión " +
-                                "a Internet, no se van a sincronizar."
+                                "a Internet, no se van a sincronizar.\n" +
+                                "Esto puede tardar varios segundos..."
                 );
                 dialogS.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
@@ -245,10 +246,6 @@ public class Notas extends ListActivity {
                     ++indice;
                     notaList.add(nota);
                 }
-                System.out.println("Lista nueva");
-
-
-                //notaList = taskNotas.notaListSinc;
                 Collections.copy(notaList, taskNotas.notaListSinc);
                 ListAdapter adapter = new SimpleAdapter(Notas.this, notaList, R.layout.view_nota_entry, new String[]{"idNota", "nameNota"}, new int[]{R.id.nota_Id, R.id.nota_name});
                 setListAdapter(adapter);
