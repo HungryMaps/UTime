@@ -49,9 +49,26 @@ public class MyMenu extends ActionBarActivity {
         ImageButton botonUbicacion = (ImageButton)findViewById(R.id.ubicaciones);
         ImageButton botonHorario = (ImageButton)findViewById(R.id.horario);
         ImageButton botonCalendario = (ImageButton)findViewById(R.id.caledario);
+        ImageButton botonLinks = (ImageButton)findViewById(R.id.links);
 
-        boolean sincNotas =false;
-        boolean sinCursos = false;
+        /**
+         *Método que captura el boton al que se le ha dado click
+         */
+        botonLinks.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             * REQ: que se haya capturado bien el botón al que se le hizo click
+             * @param view
+             * EFE: Carga en tiempo de ejecución una nueva vista o actividad según corresponda
+             */
+            @Override
+            public void onClick(View view){
+                //aquí le decimos de donde vamos (la ventana donde estoy) y hacia donde voy
+                Intent in = new Intent(MyMenu.this, Links.class);
+                //lanza la siguiente ventana
+                startActivity(in);
+            }
+        });
 
         /**
          *Método que captura el boton al que se le ha dado click
